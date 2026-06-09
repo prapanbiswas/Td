@@ -1,36 +1,10 @@
 /* ============================================================
-   DEVUTILS — Global JavaScript
+   TOOLDUCK.XYZ — Global JavaScript
    Zero-dependency, instant DOMContentLoaded attachment
    ============================================================ */
 
 (function () {
   'use strict';
-
-  /* ── Theme Manager ── */
-  const ThemeManager = {
-    KEY: 'devutils-theme',
-    current: 'dark',
-
-    init() {
-      const saved = localStorage.getItem(this.KEY);
-      this.current = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      this.apply(this.current);
-    },
-
-    apply(theme) {
-      this.current = theme;
-      document.documentElement.setAttribute('data-theme', theme);
-      localStorage.setItem(this.KEY, theme);
-      const btn = document.getElementById('theme-toggle');
-      if (btn) btn.textContent = theme === 'dark' ? '☀️' : '🌙';
-      const btnM = document.getElementById('theme-toggle-mobile');
-      if (btnM) btnM.textContent = theme === 'dark' ? '☀️' : '🌙';
-    },
-
-    toggle() {
-      this.apply(this.current === 'dark' ? 'light' : 'dark');
-    }
-  };
 
   /* ── Navigation ── */
   const Nav = {
@@ -63,7 +37,7 @@
 
   /* ── Cookie Consent ── */
   const CookieConsent = {
-    KEY: 'devutils-cookie-consent',
+    KEY: 'toolduck-cookie-consent',
 
     init() {
       if (!localStorage.getItem(this.KEY)) {
@@ -134,7 +108,6 @@
         }, 2000);
       }
     }).catch(() => {
-      // Fallback
       const ta = document.createElement('textarea');
       ta.value = text;
       ta.style.position = 'fixed';
@@ -228,8 +201,7 @@
   }
 
   /* ── Expose globals ── */
-  window.DevUtils = {
-    ThemeManager,
+  window.ToolDuck = window.DevUtils = {
     Toast,
     CookieConsent,
     copyToClipboard,
@@ -240,17 +212,12 @@
 
   /* ── Boot on DOMContentLoaded ── */
   document.addEventListener('DOMContentLoaded', () => {
-    ThemeManager.init();
     Nav.init();
     Toast.init();
     CookieConsent.init();
     initSearch();
     initCategoryTabs();
     initCopyButtons();
-
-    // Theme toggle buttons
-    document.getElementById('theme-toggle')?.addEventListener('click', () => ThemeManager.toggle());
-    document.getElementById('theme-toggle-mobile')?.addEventListener('click', () => ThemeManager.toggle());
 
     // Cookie buttons
     document.getElementById('cookie-accept')?.addEventListener('click', () => CookieConsent.accept());

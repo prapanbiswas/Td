@@ -4,147 +4,172 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-  <!-- Homepage / Directory Hub -->
+  <!-- Homepage -->
   <url>
-    <loc>https://devutils.app/</loc>
+    <loc>https://toolduck.xyz/</loc>
     <lastmod>2025-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- Tool Pages -->
+  <!-- Image Tools -->
   <url>
-    <loc>https://devutils.app/tools/exif-purger/</loc>
+    <loc>https://toolduck.xyz/tools/image-compressor/</loc>
     <lastmod>2025-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
-
   <url>
-    <loc>https://devutils.app/tools/webp-cruncher/</loc>
+    <loc>https://toolduck.xyz/tools/png-to-webp/</loc>
     <lastmod>2025-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
-
   <url>
-    <loc>https://devutils.app/tools/json-visualizer/</loc>
+    <loc>https://toolduck.xyz/tools/webp-converter/</loc>
     <lastmod>2025-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
-
   <url>
-    <loc>https://devutils.app/tools/svg-renderer/</loc>
+    <loc>https://toolduck.xyz/tools/svg-optimizer/</loc>
+    <lastmod>2025-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolduck.xyz/tools/metadata-stripper/</loc>
     <lastmod>2025-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
-
   <url>
-    <loc>https://devutils.app/tools/cron-explainer/</loc>
+    <loc>https://toolduck.xyz/tools/location-remover/</loc>
     <lastmod>2025-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
-
   <url>
-    <loc>https://devutils.app/tools/jwt-inspector/</loc>
+    <loc>https://toolduck.xyz/tools/svg-renderer/</loc>
+    <lastmod>2025-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolduck.xyz/tools/exif-purger/</loc>
+    <lastmod>2025-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolduck.xyz/tools/webp-cruncher/</loc>
+    <lastmod>2025-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Dev Tools -->
+  <url>
+    <loc>https://toolduck.xyz/tools/hash-generator/</loc>
     <lastmod>2025-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
-
   <url>
-    <loc>https://devutils.app/tools/glass-studio/</loc>
+    <loc>https://toolduck.xyz/tools/jwt-inspector/</loc>
     <lastmod>2025-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
-
   <url>
-    <loc>https://devutils.app/tools/table-builder/</loc>
+    <loc>https://toolduck.xyz/tools/json-visualizer/</loc>
+    <lastmod>2025-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolduck.xyz/tools/cron-explainer/</loc>
+    <lastmod>2025-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolduck.xyz/tools/diff-checker/</loc>
     <lastmod>2025-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
-
   <url>
-    <loc>https://devutils.app/tools/regex-simulator/</loc>
+    <loc>https://toolduck.xyz/tools/yaml-transformer/</loc>
     <lastmod>2025-06-09</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
-
   <url>
-    <loc>https://devutils.app/tools/tailwind-master/</loc>
+    <loc>https://toolduck.xyz/tools/regex-simulator/</loc>
     <lastmod>2025-06-09</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
 
+  <!-- CSS / UI Tools -->
   <url>
-    <loc>https://devutils.app/tools/string-encoder/</loc>
+    <loc>https://toolduck.xyz/tools/glass-studio/</loc>
     <lastmod>2025-06-09</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
-
   <url>
-    <loc>https://devutils.app/tools/diff-checker/</loc>
+    <loc>https://toolduck.xyz/tools/tailwind-master/</loc>
     <lastmod>2025-06-09</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
 
+  <!-- Text Tools -->
   <url>
-    <loc>https://devutils.app/tools/yaml-transformer/</loc>
+    <loc>https://toolduck.xyz/tools/string-encoder/</loc>
     <lastmod>2025-06-09</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
-
   <url>
-    <loc>https://devutils.app/tools/hash-generator/</loc>
+    <loc>https://toolduck.xyz/tools/table-builder/</loc>
     <lastmod>2025-06-09</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.7</priority>
   </url>
-
   <url>
-    <loc>https://devutils.app/tools/log-filter/</loc>
+    <loc>https://toolduck.xyz/tools/log-filter/</loc>
     <lastmod>2025-06-09</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
 
-  <!-- Legal & Compliance Pages -->
+  <!-- Legal / Info Pages -->
   <url>
-    <loc>https://devutils.app/privacy-policy.html</loc>
+    <loc>https://toolduck.xyz/privacy-policy.html</loc>
     <lastmod>2025-06-09</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.3</priority>
   </url>
-
   <url>
-    <loc>https://devutils.app/terms.html</loc>
+    <loc>https://toolduck.xyz/terms.html</loc>
     <lastmod>2025-06-09</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.3</priority>
   </url>
-
   <url>
-    <loc>https://devutils.app/cookie-policy.html</loc>
+    <loc>https://toolduck.xyz/cookie-policy.html</loc>
     <lastmod>2025-06-09</lastmod>
     <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://toolduck.xyz/contact.html</loc>
+    <lastmod>2025-06-09</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.4</priority>
-  </url>
-
-  <url>
-    <loc>https://devutils.app/contact.html</loc>
-    <lastmod>2025-06-09</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
   </url>
 
 </urlset>

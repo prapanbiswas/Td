@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebP Converter — Convert JPEG PNG GIF to WebP | ToolDuck.xyz</title>
+  <meta name="description" content="Convert JPEG, PNG and GIF images to WebP format in your browser. Batch processing, adjustable quality, instant download. No upload, 100% private.">
+  <link rel="canonical" href="https://toolduck.xyz/tools/webp-converter/">
+  <meta property="og:title" content="WebP Converter — ToolDuck.xyz">
+  <meta property="og:description" content="Convert JPEG, PNG, GIF to WebP in-browser. Batch, quality control, zero upload.">
+  <meta property="og:url" content="https://toolduck.xyz/tools/webp-converter/">
+  <link rel="stylesheet" href="../../assets/css/global.css">
+  <style>
+    .file-list { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem; max-height: 320px; overflow-y: auto; }
+    .file-row { display: flex; align-items: center; gap: 0.75rem; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 0.6rem 0.9rem; font-size: 0.85rem; }
+    .file-row .fname { flex: 1; font-weight: 500; color: var(--text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .file-row .fsize { color: var(--text-muted); font-size: 0.78rem; white-space: nowrap; }
+    .file-row .fstatus { font-size: 0.75rem; font-weight: 600; white-space: nowrap; }
+    .status-done { color: #10b981; }
+    .status-wait { color: var(--text-muted); }
+    .quality-row { display: flex; align-items: center; gap: 1rem; }
+    .quality-row input[type=range] { flex: 1; }
+    .quality-val { font-weight: 700; color: var(--accent-primary); min-width: 36px; text-align: right; }
+  </style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="../../" class="nav-logo"><svg class="logo-duck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="32" height="32" aria-hidden="true"><ellipse cx="15" cy="26" rx="11" ry="8" fill="#FFD23F"/><circle cx="22" cy="15" r="7" fill="#FFD23F"/><path d="M28 14 L34 16 L28 18Z" fill="#FF9F0A"/><ellipse cx="9" cy="25" rx="5" ry="3.5" fill="#E8BC00" transform="rotate(-10 9 25)"/><rect x="16.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><rect x="22.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><line x1="21.5" y1="12.6" x2="22.5" y2="12.6" stroke="#00F5D4" stroke-width="1.1"/><circle cx="26" cy="12" r="1.1" fill="#0B0F19"/></svg><span class="logo-text">tool<span>duck</span>.xyz</span></a>
+    <ul class="nav-links">
+      <li><a href="../../">Home</a></li>
+      <li><a href="../image-compressor/">Compressor</a></li>
+      <li><a href="../png-to-webp/">PNG→WebP</a></li>
+      <li><a href="../../privacy-policy.html">Privacy</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">☰</button>
+    </div>
+  </div>
+</nav>
+<nav class="nav-mobile" id="nav-mobile">
+  <a href="../../">Home</a>
+  <a href="../image-compressor/">Image Compressor</a>
+  <a href="../png-to-webp/">PNG to WebP</a>
+  <a href="../../privacy-policy.html">Privacy Policy</a>
+</nav>
+
+<div class="page-wrapper">
+<div class="tool-page-wrapper">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="../../">Home</a><span class="sep">›</span>
+    <span class="current">WebP Converter</span>
+  </nav>
+
+  <div class="tool-content-grid">
+    <main>
+      <div class="tool-header">
+        <div class="tool-header-inner">
+          <div class="tool-page-icon">🔄</div>
+          <div class="tool-header-text">
+            <h1>WebP Converter</h1>
+            <p>Convert JPEG, PNG or GIF images to WebP format — batch supported, fully in-browser.</p>
+          </div>
+        </div>
+        <div class="tool-badges">
+          <span class="badge badge-green">✓ 100% Offline</span>
+          <span class="badge badge-blue">JPEG · PNG · GIF</span>
+          <span class="badge badge-purple">WebP Output</span>
+        </div>
+      </div>
+
+      <div class="glass-panel">
+        <div class="panel-header">
+          <span class="panel-title">Upload Images</span>
+        </div>
+        <div class="panel-body">
+          <div class="drop-zone" id="drop-zone">
+            <input type="file" id="file-input" accept="image/jpeg,image/png,image/gif" multiple style="display:none">
+            <span class="drop-icon">🔄</span>
+            <h3>Drop JPEG, PNG or GIF images here</h3>
+            <p>Multiple files supported · <span class="browse-link" id="browse-link">Browse files</span></p>
+          </div>
+
+          <div id="controls" style="display:none; margin-top:1.5rem;">
+            <div class="form-group">
+              <label class="form-label">WebP Quality</label>
+              <div class="quality-row">
+                <input type="range" id="quality-slider" min="1" max="100" value="85">
+                <span class="quality-val" id="quality-display">85%</span>
+              </div>
+            </div>
+            <div id="file-list" class="file-list"></div>
+            <div style="margin-top:1rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
+              <button class="btn btn-primary" id="convert-btn">Convert All to WebP</button>
+              <button class="btn btn-secondary" id="reset-btn">Clear</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <aside class="ad-sidebar">
+      <div class="ad-slot ad-slot-300x600">
+        <span class="ad-slot-label">Advertisement</span>
+        <div class="ad-slot-inner"><!-- GOOGLE ADSENSE INLINE CODE SLOT --></div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<section class="tool-info-section">
+  <div class="info-divider"></div>
+  <div class="info-grid">
+    <div class="info-card">
+      <h3><span class="icon">📖</span> User Manual</h3>
+      <ol>
+        <li>Drop JPEG, PNG or GIF images onto the zone (or click to browse).</li>
+        <li>Set the WebP quality (85% is an excellent balance).</li>
+        <li>Click <strong>Convert All to WebP</strong> — files download individually.</li>
+      </ol>
+    </div>
+    <div class="info-card">
+      <h3><span class="icon">⚙️</span> Architecture Insight</h3>
+      <p>Images are decoded natively by the browser, drawn to a <code>Canvas</code>, and re-encoded to <code>image/webp</code> using <code>toBlob()</code>. GIF animations are flattened to a single WebP frame (the first frame). No external libraries are used.</p>
+    </div>
+    <div class="info-card">
+      <h3><span class="icon">❓</span> FAQ</h3>
+      <div class="faq-list">
+        <details class="faq-item"><summary>Why convert to WebP?</summary><div class="faq-answer">WebP provides 25–34% better compression than JPEG at equivalent visual quality, resulting in faster page loads and lower bandwidth costs.</div></details>
+        <details class="faq-item"><summary>Will GIF animations be preserved?</summary><div class="faq-answer">No — GIFs are flattened to the first frame. For animated WebP, you'd need a dedicated animation tool.</div></details>
+        <details class="faq-item"><summary>Does transparency survive conversion?</summary><div class="faq-answer">Yes. PNG transparency is preserved when converting to WebP. JPEG files have no transparency channel so none is added.</div></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="../../" class="nav-logo"><svg class="logo-duck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="28" height="28" aria-hidden="true"><ellipse cx="15" cy="26" rx="11" ry="8" fill="#FFD23F"/><circle cx="22" cy="15" r="7" fill="#FFD23F"/><path d="M28 14 L34 16 L28 18Z" fill="#FF9F0A"/><ellipse cx="9" cy="25" rx="5" ry="3.5" fill="#E8BC00" transform="rotate(-10 9 25)"/><rect x="16.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><rect x="22.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><line x1="21.5" y1="12.6" x2="22.5" y2="12.6" stroke="#00F5D4" stroke-width="1.1"/><circle cx="26" cy="12" r="1.1" fill="#0B0F19"/></svg><span class="logo-text">tool<span>duck</span>.xyz</span></a>
+      <p>Free, privacy-first developer tools — all running 100% in your browser.</p>
+    </div>
+    <nav class="footer-links"><a href="../../privacy-policy.html">Privacy</a><a href="../../terms.html">Terms</a><a href="../../cookie-policy.html">Cookies</a><a href="../../contact.html">Contact</a></nav>
+  </div>
+  <div class="footer-bottom"><p>© 2025 ToolDuck.xyz</p></div>
+</footer>
+</div>
+
+<div class="sticky-ad-footer"><span class="ad-slot-label">Advertisement</span><div class="footer-ad-inner"><!-- GOOGLE ADSENSE INLINE CODE SLOT --></div></div>
+<script src="../../assets/js/global.js"></script>
+<script>
+(function(){
+  'use strict';
+  const dropZone = document.getElementById('drop-zone');
+  const fileInput = document.getElementById('file-input');
+  const browseLink = document.getElementById('browse-link');
+  const controls = document.getElementById('controls');
+  const fileListEl = document.getElementById('file-list');
+  const qualitySlider = document.getElementById('quality-slider');
+  const qualityDisplay = document.getElementById('quality-display');
+  const convertBtn = document.getElementById('convert-btn');
+  const resetBtn = document.getElementById('reset-btn');
+  let files = [];
+
+  browseLink.addEventListener('click', e => { e.stopPropagation(); fileInput.click(); });
+  dropZone.addEventListener('click', () => fileInput.click());
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', e => { if (!dropZone.contains(e.relatedTarget)) dropZone.classList.remove('drag-over'); });
+  dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('drag-over'); addFiles(Array.from(e.dataTransfer.files)); });
+  fileInput.addEventListener('change', () => addFiles(Array.from(fileInput.files)));
+  qualitySlider.addEventListener('input', () => qualityDisplay.textContent = qualitySlider.value + '%');
+
+  function addFiles(newFiles) {
+    const imgs = newFiles.filter(f => ['image/jpeg','image/png','image/gif'].includes(f.type));
+    if (!imgs.length) { window.ToolDuck.Toast.show('Please select JPEG, PNG or GIF files.', 'error'); return; }
+    files = files.concat(imgs);
+    renderList();
+    controls.style.display = 'block';
+  }
+
+  function renderList() {
+    fileListEl.innerHTML = '';
+    files.forEach((f, i) => {
+      const row = document.createElement('div'); row.className = 'file-row';
+      row.innerHTML = `<span class="fname">${f.name}</span><span class="fsize">${window.ToolDuck.formatBytes(f.size)}</span><span class="fstatus status-wait" id="status-${i}">Pending</span>`;
+      fileListEl.appendChild(row);
+    });
+  }
+
+  convertBtn.addEventListener('click', async () => {
+    if (!files.length) return;
+    convertBtn.disabled = true; convertBtn.textContent = 'Converting…';
+    const quality = parseInt(qualitySlider.value) / 100;
+    for (let i = 0; i < files.length; i++) {
+      const statusEl = document.getElementById('status-' + i);
+      statusEl.textContent = 'Converting…';
+      await convertFile(files[i], quality);
+      statusEl.textContent = '✓ Done'; statusEl.className = 'fstatus status-done';
+    }
+    convertBtn.disabled = false; convertBtn.textContent = 'Convert All to WebP';
+    window.ToolDuck.Toast.show('All files converted!', 'success');
+  });
+
+  function convertFile(file, quality) {
+    return new Promise(resolve => {
+      const img = new Image();
+      const url = URL.createObjectURL(file);
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+        canvas.getContext('2d').drawImage(img, 0, 0);
+        URL.revokeObjectURL(url);
+        canvas.toBlob(blob => {
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = file.name.replace(/\.[^.]+$/, '') + '.webp';
+          a.click(); resolve();
+        }, 'image/webp', quality);
+      };
+      img.src = url;
+    });
+  }
+
+  resetBtn.addEventListener('click', () => {
+    files = []; fileListEl.innerHTML = ''; controls.style.display = 'none'; fileInput.value = '';
+  });
+})();
+</script>
+</body>
+</html>
