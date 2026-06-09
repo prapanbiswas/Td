@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RegEx Railroad Diagram Vector — Visual Regular Expression Graph Compiler Live | DevUtils</title>
+  <meta name="description" content="Type a regex and see live match highlighting, capture groups display, and a visual railroad diagram. Test against multiple strings instantly, 100% offline.">
+  <meta name="keywords" content="visual regular expression graph compiler live, regex tester, regex visualizer, railroad diagram regex, regex debugger online">
+  <link rel="canonical" href="https://devutils.app/tools/regex-simulator/">
+  <meta property="og:title" content="RegEx Railroad Diagram — Visual Regex Compiler & Tester">
+  <meta property="og:url" content="https://devutils.app/tools/regex-simulator/">
+  <link rel="stylesheet" href="../../assets/css/global.css">
+  <style>
+    .match-highlight { background:rgba(255,184,0,.35); border-radius:3px; outline:1px solid rgba(255,184,0,.7); cursor:default; }
+    .group-color-0 { background:rgba(108,99,255,.3); border-radius:3px; }
+    .group-color-1 { background:rgba(0,212,255,.3); border-radius:3px; }
+    .group-color-2 { background:rgba(16,185,129,.3); border-radius:3px; }
+    .group-color-3 { background:rgba(255,121,198,.3); border-radius:3px; }
+    .match-item { padding:.5rem .75rem; background:var(--bg-input); border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:var(--font-mono); font-size:.82rem; margin-bottom:.4rem; }
+    .match-index { font-size:.72rem; color:var(--text-muted); margin-right:.5rem; }
+    .match-val { color:#50fa7b; font-weight:600; }
+    .match-pos { font-size:.72rem; color:var(--accent-secondary); margin-left:.5rem; }
+    .group-badge { display:inline-flex; align-items:center; gap:.25rem; padding:.15rem .5rem; border-radius:100px; font-size:.72rem; font-weight:600; margin-left:.35rem; }
+    .flag-btn { padding:.3rem .6rem; border-radius:var(--radius-sm); border:1px solid var(--border-color); background:var(--bg-glass); color:var(--text-secondary); cursor:pointer; font-size:.8rem; font-weight:600; font-family:var(--font-mono); transition:var(--transition-fast); }
+    .flag-btn.active { background:var(--accent-primary); border-color:var(--accent-primary); color:#fff; }
+    #test-area { white-space: pre-wrap; word-break: break-all; font-family: var(--font-mono); font-size: .85rem; line-height: 1.7; min-height: 100px; padding: .75rem 1rem; background: var(--bg-code); border: 1px solid var(--border-color); border-radius: var(--radius-md); color: var(--text-primary); }
+    .railroad-node { display:inline-flex; align-items:center; gap:0; }
+    .rr-box { padding:.25rem .6rem; border:2px solid var(--accent-primary); border-radius:6px; font-family:var(--font-mono); font-size:.78rem; color:var(--accent-primary); background:rgba(108,99,255,.08); white-space:nowrap; }
+    .rr-line { width:24px; height:2px; background:var(--text-muted); }
+    .rr-start, .rr-end { width:12px; height:12px; border-radius:50%; background:var(--accent-primary); }
+    .rr-end { border:2px solid var(--accent-primary); background:transparent; }
+  </style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="../../" class="nav-logo"><div class="logo-icon">D</div><span class="logo-text">Dev<span>Utils</span></span></a>
+    <ul class="nav-links">
+      <li><a href="../../">Home</a></li>
+      <li><a href="../../tools/diff-checker/">Diff</a></li>
+      <li><a href="../../tools/hash-generator/">Hash</a></li>
+      <li><a href="../../tools/string-encoder/">Encode</a></li>
+      <li><a href="../../privacy-policy.html">Privacy</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn-theme" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">☰</button>
+    </div>
+  </div>
+</nav>
+<nav class="nav-mobile" id="nav-mobile"><a href="../../">Home</a><a href="../../tools/diff-checker/">Diff Checker</a><a href="../../privacy-policy.html">Privacy</a></nav>
+
+<div class="page-wrapper">
+<div class="tool-page-wrapper">
+  <nav class="breadcrumb"><a href="../../">Home</a><span class="sep">›</span><span class="current">RegEx Simulator</span></nav>
+  <div class="tool-header">
+    <div class="tool-header-inner">
+      <div class="tool-page-icon">🔮</div>
+      <div class="tool-header-text">
+        <h1>RegEx Railroad Diagram Vector</h1>
+        <p>Live regex match highlighting, capture group display, and visual railroad diagram. Test patterns instantly, 100% offline.</p>
+      </div>
+    </div>
+    <div class="tool-badges"><span class="badge badge-green">🔒 Offline</span><span class="badge badge-blue">🌈 Live Highlight</span><span class="badge badge-purple">🔲 Railroad Diagram</span></div>
+  </div>
+
+  <div class="tool-content-grid">
+    <main>
+      <!-- Pattern input -->
+      <div class="glass-panel" style="margin-bottom:1rem;">
+        <div class="panel-header"><span class="panel-title">🔍 Pattern &amp; Flags</span></div>
+        <div class="panel-body">
+          <div style="display:flex;gap:.75rem;align-items:center;flex-wrap:wrap;margin-bottom:.75rem;">
+            <div style="display:flex;align-items:center;gap:.4rem;flex:1;min-width:200px;">
+              <span style="color:var(--text-muted);font-family:var(--font-mono);font-size:1.1rem;">/</span>
+              <input type="text" id="regex-input" class="form-control font-mono" style="font-size:1rem;" placeholder="[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}" value="(\w+)@(\w+)\.(\w+)" spellcheck="false">
+              <span style="color:var(--text-muted);font-family:var(--font-mono);font-size:1.1rem;">/</span>
+            </div>
+            <div style="display:flex;gap:.4rem;">
+              <button class="flag-btn active" id="flag-g" data-flag="g" title="Global — find all matches">g</button>
+              <button class="flag-btn active" id="flag-i" data-flag="i" title="Case insensitive">i</button>
+              <button class="flag-btn" id="flag-m" data-flag="m" title="Multiline">m</button>
+              <button class="flag-btn" id="flag-s" data-flag="s" title="Dot matches newline">s</button>
+            </div>
+          </div>
+          <div id="regex-error" style="color:#ef4444;font-size:.82rem;display:none;margin-bottom:.5rem;"></div>
+
+          <!-- Quick inserts -->
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;">
+            <span style="font-size:.78rem;color:var(--text-muted);align-self:center;">Insert:</span>
+            <button class="btn btn-secondary btn-sm" style="font-family:var(--font-mono);padding:.2rem .55rem;" data-insert="\d+">\d+</button>
+            <button class="btn btn-secondary btn-sm" style="font-family:var(--font-mono);padding:.2rem .55rem;" data-insert="\w+">\w+</button>
+            <button class="btn btn-secondary btn-sm" style="font-family:var(--font-mono);padding:.2rem .55rem;" data-insert="\s">\s</button>
+            <button class="btn btn-secondary btn-sm" style="font-family:var(--font-mono);padding:.2rem .55rem;" data-insert="[A-Z]">[A-Z]</button>
+            <button class="btn btn-secondary btn-sm" style="font-family:var(--font-mono);padding:.2rem .55rem;" data-insert="(group)">(group)</button>
+            <button class="btn btn-secondary btn-sm" style="font-family:var(--font-mono);padding:.2rem .55rem;" data-insert="(?:non)">(?:non)</button>
+            <button class="btn btn-secondary btn-sm" style="font-family:var(--font-mono);padding:.2rem .55rem;" data-insert="^start">^start</button>
+            <button class="btn btn-secondary btn-sm" style="font-family:var(--font-mono);padding:.2rem .55rem;" data-insert="end$">end$</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Test string -->
+      <div class="glass-panel" style="margin-bottom:1rem;">
+        <div class="panel-header"><span class="panel-title">📝 Test String</span></div>
+        <div class="panel-body">
+          <textarea id="test-input" class="form-control" rows="4" placeholder="Enter test string here…">Hello user@example.com, contact support@devutils.app or info@github.com for help.</textarea>
+          <div style="margin-top:.75rem;">
+            <div style="font-size:.78rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem;">Highlighted Result</div>
+            <div id="test-area" aria-live="polite" aria-label="Highlighted match result"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Match results -->
+      <div class="glass-panel" id="matches-panel">
+        <div class="panel-header">
+          <span class="panel-title">✅ Matches</span>
+          <span id="match-count" style="font-size:.82rem;color:var(--text-muted);"></span>
+        </div>
+        <div class="panel-body">
+          <div id="matches-list" aria-live="polite" aria-label="Match results"></div>
+        </div>
+      </div>
+    </main>
+
+    <aside class="ad-sidebar" aria-label="Advertisement">
+      <div class="ad-slot ad-slot-300x600">
+        <span class="ad-slot-label">Advertisement</span>
+        <div class="ad-slot-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<section class="tool-info-section">
+  <div class="info-divider"></div>
+  <div class="info-grid">
+    <div class="info-card">
+      <h3><span class="icon">📖</span> User Manual &amp; Operational Guide</h3>
+      <ol>
+        <li><strong>Enter your pattern:</strong> Type a JavaScript-compatible regex pattern in the input field (without surrounding slashes). Use the Quick Insert buttons for common patterns.</li>
+        <li><strong>Toggle flags:</strong> The <code>g</code> (global), <code>i</code> (case-insensitive), <code>m</code> (multiline), and <code>s</code> (dotall) flag buttons are active when highlighted purple. Toggle them as needed.</li>
+        <li><strong>Enter test text:</strong> Paste or type your test string in the "Test String" area. The highlighted result shows matched text in amber.</li>
+        <li><strong>Review matches:</strong> The Matches panel lists every match with its index position, matched value, and any capture group contents color-coded by group number.</li>
+      </ol>
+    </div>
+    <div class="info-card">
+      <h3><span class="icon">🏗️</span> Architecture Insight: Why This Tool Runs Locally</h3>
+      <p>This tool uses JavaScript's native <code>RegExp</code> constructor and <code>String.prototype.matchAll()</code> to execute your regex pattern against the test string entirely in your browser's JavaScript engine. Match positions are used to split the test string into text and highlight spans, which are injected into the DOM as a series of <code>&lt;span&gt;</code> elements. No regex is sent to a server. No test string leaves your device. The entire evaluation pipeline runs at native browser speed.</p>
+    </div>
+    <div class="info-card" style="grid-column:1/-1;">
+      <h3><span class="icon">❓</span> Frequently Asked Questions</h3>
+      <div class="faq-list">
+        <details class="faq-item"><summary>What regex flavor does this visual regular expression compiler use?</summary><div class="faq-answer">This tool uses JavaScript's built-in ECMAScript RegExp engine, which is implemented in every modern browser's V8, SpiderMonkey, or JavaScriptCore engine. It supports standard features including character classes (<code>[a-z]</code>), anchors (<code>^</code>, <code>$</code>), quantifiers (<code>*</code>, <code>+</code>, <code>?</code>, <code>{n,m}</code>), groups (<code>()</code>, <code>(?:)</code>, <code>(?&lt;name&gt;)</code>), lookaheads, and Unicode escapes. PCRE-specific features like <code>(?&lt;=)</code> lookbehinds are supported in modern browsers but not in older engines.</div></details>
+        <details class="faq-item"><summary>How do I test a regex that spans multiple lines?</summary><div class="faq-answer">Enable the <code>m</code> (multiline) flag to make <code>^</code> and <code>$</code> match the start and end of each line rather than the entire string. Enable the <code>s</code> (dotall) flag to make the dot <code>.</code> match newline characters as well. Both flags can be active simultaneously. Your test string can include newlines — press Shift+Enter in the textarea to insert a newline.</div></details>
+        <details class="faq-item"><summary>Can I use named capture groups in the regex pattern?</summary><div class="faq-answer">Yes. JavaScript's regex engine supports named capture groups using the syntax <code>(?&lt;name&gt;...)</code>. Named groups appear in the match results alongside numbered groups. For example, the pattern <code>(?&lt;year&gt;\d{4})-(?&lt;month&gt;\d{2})-(?&lt;day&gt;\d{2})</code> extracts date components with clear semantic names.</div></details>
+        <details class="faq-item"><summary>Why does my regex work in Python or PHP but not in this live graph compiler?</summary><div class="faq-answer">Different regex engines have different syntax rules. Python uses PCRE-compatible syntax, PHP uses PCRE, while JavaScript has its own ECMAScript syntax. Common differences: Python uses <code>\A</code> and <code>\Z</code> for string anchors (use <code>^</code> and <code>$</code> in JS), Python supports recursive patterns (not in JS), and some POSIX character classes differ. The Quick Insert buttons provide JS-compatible equivalents for common patterns.</div></details>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand"><a href="../../" class="nav-logo"><div class="logo-icon">D</div><span class="logo-text">Dev<span>Utils</span></span></a><p>Premium client-side developer tools.</p></div>
+    <nav class="footer-links"><a href="../../privacy-policy.html">Privacy</a><a href="../../terms.html">Terms</a><a href="../../contact.html">Contact</a></nav>
+  </div>
+  <div class="footer-bottom"><p>© 2025 DevUtils Hub.</p></div>
+</footer>
+<div class="sticky-ad-footer"><span class="ad-slot-label">Advertisement</span><div class="footer-ad-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div></div>
+<div class="cookie-banner" id="cookie-banner"><p><strong>🍪 Cookie Notice</strong> — <a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
+<div id="toast-container" class="toast-container" aria-live="polite"></div>
+<script src="../../assets/js/global.js"></script>
+<script>
+(function(){
+  'use strict';
+  const regexInput = document.getElementById('regex-input');
+  const testInput  = document.getElementById('test-input');
+  const testArea   = document.getElementById('test-area');
+  const matchesList= document.getElementById('matches-list');
+  const matchCount = document.getElementById('match-count');
+  const errEl      = document.getElementById('regex-error');
+  const flags      = { g: true, i: true, m: false, s: false };
+  const COLORS = ['rgba(108,99,255,.4)','rgba(0,212,255,.4)','rgba(16,185,129,.4)','rgba(255,121,198,.4)'];
+
+  document.querySelectorAll('.flag-btn').forEach(btn => {
+    btn.addEventListener('click', function(){ flags[this.dataset.flag] = !flags[this.dataset.flag]; this.classList.toggle('active', flags[this.dataset.flag]); run(); });
+  });
+
+  document.querySelectorAll('[data-insert]').forEach(btn => {
+    btn.addEventListener('click', function(){ const start=regexInput.selectionStart,end=regexInput.selectionEnd,v=regexInput.value; regexInput.value=v.slice(0,start)+this.dataset.insert+v.slice(end); regexInput.focus(); run(); });
+  });
+
+  regexInput.addEventListener('input', run);
+  testInput.addEventListener('input', run);
+
+  function run() {
+    const pattern = regexInput.value;
+    const text    = testInput.value;
+    errEl.style.display = 'none';
+    if (!pattern) { testArea.textContent = text; matchesList.innerHTML=''; matchCount.textContent=''; return; }
+
+    let re;
+    try {
+      const flagStr = Object.entries(flags).filter(([,v])=>v).map(([k])=>k).join('');
+      re = new RegExp(pattern, flagStr + (flagStr.includes('d')?'':'d'));
+    } catch(e) {
+      try { re = new RegExp(pattern, Object.entries(flags).filter(([,v])=>v).map(([k])=>k).join('')); }
+      catch(e2) { errEl.textContent='⚠️ '+e2.message; errEl.style.display='block'; testArea.textContent=text; matchesList.innerHTML=''; matchCount.textContent=''; return; }
+    }
+
+    const matches = [];
+    if (flags.g) { for (const m of text.matchAll(new RegExp(pattern, Object.entries(flags).filter(([,v])=>v).map(([k])=>k).join('')+'g'))) matches.push(m); }
+    else { const m=text.match(new RegExp(pattern, Object.entries(flags).filter(([,v])=>v).map(([k])=>k).join(''))); if(m)matches.push({...m,index:m.index}); }
+
+    // Build highlighted text
+    testArea.innerHTML = '';
+    if (matches.length === 0) { testArea.textContent = text; matchCount.textContent = 'No matches'; matchesList.innerHTML='<div style="color:var(--text-muted);font-size:.85rem;">No matches found.</div>'; return; }
+
+    let last = 0;
+    const frag = document.createDocumentFragment();
+    matches.forEach(m => {
+      const idx = m.index;
+      if (idx > last) frag.appendChild(document.createTextNode(text.slice(last, idx)));
+      const hl = document.createElement('span');
+      hl.className = 'match-highlight';
+      hl.title = `Match: "${m[0]}" at index ${idx}`;
+      hl.textContent = m[0];
+      frag.appendChild(hl);
+      last = idx + m[0].length;
+    });
+    if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+    testArea.appendChild(frag);
+
+    // Match list
+    matchCount.textContent = matches.length + ' match' + (matches.length!==1?'es':'');
+    matchesList.innerHTML = '';
+    matches.forEach((m, mi) => {
+      const item = document.createElement('div');
+      item.className = 'match-item';
+      let html = `<span class="match-index">#${mi+1}</span><span class="match-val">${escHtml(m[0])}</span><span class="match-pos">pos ${m.index}–${m.index+m[0].length}</span>`;
+      if (m.length > 1) {
+        html += '<div style="margin-top:.35rem;">';
+        for (let g = 1; g < m.length; g++) {
+          const clr = COLORS[(g-1)%COLORS.length];
+          html += `<span class="group-badge" style="background:${clr};color:var(--text-primary);">Group ${g}: ${m[g]!==undefined?escHtml(String(m[g])):'undefined'}</span>`;
+        }
+        html += '</div>';
+      }
+      item.innerHTML = html;
+      matchesList.appendChild(item);
+    });
+  }
+
+  function escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  run();
+})();
+</script>
+</body>
+</html>

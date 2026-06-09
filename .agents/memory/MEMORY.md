@@ -1,0 +1,1 @@
+- [Node path for workflow](node-workflow.md) — Node.js binary not in PATH for workflows; must use full nix store path.

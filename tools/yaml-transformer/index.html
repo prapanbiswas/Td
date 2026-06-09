@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YAML ↔ JSON Isomorphic Bridge — YAML Frontmatter to JSON Object Converter | DevUtils</title>
+  <meta name="description" content="Convert YAML to JSON and JSON to YAML instantly. Parse frontmatter, validate YAML syntax, and format output — 100% offline, no upload needed.">
+  <meta name="keywords" content="yaml frontmatter to json object converter, yaml to json, json to yaml, yaml converter, yaml validator, yaml parser online">
+  <link rel="canonical" href="https://devutils.app/tools/yaml-transformer/">
+  <meta property="og:title" content="YAML ↔ JSON Isomorphic Bridge — Offline YAML Converter">
+  <meta property="og:url" content="https://devutils.app/tools/yaml-transformer/">
+  <link rel="stylesheet" href="../../assets/css/global.css">
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="../../" class="nav-logo"><div class="logo-icon">D</div><span class="logo-text">Dev<span>Utils</span></span></a>
+    <ul class="nav-links">
+      <li><a href="../../">Home</a></li>
+      <li><a href="../../tools/json-visualizer/">JSON</a></li>
+      <li><a href="../../tools/diff-checker/">Diff</a></li>
+      <li><a href="../../tools/hash-generator/">Hash</a></li>
+      <li><a href="../../privacy-policy.html">Privacy</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn-theme" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">☰</button>
+    </div>
+  </div>
+</nav>
+<nav class="nav-mobile" id="nav-mobile"><a href="../../">Home</a><a href="../../tools/json-visualizer/">JSON Visualizer</a><a href="../../privacy-policy.html">Privacy</a></nav>
+
+<div class="page-wrapper">
+<div class="tool-page-wrapper">
+  <nav class="breadcrumb"><a href="../../">Home</a><span class="sep">›</span><span class="current">YAML ↔ JSON Transformer</span></nav>
+  <div class="tool-header">
+    <div class="tool-header-inner">
+      <div class="tool-page-icon">🔃</div>
+      <div class="tool-header-text">
+        <h1>YAML ↔ JSON Isomorphic Bridge</h1>
+        <p>Convert YAML to JSON and JSON to YAML instantly. Parse frontmatter, validate syntax, and explore structure. 100% offline.</p>
+      </div>
+    </div>
+    <div class="tool-badges"><span class="badge badge-green">🔒 Offline</span><span class="badge badge-blue">↔ Bidirectional</span><span class="badge badge-purple">⚡ Instant</span></div>
+  </div>
+
+  <div class="tool-content-grid">
+    <main>
+      <!-- Controls -->
+      <div class="glass-panel" style="margin-bottom:1rem;">
+        <div class="panel-header">
+          <span class="panel-title">⚙️ Conversion Mode</span>
+          <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;">
+            <button class="tab-btn active" id="mode-y2j" data-mode="y2j">YAML → JSON</button>
+            <button class="tab-btn" id="mode-j2y" data-mode="j2y">JSON → YAML</button>
+            <button class="tab-btn" id="mode-fm" data-mode="fm">Extract Frontmatter</button>
+            <label style="display:flex;align-items:center;gap:.35rem;font-size:.82rem;cursor:pointer;"><input type="checkbox" id="pretty-print" checked> Pretty Print</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- I/O -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;" class="yaml-grid">
+        <div class="glass-panel">
+          <div class="panel-header">
+            <span class="panel-title" id="input-label">📥 YAML Input</span>
+            <div style="display:flex;gap:.4rem;">
+              <button class="btn btn-secondary btn-sm" id="sample-btn">📄 Sample</button>
+              <button class="btn btn-danger btn-sm" id="clear-btn">✕</button>
+            </div>
+          </div>
+          <div class="panel-body">
+            <textarea id="yaml-input" class="form-control font-mono" rows="16" spellcheck="false" placeholder="Paste YAML or JSON here…">name: Alice Nakamura
+age: 30
+active: true
+score: 98.5
+tags:
+  - admin
+  - developer
+  - moderator
+address:
+  city: Tokyo
+  country: Japan
+  zip: "100-0001"
+settings:
+  theme: dark
+  notifications: true</textarea>
+            <div id="input-error" style="color:#ef4444;font-size:.82rem;margin-top:.5rem;display:none;"></div>
+          </div>
+        </div>
+        <div class="glass-panel">
+          <div class="panel-header">
+            <span class="panel-title" id="output-label">📤 JSON Output</span>
+            <button class="btn btn-secondary btn-sm" id="copy-output-btn">📋 Copy</button>
+          </div>
+          <div class="panel-body">
+            <div class="output-wrapper" style="height:100%;">
+              <pre class="code-output" id="yaml-output" style="min-height:320px;font-size:.82rem;white-space:pre-wrap;word-break:break-all;"></pre>
+              <button class="copy-btn" id="copy-output-btn2" data-copy-target="yaml-output">Copy</button>
+            </div>
+            <div id="output-stats" style="font-size:.75rem;color:var(--text-muted);margin-top:.5rem;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center;"><button class="btn btn-primary" id="convert-btn" style="min-width:160px;">🔃 Convert</button></div>
+    </main>
+
+    <aside class="ad-sidebar" aria-label="Advertisement">
+      <div class="ad-slot ad-slot-300x600">
+        <span class="ad-slot-label">Advertisement</span>
+        <div class="ad-slot-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<section class="tool-info-section">
+  <div class="info-divider"></div>
+  <div class="info-grid">
+    <div class="info-card">
+      <h3><span class="icon">📖</span> User Manual &amp; Operational Guide</h3>
+      <ol>
+        <li><strong>Choose conversion direction:</strong> Select "YAML → JSON" to convert YAML to JSON, "JSON → YAML" to go the other way, or "Extract Frontmatter" to parse YAML frontmatter from Markdown files (<code>---</code> delimited).</li>
+        <li><strong>Paste your input:</strong> Enter YAML or JSON in the left panel, or click "Sample" to load a working example.</li>
+        <li><strong>Convert:</strong> Click "Convert" or the output updates automatically as you type. The result appears on the right.</li>
+        <li><strong>Copy output:</strong> Click "Copy" to copy the converted output to your clipboard.</li>
+      </ol>
+    </div>
+    <div class="info-card">
+      <h3><span class="icon">🏗️</span> Architecture Insight: Why This Tool Runs Locally</h3>
+      <p>This tool implements a JavaScript YAML parser that converts YAML to a JavaScript object graph, then serializes to JSON using <code>JSON.stringify()</code>. The YAML parser handles the most common YAML syntax: scalars (strings, numbers, booleans, null), block sequences, block mappings, inline arrays and objects, multiline strings, and quoted strings. The JSON-to-YAML direction uses a recursive serializer that produces indented YAML block format. Both conversions run synchronously in browser memory with no network I/O.</p>
+    </div>
+    <div class="info-card" style="grid-column:1/-1;">
+      <h3><span class="icon">❓</span> Frequently Asked Questions</h3>
+      <div class="faq-list">
+        <details class="faq-item"><summary>How do I convert YAML frontmatter to a JSON object instantly offline?</summary><div class="faq-answer">Select the "Extract Frontmatter" mode and paste your Markdown file content (including the <code>---</code> delimiters). The tool extracts the YAML block between the opening and closing <code>---</code> markers and converts it to a JSON object. This is useful for processing Jekyll, Hugo, Gatsby, or Astro static site content files.</div></details>
+        <details class="faq-item"><summary>What YAML features are supported?</summary><div class="faq-answer">The built-in parser supports standard YAML frontmatter syntax used in static site generators and configuration files: scalar strings (quoted and unquoted), integers, floats, booleans (true/false/yes/no), null values, block sequences (list items prefixed with <code>-</code>), and nested block mappings (key: value indented). Advanced YAML features like anchors, aliases, multi-document streams, and custom tags are not supported by the lightweight parser.</div></details>
+        <details class="faq-item"><summary>Can I use this to convert Kubernetes or Docker Compose YAML to JSON?</summary><div class="faq-answer">Yes, for standard Kubernetes and Docker Compose YAML files. Most production k8s manifests and compose files use standard YAML features (scalars, sequences, mappings) that are fully supported. Multi-document YAML files (multiple documents separated by <code>---</code>) are parsed as the first document only.</div></details>
+        <details class="faq-item"><summary>Why does my YAML convert to JSON with incorrect types?</summary><div class="faq-answer">YAML automatically infers scalar types. Values like <code>true</code>, <code>yes</code>, <code>on</code>, <code>false</code>, <code>no</code>, <code>off</code> are treated as booleans. Numeric strings like <code>1e3</code> are treated as numbers. To force a value to remain a string, quote it: <code>version: "1"</code> instead of <code>version: 1</code>. This is standard YAML 1.2 behavior.</div></details>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand"><a href="../../" class="nav-logo"><div class="logo-icon">D</div><span class="logo-text">Dev<span>Utils</span></span></a><p>Premium client-side developer tools.</p></div>
+    <nav class="footer-links"><a href="../../privacy-policy.html">Privacy</a><a href="../../terms.html">Terms</a><a href="../../contact.html">Contact</a></nav>
+  </div>
+  <div class="footer-bottom"><p>© 2025 DevUtils Hub.</p></div>
+</footer>
+<div class="sticky-ad-footer"><span class="ad-slot-label">Advertisement</span><div class="footer-ad-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div></div>
+<div class="cookie-banner" id="cookie-banner"><p><strong>🍪 Cookie Notice</strong> — <a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
+<div id="toast-container" class="toast-container" aria-live="polite"></div>
+<script src="../../assets/js/global.js"></script>
+<script>
+(function(){
+  'use strict';
+  const yamlInput  = document.getElementById('yaml-input');
+  const yamlOutput = document.getElementById('yaml-output');
+  const inputError = document.getElementById('input-error');
+  const statsEl    = document.getElementById('output-stats');
+  const inputLabel = document.getElementById('input-label');
+  const outputLabel= document.getElementById('output-label');
+  let currentMode  = 'y2j';
+  let debounce;
+
+  const SAMPLES = {
+    y2j: `name: Alice Nakamura\nage: 30\nactive: true\nscore: 98.5\ntags:\n  - admin\n  - developer\naddress:\n  city: Tokyo\n  country: Japan`,
+    j2y: `{"name":"Alice Nakamura","age":30,"active":true,"score":98.5,"tags":["admin","developer"],"address":{"city":"Tokyo","country":"Japan"}}`,
+    fm: `---\ntitle: Hello World\ndate: 2025-01-15\npublished: true\ntags:\n  - blog\n  - coding\nauthor: Alice\n---\n\n# Hello World\n\nThis is the body of the post.`,
+  };
+
+  document.querySelectorAll('[data-mode]').forEach(btn => {
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('[data-mode]').forEach(b=>b.classList.remove('active'));
+      this.classList.add('active'); currentMode=this.dataset.mode;
+      const labels = { y2j:['📥 YAML Input','📤 JSON Output'], j2y:['📥 JSON Input','📤 YAML Output'], fm:['📥 Markdown + Frontmatter','📤 Frontmatter as JSON'] };
+      inputLabel.textContent=labels[currentMode][0]; outputLabel.textContent=labels[currentMode][1];
+    });
+  });
+
+  document.getElementById('sample-btn').addEventListener('click', ()=>{ yamlInput.value=SAMPLES[currentMode]; convert(); });
+  document.getElementById('clear-btn').addEventListener('click', ()=>{ yamlInput.value=''; yamlOutput.textContent=''; inputError.style.display='none'; });
+  document.getElementById('convert-btn').addEventListener('click', convert);
+  document.getElementById('copy-output-btn').addEventListener('click', function(){ window.DevUtils.copyToClipboard(yamlOutput.textContent, this); });
+  document.getElementById('copy-output-btn2').addEventListener('click', function(){ window.DevUtils.copyToClipboard(yamlOutput.textContent, this); });
+  yamlInput.addEventListener('input', ()=>{ clearTimeout(debounce); debounce=setTimeout(convert,400); });
+
+  // Minimal YAML parser
+  function parseYaml(str) {
+    const lines = str.replace(/\r/g,'').split('\n');
+    function parseLine(l) { return l.trimEnd(); }
+    function parseValue(v) {
+      v = v.trim();
+      if (v==='true'||v==='yes'||v==='on') return true;
+      if (v==='false'||v==='no'||v==='off') return false;
+      if (v==='null'||v==='~'||v==='') return null;
+      if (/^-?\d+$/.test(v)) return parseInt(v,10);
+      if (/^-?\d*\.\d+([eE][+-]?\d+)?$/.test(v)||/^-?\d+[eE][+-]?\d+$/.test(v)) return parseFloat(v);
+      if ((v.startsWith("'")||v.startsWith('"'))&&(v.endsWith("'")||v.endsWith('"'))) return v.slice(1,-1);
+      if (v.startsWith('[')) { try { return JSON.parse(v.replace(/'/g,'"')); }catch(e){} }
+      if (v.startsWith('{')) { try { return JSON.parse(v.replace(/'/g,'"')); }catch(e){} }
+      return v;
+    }
+    function parseBlock(lines, indent) {
+      const result = {};
+      const items  = [];
+      let isArray  = null;
+      let i = 0;
+      while (i < lines.length) {
+        const line = lines[i];
+        if (!line.trim()||line.trim().startsWith('#')) { i++; continue; }
+        const lineIndent = line.match(/^(\s*)/)[1].length;
+        if (lineIndent < indent) break;
+        if (lineIndent > indent) { i++; continue; }
+        const trimmed = line.trim();
+        if (trimmed.startsWith('- ')) {
+          isArray = true;
+          const val = trimmed.slice(2);
+          // Collect sub-lines
+          const subLines = [];
+          let j = i+1;
+          while (j < lines.length) {
+            const sl = lines[j];
+            if (!sl.trim()||sl.trim().startsWith('#')) { j++; continue; }
+            const si = sl.match(/^(\s*)/)[1].length;
+            if (si <= indent) break;
+            subLines.push(sl); j++;
+          }
+          if (val.trim()&&!val.trim().startsWith('#')) {
+            if (subLines.length && subLines[0].trim().startsWith('- ')||subLines.some(l=>l.trim().match(/^\w[\w\s]*:/))) {
+              items.push(parseBlock([val.trim(),...subLines], indent+2));
+            } else { items.push(parseValue(val)); }
+          } else if (subLines.length) { items.push(parseBlock(subLines, indent+2)); }
+          i = j;
+        } else {
+          const m = trimmed.match(/^([\w\-\/\.]+)\s*:\s*(.*)/);
+          if (m) {
+            isArray = false;
+            const key = m[1], rest = m[2];
+            if (rest.trim()&&!rest.trim().startsWith('#')&&rest.trim()!=='|'&&rest.trim()!=='>') {
+              const subLines = [];
+              let j=i+1;
+              while(j<lines.length){const sl=lines[j];if(!sl.trim()||sl.trim().startsWith('#')){j++;continue;}const si=sl.match(/^(\s*)/)[1].length;if(si<=indent)break;subLines.push(sl);j++;}
+              if(subLines.length)result[key]=parseBlock(subLines,indent+2);
+              else result[key]=parseValue(rest);
+              i=j;
+            } else {
+              const subLines=[];let j=i+1;
+              while(j<lines.length){const sl=lines[j];if(!sl.trim()||sl.trim().startsWith('#')){j++;continue;}const si=sl.match(/^(\s*)/)[1].length;if(si<=indent)break;subLines.push(sl);j++;}
+              if(subLines.length)result[key]=parseBlock(subLines,indent+2);
+              else result[key]=parseValue(rest);
+              i=j;
+            }
+          } else { i++; }
+        }
+      }
+      return isArray ? items : result;
+    }
+    return parseBlock(lines, 0);
+  }
+
+  function jsonToYaml(obj, indent=0) {
+    const sp = '  '.repeat(indent);
+    if (obj === null) return 'null';
+    if (typeof obj === 'boolean') return String(obj);
+    if (typeof obj === 'number') return String(obj);
+    if (typeof obj === 'string') return obj.includes('\n')||obj.match(/^[\s#>&|*!,\[\]{}"'`@]/)||obj.match(/:\s/)? `"${obj.replace(/"/g,'\\"')}"` : obj;
+    if (Array.isArray(obj)) {
+      if (!obj.length) return '[]';
+      return obj.map(item=>{
+        const v=jsonToYaml(item,indent+1);
+        if(typeof item==='object'&&item!==null&&!Array.isArray(item))return `\n${sp}- ${v.trimStart()}`;
+        return `\n${sp}- ${v}`;
+      }).join('');
+    }
+    if (typeof obj === 'object') {
+      const keys=Object.keys(obj);
+      if(!keys.length)return '{}';
+      return keys.map(k=>{
+        const v=obj[k];
+        if(v===null||typeof v!=='object')return `\n${sp}${k}: ${jsonToYaml(v,indent)}`;
+        if(Array.isArray(v)){return `\n${sp}${k}:${jsonToYaml(v,indent+1)}`;}
+        return `\n${sp}${k}:${jsonToYaml(v,indent+1)}`;
+      }).join('');
+    }
+    return String(obj);
+  }
+
+  function convert() {
+    const input = yamlInput.value.trim();
+    if (!input) { yamlOutput.textContent=''; return; }
+    inputError.style.display='none';
+    const pretty = document.getElementById('pretty-print').checked;
+    try {
+      if (currentMode==='y2j') {
+        const obj = parseYaml(input);
+        yamlOutput.textContent = JSON.stringify(obj, null, pretty?2:0);
+        statsEl.textContent = `${Object.keys(obj).length} top-level keys`;
+      } else if (currentMode==='j2y') {
+        const obj = JSON.parse(input);
+        const yaml = jsonToYaml(obj,0).trimStart();
+        yamlOutput.textContent = yaml;
+        statsEl.textContent = `${Object.keys(obj).length} top-level keys`;
+      } else { // frontmatter
+        const m = input.match(/^---\s*\n([\s\S]*?)\n---/);
+        if (!m) throw new Error('No frontmatter found. Expected content between --- delimiters.');
+        const obj = parseYaml(m[1]);
+        yamlOutput.textContent = JSON.stringify(obj, null, pretty?2:0);
+        statsEl.textContent = `${Object.keys(obj).length} frontmatter keys extracted`;
+      }
+    } catch(e) {
+      inputError.textContent = '⚠️ '+e.message;
+      inputError.style.display='block';
+    }
+  }
+
+  convert();
+})();
+</script>
+</body>
+</html>

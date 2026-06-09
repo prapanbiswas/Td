@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glassmorphic UI CSS Lab — Premium Apple Style Glassmorphism CSS Generator | DevUtils</title>
+  <meta name="description" content="Generate premium Apple-style glassmorphism CSS with live preview. Customize blur, opacity, border, and shadow. Export ready-to-use CSS variables instantly.">
+  <meta name="keywords" content="premium apple style glassmorphism css generator, glassmorphism css, glass ui generator, backdrop filter css, frosted glass css effect">
+  <link rel="canonical" href="https://devutils.app/tools/glass-studio/">
+  <meta property="og:title" content="Glassmorphic UI CSS Lab — Apple-Style Glass CSS Generator">
+  <meta property="og:url" content="https://devutils.app/tools/glass-studio/">
+  <link rel="stylesheet" href="../../assets/css/global.css">
+  <style>
+    .glass-preview-bg {
+      background: linear-gradient(135deg, #6c63ff 0%, #00d4ff 50%, #ff79c6 100%);
+      border-radius: var(--radius-xl);
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 280px;
+      position: relative;
+      overflow: hidden;
+    }
+    .glass-preview-bg::before {
+      content: '';
+      position: absolute;
+      width: 160px; height: 160px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 50%;
+      top: -40px; right: -40px;
+    }
+    .glass-preview-bg::after {
+      content: '';
+      position: absolute;
+      width: 120px; height: 120px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      bottom: -30px; left: 20px;
+    }
+    #glass-preview-card {
+      position: relative; z-index: 1;
+      width: 280px; padding: 1.75rem;
+      text-align: center;
+    }
+    #glass-preview-card h3 { color: #fff; font-size: 1.1rem; margin-bottom: .5rem; }
+    #glass-preview-card p { color: rgba(255,255,255,0.8); font-size: .85rem; }
+    .slider-row { display:grid; grid-template-columns:140px 1fr 50px; gap:.75rem; align-items:center; margin-bottom:.75rem; }
+    .slider-row label { font-size:.82rem; font-weight:600; color:var(--text-secondary); }
+    .slider-row span { font-family:var(--font-mono); font-size:.82rem; color:var(--accent-primary); text-align:right; }
+  </style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="../../" class="nav-logo"><div class="logo-icon">D</div><span class="logo-text">Dev<span>Utils</span></span></a>
+    <ul class="nav-links">
+      <li><a href="../../">Home</a></li>
+      <li><a href="../../tools/tailwind-master/">Tailwind</a></li>
+      <li><a href="../../tools/svg-renderer/">SVG</a></li>
+      <li><a href="../../tools/hash-generator/">Hash</a></li>
+      <li><a href="../../privacy-policy.html">Privacy</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn-theme" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">☰</button>
+    </div>
+  </div>
+</nav>
+<nav class="nav-mobile" id="nav-mobile"><a href="../../">Home</a><a href="../../tools/tailwind-master/">Tailwind</a><a href="../../privacy-policy.html">Privacy</a></nav>
+
+<div class="page-wrapper">
+<div class="tool-page-wrapper">
+  <nav class="breadcrumb"><a href="../../">Home</a><span class="sep">›</span><span class="current">Glassmorphic CSS Lab</span></nav>
+  <div class="tool-header">
+    <div class="tool-header-inner">
+      <div class="tool-page-icon">💎</div>
+      <div class="tool-header-text">
+        <h1>Glassmorphic UI CSS Lab</h1>
+        <p>Design premium Apple-style glass UI components with real-time preview and export production-ready CSS.</p>
+      </div>
+    </div>
+    <div class="tool-badges"><span class="badge badge-green">🔒 Offline</span><span class="badge badge-blue">👁 Live Preview</span><span class="badge badge-purple">📋 Copy CSS</span></div>
+  </div>
+
+  <div class="tool-content-grid">
+    <main>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;" class="glass-grid">
+        <!-- Controls -->
+        <div class="glass-panel">
+          <div class="panel-header"><span class="panel-title">🎛️ Glass Controls</span></div>
+          <div class="panel-body">
+            <div class="slider-row">
+              <label for="blur-amt">Blur Radius</label>
+              <input type="range" id="blur-amt" min="0" max="40" value="20" step="1">
+              <span id="blur-val">20px</span>
+            </div>
+            <div class="slider-row">
+              <label for="bg-opacity">Background Opacity</label>
+              <input type="range" id="bg-opacity" min="0" max="100" value="15" step="1">
+              <span id="bg-opacity-val">15%</span>
+            </div>
+            <div class="slider-row">
+              <label for="border-opacity">Border Opacity</label>
+              <input type="range" id="border-opacity" min="0" max="100" value="20" step="1">
+              <span id="border-opacity-val">20%</span>
+            </div>
+            <div class="slider-row">
+              <label for="border-width">Border Width</label>
+              <input type="range" id="border-width" min="0" max="4" value="1" step="0.5">
+              <span id="border-width-val">1px</span>
+            </div>
+            <div class="slider-row">
+              <label for="border-radius">Border Radius</label>
+              <input type="range" id="border-radius" min="0" max="40" value="20" step="1">
+              <span id="border-radius-val">20px</span>
+            </div>
+            <div class="slider-row">
+              <label for="shadow-size">Shadow Size</label>
+              <input type="range" id="shadow-size" min="0" max="60" value="24" step="2">
+              <span id="shadow-size-val">24px</span>
+            </div>
+            <div class="slider-row">
+              <label for="shadow-opacity">Shadow Opacity</label>
+              <input type="range" id="shadow-opacity" min="0" max="50" value="20" step="1">
+              <span id="shadow-opacity-val">20%</span>
+            </div>
+            <div class="divider"></div>
+            <div style="display:flex;gap:.75rem;align-items:center;flex-wrap:wrap;">
+              <div>
+                <label class="form-label" for="bg-color-pick">Glass Color</label>
+                <input type="color" id="bg-color-pick" value="#ffffff" style="height:36px;width:60px;border-radius:var(--radius-sm);border:1px solid var(--border-color);cursor:pointer;">
+              </div>
+              <div>
+                <label class="form-label" for="bg-theme">Theme</label>
+                <select id="bg-theme" class="form-control" style="width:auto;">
+                  <option value="gradient">Gradient BG</option>
+                  <option value="dark">Dark BG</option>
+                  <option value="light">Light BG</option>
+                  <option value="image">Abstract BG</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Preview -->
+        <div class="glass-panel">
+          <div class="panel-header"><span class="panel-title">👁 Live Preview</span></div>
+          <div class="panel-body" style="padding:.75rem;">
+            <div class="glass-preview-bg" id="preview-bg">
+              <div id="glass-preview-card">
+                <h3>Glass Card</h3>
+                <p>This is a premium glassmorphic UI component. Adjust the sliders to customize the effect.</p>
+                <div style="margin-top:1rem;display:flex;gap:.5rem;justify-content:center;">
+                  <div style="background:rgba(255,255,255,0.3);border-radius:100px;padding:.3rem .9rem;color:#fff;font-size:.78rem;font-weight:600;">Button</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CSS Output -->
+      <div class="glass-panel">
+        <div class="panel-header">
+          <span class="panel-title">📋 Generated CSS</span>
+          <div style="display:flex;gap:.5rem;">
+            <button class="btn btn-primary btn-sm" id="copy-css-btn">📋 Copy CSS</button>
+            <button class="btn btn-secondary btn-sm" id="copy-vars-btn">📋 Copy as CSS Variables</button>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="output-wrapper">
+            <pre class="code-output" id="css-output"></pre>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <aside class="ad-sidebar" aria-label="Advertisement">
+      <div class="ad-slot ad-slot-300x600">
+        <span class="ad-slot-label">Advertisement</span>
+        <div class="ad-slot-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<section class="tool-info-section">
+  <div class="info-divider"></div>
+  <div class="info-grid">
+    <div class="info-card">
+      <h3><span class="icon">📖</span> User Manual &amp; Operational Guide</h3>
+      <ol>
+        <li><strong>Adjust Glass Properties:</strong> Use the sliders to tune Blur Radius (controls frosted depth), Background Opacity (glass fill transparency), Border Opacity and Width (rim definition), Border Radius (corner roundness), and Shadow settings.</li>
+        <li><strong>Choose Glass Color:</strong> The color picker sets the RGB base of the glass fill. White creates a classic light glass; dark colors create a "dark glass" effect popular in macOS and iOS.</li>
+        <li><strong>Select Background:</strong> Switch the preview background to test your glass against different surfaces — gradient, dark, light, or abstract.</li>
+        <li><strong>Copy the CSS:</strong> Click "Copy CSS" for a ready-to-paste CSS rule, or "Copy as CSS Variables" for a design-token-friendly variable set.</li>
+      </ol>
+    </div>
+    <div class="info-card">
+      <h3><span class="icon">🏗️</span> Architecture Insight: Why This Tool Runs Locally</h3>
+      <p>This glassmorphism CSS generator computes all style values using pure JavaScript math in your browser. As you move sliders, JavaScript reads the input values, interpolates rgba() color strings, and writes the resulting CSS directly to the preview element's <code>style</code> attribute using the DOM API. The CSS output is assembled as a formatted string using template literals. No server, no API, no compilation — just instant DOM manipulation at native browser speed.</p>
+    </div>
+    <div class="info-card" style="grid-column:1/-1;">
+      <h3><span class="icon">❓</span> Frequently Asked Questions</h3>
+      <div class="faq-list">
+        <details class="faq-item"><summary>What is the premium Apple-style glassmorphism CSS technique?</summary><div class="faq-answer">Glassmorphism is a design trend popularized by Apple's macOS Big Sur and iOS 15+ interfaces. It creates a frosted glass effect by combining <code>backdrop-filter: blur()</code> to blur the background behind an element, a semi-transparent rgba() background fill, a subtle border with partial opacity, and a soft box shadow. The result is a layered, depth-creating visual effect.</div></details>
+        <details class="faq-item"><summary>Does backdrop-filter work in all browsers?</summary><div class="faq-answer"><code>backdrop-filter</code> is supported in Chrome, Edge, Safari, and Opera. Firefox requires enabling <code>layout.css.backdrop-filter.enabled</code> in about:config (or is enabled by default in recent versions). For full compatibility, include a fallback: <code>@supports (backdrop-filter: blur(1px)) { ... }</code>. The generated CSS includes the <code>-webkit-backdrop-filter</code> prefix for Safari compatibility.</div></details>
+        <details class="faq-item"><summary>How do I achieve the best glassmorphism effect on a dark background?</summary><div class="faq-answer">For dark glass, set the glass color to a dark grey (e.g., #1a1a2e), set Background Opacity to 60–80%, set Blur to 12–20px, and use a white Border Opacity of 8–15%. Reduce shadow opacity for subtlety. The key principle is that glass only looks convincing when there is visually distinct content behind it to blur — ensure your background has sufficient variation.</div></details>
+        <details class="faq-item"><summary>Can I use the generated CSS in React, Vue, Tailwind, or other frameworks?</summary><div class="faq-answer">Yes — the generated CSS is standard CSS with no framework-specific dependencies. Copy the CSS rule and paste it into any .css, .scss, .module.css, or styled-components template string. For Tailwind users, the CSS Variables output can be added to your <code>tailwind.config.js</code> theme extensions, and the raw values can be used as arbitrary Tailwind utility values (e.g., <code>backdrop-blur-[20px]</code>).</div></details>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand"><a href="../../" class="nav-logo"><div class="logo-icon">D</div><span class="logo-text">Dev<span>Utils</span></span></a><p>Premium client-side developer tools.</p></div>
+    <nav class="footer-links"><a href="../../privacy-policy.html">Privacy</a><a href="../../terms.html">Terms</a><a href="../../contact.html">Contact</a></nav>
+  </div>
+  <div class="footer-bottom"><p>© 2025 DevUtils Hub.</p></div>
+</footer>
+<div class="sticky-ad-footer"><span class="ad-slot-label">Advertisement</span><div class="footer-ad-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div></div>
+<div class="cookie-banner" id="cookie-banner"><p><strong>🍪 Cookie Notice</strong> — <a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
+<div id="toast-container" class="toast-container" aria-live="polite"></div>
+<script src="../../assets/js/global.js"></script>
+<script>
+(function(){
+  'use strict';
+  const sliders = {
+    blur:    { el: document.getElementById('blur-amt'),      valEl: document.getElementById('blur-val'),         suffix:'px' },
+    bgOp:    { el: document.getElementById('bg-opacity'),    valEl: document.getElementById('bg-opacity-val'),   suffix:'%' },
+    borOp:   { el: document.getElementById('border-opacity'),valEl: document.getElementById('border-opacity-val'),suffix:'%' },
+    borW:    { el: document.getElementById('border-width'),  valEl: document.getElementById('border-width-val'),  suffix:'px' },
+    borR:    { el: document.getElementById('border-radius'), valEl: document.getElementById('border-radius-val'), suffix:'px' },
+    shadowS: { el: document.getElementById('shadow-size'),   valEl: document.getElementById('shadow-size-val'),  suffix:'px' },
+    shadowO: { el: document.getElementById('shadow-opacity'),valEl: document.getElementById('shadow-opacity-val'),suffix:'%' },
+  };
+  const colorPick = document.getElementById('bg-color-pick');
+  const cssOutput = document.getElementById('css-output');
+  const previewCard = document.getElementById('glass-preview-card');
+  const previewBg   = document.getElementById('preview-bg');
+
+  function hexToRgb(hex) {
+    const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+    return { r, g, b };
+  }
+
+  function update() {
+    const blur    = parseInt(sliders.blur.el.value);
+    const bgOp    = parseInt(sliders.bgOp.el.value) / 100;
+    const borOp   = parseInt(sliders.borOp.el.value) / 100;
+    const borW    = parseFloat(sliders.borW.el.value);
+    const borR    = parseInt(sliders.borR.el.value);
+    const shadowS = parseInt(sliders.shadowS.el.value);
+    const shadowO = parseInt(sliders.shadowO.el.value) / 100;
+    const { r, g, b } = hexToRgb(colorPick.value);
+
+    Object.values(sliders).forEach(s => { s.valEl.textContent = s.el.value + s.suffix; });
+
+    const css = {
+      background: `rgba(${r}, ${g}, ${b}, ${bgOp.toFixed(2)})`,
+      backdropFilter: `blur(${blur}px)`,
+      webkitBackdropFilter: `blur(${blur}px)`,
+      border: `${borW}px solid rgba(${r}, ${g}, ${b}, ${borOp.toFixed(2)})`,
+      borderRadius: `${borR}px`,
+      boxShadow: `0 ${Math.round(shadowS/3)}px ${shadowS}px rgba(0, 0, 0, ${shadowO.toFixed(2)})`,
+    };
+
+    previewCard.style.background       = css.background;
+    previewCard.style.backdropFilter   = css.backdropFilter;
+    previewCard.style.webkitBackdropFilter = css.webkitBackdropFilter;
+    previewCard.style.border           = css.border;
+    previewCard.style.borderRadius     = css.borderRadius;
+    previewCard.style.boxShadow        = css.boxShadow;
+
+    cssOutput.textContent = `.glass-card {\n  background: ${css.background};\n  backdrop-filter: ${css.backdropFilter};\n  -webkit-backdrop-filter: ${css.webkitBackdropFilter};\n  border: ${css.border};\n  border-radius: ${css.borderRadius};\n  box-shadow: ${css.boxShadow};\n}`;
+  }
+
+  Object.values(sliders).forEach(s => s.el.addEventListener('input', update));
+  colorPick.addEventListener('input', update);
+
+  document.getElementById('bg-theme').addEventListener('change', function() {
+    const themes = {
+      gradient: 'linear-gradient(135deg, #6c63ff 0%, #00d4ff 50%, #ff79c6 100%)',
+      dark: 'linear-gradient(135deg, #0d1117 0%, #1a1a2e 100%)',
+      light: 'linear-gradient(135deg, #f0f2f8 0%, #e8eaf6 100%)',
+      image: 'repeating-linear-gradient(45deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%)',
+    };
+    previewBg.style.background = themes[this.value] || themes.gradient;
+  });
+
+  document.getElementById('copy-css-btn').addEventListener('click', function() {
+    window.DevUtils.copyToClipboard(cssOutput.textContent, this);
+  });
+
+  document.getElementById('copy-vars-btn').addEventListener('click', function() {
+    const blur = sliders.blur.el.value, bgOp = (parseInt(sliders.bgOp.el.value)/100).toFixed(2);
+    const borOp = (parseInt(sliders.borOp.el.value)/100).toFixed(2), borW = sliders.borW.el.value;
+    const borR = sliders.borR.el.value, shadowS = sliders.shadowS.el.value, shadowO = (parseInt(sliders.shadowO.el.value)/100).toFixed(2);
+    const { r, g, b } = hexToRgb(colorPick.value);
+    const vars = `:root {\n  --glass-blur: ${blur}px;\n  --glass-bg: rgba(${r}, ${g}, ${b}, ${bgOp});\n  --glass-border: ${borW}px solid rgba(${r}, ${g}, ${b}, ${borOp});\n  --glass-radius: ${borR}px;\n  --glass-shadow: 0 ${Math.round(parseInt(shadowS)/3)}px ${shadowS}px rgba(0, 0, 0, ${shadowO});\n}`;
+    window.DevUtils.copyToClipboard(vars, this);
+  });
+
+  update();
+})();
+</script>
+</body>
+</html>

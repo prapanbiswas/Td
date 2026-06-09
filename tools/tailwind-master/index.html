@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tailwind Palette Master Engine — Custom Tailwind Color Palette Shade Picker | DevUtils</title>
+  <meta name="description" content="Generate a complete 50–950 Tailwind CSS color shade palette from any hex seed color. Preview swatches, copy hex values, and export as tailwind.config.js — 100% offline.">
+  <meta name="keywords" content="custom tailwind color palette shade picker, tailwind color generator, tailwind palette creator, tailwind css colors, tailwind shade generator">
+  <link rel="canonical" href="https://devutils.app/tools/tailwind-master/">
+  <meta property="og:title" content="Tailwind Palette Master Engine — Generate Color Shades from Any Hex">
+  <meta property="og:url" content="https://devutils.app/tools/tailwind-master/">
+  <link rel="stylesheet" href="../../assets/css/global.css">
+  <style>
+    .palette-row { display:flex; flex-direction:column; gap:.5rem; }
+    .shade-strip { display:grid; grid-template-columns: repeat(11, 1fr); gap:4px; }
+    .shade-cell { display:flex; flex-direction:column; align-items:center; gap:4px; }
+    .shade-box { width:100%; padding-bottom:60%; border-radius:6px; cursor:pointer; transition:transform .15s; position:relative; }
+    .shade-box:hover { transform:scale(1.08); z-index:2; }
+    .shade-label { font-size:.65rem; color:var(--text-muted); font-family:var(--font-mono); text-align:center; }
+    .shade-hex { font-size:.62rem; color:var(--text-muted); font-family:var(--font-mono); text-align:center; }
+    .named-palettes { display:flex; gap:.5rem; flex-wrap:wrap; }
+    .palette-chip { width:20px; height:20px; border-radius:4px; cursor:pointer; border:2px solid transparent; transition:border-color .15s, transform .15s; }
+    .palette-chip:hover, .palette-chip.selected { border-color:var(--accent-primary); transform:scale(1.15); }
+  </style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="../../" class="nav-logo"><div class="logo-icon">D</div><span class="logo-text">Dev<span>Utils</span></span></a>
+    <ul class="nav-links">
+      <li><a href="../../">Home</a></li>
+      <li><a href="../../tools/glass-studio/">Glass CSS</a></li>
+      <li><a href="../../tools/string-encoder/">Encoder</a></li>
+      <li><a href="../../tools/hash-generator/">Hash</a></li>
+      <li><a href="../../privacy-policy.html">Privacy</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn-theme" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">☰</button>
+    </div>
+  </div>
+</nav>
+<nav class="nav-mobile" id="nav-mobile"><a href="../../">Home</a><a href="../../tools/glass-studio/">Glass Studio</a><a href="../../privacy-policy.html">Privacy</a></nav>
+
+<div class="page-wrapper">
+<div class="tool-page-wrapper">
+  <nav class="breadcrumb"><a href="../../">Home</a><span class="sep">›</span><span class="current">Tailwind Palette Master</span></nav>
+  <div class="tool-header">
+    <div class="tool-header-inner">
+      <div class="tool-page-icon">🎨</div>
+      <div class="tool-header-text">
+        <h1>Tailwind Palette Master Engine</h1>
+        <p>Generate a complete 50–950 shade scale from any hex color. Export as Tailwind config, CSS variables, or hex list.</p>
+      </div>
+    </div>
+    <div class="tool-badges"><span class="badge badge-green">🔒 Offline</span><span class="badge badge-blue">🎨 11 Shades</span><span class="badge badge-purple">⚡ Instant</span></div>
+  </div>
+
+  <div class="tool-content-grid">
+    <main>
+      <!-- Color input -->
+      <div class="glass-panel" style="margin-bottom:1rem;">
+        <div class="panel-header"><span class="panel-title">🎨 Seed Color</span></div>
+        <div class="panel-body">
+          <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem;">
+            <div style="display:flex;align-items:center;gap:.75rem;">
+              <input type="color" id="color-pick" value="#6c63ff" style="width:56px;height:48px;border-radius:var(--radius-md);border:2px solid var(--border-strong);cursor:pointer;padding:2px;" aria-label="Pick seed color">
+              <div>
+                <label class="form-label" for="hex-input">Hex Value</label>
+                <input type="text" id="hex-input" class="form-control font-mono" value="#6c63ff" style="width:110px;" placeholder="#6c63ff" maxlength="7" spellcheck="false">
+              </div>
+              <div>
+                <label class="form-label" for="palette-name">Palette Name</label>
+                <input type="text" id="palette-name" class="form-control" value="brand" style="width:120px;" placeholder="primary">
+              </div>
+            </div>
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+              <button class="btn btn-secondary btn-sm" id="copy-config-btn">📋 Copy tailwind.config</button>
+              <button class="btn btn-secondary btn-sm" id="copy-css-btn">📋 Copy CSS Variables</button>
+              <button class="btn btn-secondary btn-sm" id="copy-hex-btn">📋 Copy Hex List</button>
+            </div>
+          </div>
+          <!-- Named presets -->
+          <div>
+            <div class="form-label" style="margin-bottom:.5rem;">Tailwind Built-in Palettes</div>
+            <div class="named-palettes" id="named-palettes"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shade preview -->
+      <div class="glass-panel" style="margin-bottom:1rem;">
+        <div class="panel-header"><span class="panel-title">🌈 Generated Shade Scale</span></div>
+        <div class="panel-body">
+          <div class="shade-strip" id="shade-strip" role="list" aria-label="Color shade scale"></div>
+          <p style="font-size:.75rem;color:var(--text-muted);margin-top:.75rem;">Click any swatch to copy its hex value to clipboard.</p>
+        </div>
+      </div>
+
+      <!-- Config output -->
+      <div class="glass-panel">
+        <div class="panel-header"><span class="panel-title">📋 Export Code</span></div>
+        <div class="panel-body">
+          <div style="display:flex;gap:.4rem;margin-bottom:.75rem;">
+            <button class="tab-btn active" data-tab="config" id="tab-config">tailwind.config.js</button>
+            <button class="tab-btn" data-tab="css" id="tab-css">CSS Variables</button>
+            <button class="tab-btn" data-tab="hex" id="tab-hex">Hex List</button>
+          </div>
+          <div class="output-wrapper">
+            <pre class="code-output" id="export-output" style="max-height:220px;"></pre>
+            <button class="copy-btn" id="copy-output-btn" data-copy-target="export-output">Copy</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <aside class="ad-sidebar" aria-label="Advertisement">
+      <div class="ad-slot ad-slot-300x600">
+        <span class="ad-slot-label">Advertisement</span>
+        <div class="ad-slot-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<section class="tool-info-section">
+  <div class="info-divider"></div>
+  <div class="info-grid">
+    <div class="info-card">
+      <h3><span class="icon">📖</span> User Manual &amp; Operational Guide</h3>
+      <ol>
+        <li><strong>Pick a seed color:</strong> Use the color picker or type a hex value directly. The full 11-shade scale (50, 100, 200…900, 950) generates instantly.</li>
+        <li><strong>Use a preset:</strong> Click any Tailwind built-in palette chip to load that exact palette. Useful for referencing Tailwind defaults while customizing.</li>
+        <li><strong>Name your palette:</strong> Set the palette name (e.g., "brand", "primary") — this becomes the key in the Tailwind config export.</li>
+        <li><strong>Copy swatches:</strong> Click any shade box to copy its hex value. Switch the export tab to get tailwind.config.js format, CSS custom properties, or a plain hex list.</li>
+      </ol>
+    </div>
+    <div class="info-card">
+      <h3><span class="icon">🏗️</span> Architecture Insight: Why This Tool Runs Locally</h3>
+      <p>The shade generation algorithm converts the seed hex color to HSL (Hue-Saturation-Lightness) color space using pure JavaScript math, then applies a perceptually-uniform lightness curve across the 11 standard Tailwind shade stops (50–950). Saturation is slightly boosted at mid-range shades (400–600) to match Tailwind's visual design language. The entire color computation — hex→HSL→shade generation→HSL→hex — runs as arithmetic in your browser. The resulting config strings are assembled using template literals. No color computation library is needed.</p>
+    </div>
+    <div class="info-card" style="grid-column:1/-1;">
+      <h3><span class="icon">❓</span> Frequently Asked Questions</h3>
+      <div class="faq-list">
+        <details class="faq-item"><summary>How do I add a custom Tailwind color palette shade to my tailwind.config.js?</summary><div class="faq-answer">Copy the "tailwind.config.js" export from this tool and paste the color object into your Tailwind config's <code>theme.extend.colors</code> (to add alongside defaults) or <code>theme.colors</code> (to override defaults). For example: <code>module.exports = { theme: { extend: { colors: { brand: { 50: '#f5f3ff', ... 950: '#2e1065' } } } } }</code></div></details>
+        <details class="faq-item"><summary>Why do the generated shades look different from Tailwind's built-in palettes?</summary><div class="faq-answer">Tailwind's built-in palettes are hand-curated by designers for optimal perceptual uniformity and accessibility contrast ratios. The algorithmic generation here uses an HSL-based lightness curve which produces good results but may not perfectly replicate the manual curation. For production design systems, treat the generated palette as a starting point and adjust individual shade values as needed for your brand identity.</div></details>
+        <details class="faq-item"><summary>Can I use the exported CSS variables directly in a Tailwind CSS v4 project?</summary><div class="faq-answer">Yes. Tailwind CSS v4 uses CSS custom properties natively. Copy the "CSS Variables" export and add it to your <code>@theme</code> block or <code>:root</code> section. The variable naming convention uses <code>--color-{name}-{shade}</code> which aligns with Tailwind v4's theme variable convention.</div></details>
+        <details class="faq-item"><summary>How do I check if my generated palette has sufficient contrast for WCAG accessibility?</summary><div class="faq-answer">As a general rule, text on a shade-900 background should use shade-50 or white, and text on a shade-100 background should use shade-900 or black to meet WCAG AA contrast requirements (minimum 4.5:1 for normal text). Use a dedicated contrast checker tool after generating your palette to verify specific shade combinations. The generated shade-500 color is typically closest to your seed color and works well as a primary interactive color with white text on dark backgrounds.</div></details>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand"><a href="../../" class="nav-logo"><div class="logo-icon">D</div><span class="logo-text">Dev<span>Utils</span></span></a><p>Premium client-side developer tools.</p></div>
+    <nav class="footer-links"><a href="../../privacy-policy.html">Privacy</a><a href="../../terms.html">Terms</a><a href="../../contact.html">Contact</a></nav>
+  </div>
+  <div class="footer-bottom"><p>© 2025 DevUtils Hub.</p></div>
+</footer>
+<div class="sticky-ad-footer"><span class="ad-slot-label">Advertisement</span><div class="footer-ad-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div></div>
+<div class="cookie-banner" id="cookie-banner"><p><strong>🍪 Cookie Notice</strong> — <a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
+<div id="toast-container" class="toast-container" aria-live="polite"></div>
+<script src="../../assets/js/global.js"></script>
+<script>
+(function(){
+  'use strict';
+  const colorPick   = document.getElementById('color-pick');
+  const hexInput    = document.getElementById('hex-input');
+  const paletteName = document.getElementById('palette-name');
+  const shadeStrip  = document.getElementById('shade-strip');
+  const exportOutput= document.getElementById('export-output');
+  const STOPS = [50,100,200,300,400,500,600,700,800,900,950];
+  let currentTab = 'config';
+  let currentShades = [];
+
+  const TW_PRESETS = [
+    {name:'slate',hex:'#64748b'},{name:'gray',hex:'#6b7280'},{name:'zinc',hex:'#71717a'},{name:'red',hex:'#ef4444'},
+    {name:'orange',hex:'#f97316'},{name:'amber',hex:'#f59e0b'},{name:'yellow',hex:'#eab308'},{name:'lime',hex:'#84cc16'},
+    {name:'green',hex:'#22c55e'},{name:'teal',hex:'#14b8a6'},{name:'cyan',hex:'#06b6d4'},{name:'sky',hex:'#0ea5e9'},
+    {name:'blue',hex:'#3b82f6'},{name:'indigo',hex:'#6366f1'},{name:'violet',hex:'#8b5cf6'},{name:'purple',hex:'#a855f7'},
+    {name:'fuchsia',hex:'#d946ef'},{name:'pink',hex:'#ec4899'},{name:'rose',hex:'#f43f5e'},
+  ];
+
+  const presetsEl = document.getElementById('named-palettes');
+  TW_PRESETS.forEach(p => {
+    const chip = document.createElement('div');
+    chip.className='palette-chip'; chip.title=p.name;
+    chip.style.background=p.hex;
+    chip.addEventListener('click',()=>{ hexInput.value=p.hex; colorPick.value=p.hex; paletteName.value=p.name; generate(); });
+    presetsEl.appendChild(chip);
+  });
+
+  function hexToHsl(hex) {
+    let r=parseInt(hex.slice(1,3),16)/255, g=parseInt(hex.slice(3,5),16)/255, b=parseInt(hex.slice(5,7),16)/255;
+    const max=Math.max(r,g,b), min=Math.min(r,g,b);
+    let h,s,l=(max+min)/2;
+    if (max===min) { h=s=0; }
+    else { const d=max-min; s=l>.5?d/(2-max-min):d/(max+min);
+      switch(max){case r:h=((g-b)/d+(g<b?6:0))/6;break;case g:h=((b-r)/d+2)/6;break;default:h=((r-g)/d+4)/6;}
+    }
+    return [h*360, s*100, l*100];
+  }
+
+  function hslToHex(h,s,l) {
+    h/=360; s/=100; l/=100;
+    let r,g,b;
+    if (s===0) { r=g=b=l; }
+    else {
+      const q=l<.5?l*(1+s):l+s-l*s, p=2*l-q;
+      const hue2rgb=(p,q,t)=>{if(t<0)t+=1;if(t>1)t-=1;if(t<1/6)return p+(q-p)*6*t;if(t<1/2)return q;if(t<2/3)return p+(q-p)*(2/3-t)*6;return p;};
+      r=hue2rgb(p,q,h+1/3); g=hue2rgb(p,q,h); b=hue2rgb(p,q,h-1/3);
+    }
+    return '#'+[r,g,b].map(c=>Math.round(c*255).toString(16).padStart(2,'0')).join('');
+  }
+
+  function generateShades(hex) {
+    const [h,s,l] = hexToHsl(hex);
+    const lightness = [97,94,88,80,67,50,39,31,24,17,11];
+    const satAdj    = [1, 1,.95,.9,.92,1,.97,.95,.9,.88,.85];
+    return STOPS.map((_,i)=>({ stop:STOPS[i], hex:hslToHex(h, Math.min(100,s*satAdj[i]), lightness[i]) }));
+  }
+
+  function luminance(hex) { const r=parseInt(hex.slice(1,3),16)/255,g=parseInt(hex.slice(3,5),16)/255,b=parseInt(hex.slice(5,7),16)/255; return .2126*r+.7152*g+.0722*b; }
+
+  function generate() {
+    let hex = hexInput.value.trim();
+    if (!/^#[0-9a-fA-F]{6}$/.test(hex)) return;
+    colorPick.value = hex;
+    currentShades = generateShades(hex);
+    shadeStrip.innerHTML = '';
+    currentShades.forEach(({stop,hex:sh}) => {
+      const cell = document.createElement('div'); cell.className='shade-cell'; cell.setAttribute('role','listitem');
+      const box = document.createElement('div'); box.className='shade-box';
+      box.style.background=sh; box.title=`${stop}: ${sh}`;
+      box.setAttribute('tabindex','0'); box.setAttribute('aria-label',`Shade ${stop}: ${sh}`);
+      box.addEventListener('click',()=>{ window.DevUtils.copyToClipboard(sh); });
+      box.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')window.DevUtils.copyToClipboard(sh);});
+      const lbl=document.createElement('div'); lbl.className='shade-label'; lbl.textContent=stop;
+      const hexLbl=document.createElement('div'); hexLbl.className='shade-hex'; hexLbl.textContent=sh.toUpperCase();
+      cell.appendChild(box); cell.appendChild(lbl); cell.appendChild(hexLbl);
+      shadeStrip.appendChild(cell);
+    });
+    renderExport();
+  }
+
+  function renderExport() {
+    const name = paletteName.value.trim()||'brand';
+    const obj = Object.fromEntries(currentShades.map(({stop,hex:sh})=>[stop,"'"+sh.toUpperCase()+"'"]));
+    if (currentTab==='config') {
+      exportOutput.textContent = `// tailwind.config.js\nmodule.exports = {\n  theme: {\n    extend: {\n      colors: {\n        '${name}': {\n${currentShades.map(({stop,hex:sh})=>`          ${stop}: '${sh.toUpperCase()}',`).join('\n')}\n        },\n      },\n    },\n  },\n};`;
+    } else if (currentTab==='css') {
+      exportOutput.textContent = `:root {\n${currentShades.map(({stop,hex:sh})=>`  --color-${name}-${stop}: ${sh.toUpperCase()};`).join('\n')}\n}`;
+    } else {
+      exportOutput.textContent = currentShades.map(({stop,hex:sh})=>`${stop}: ${sh.toUpperCase()}`).join('\n');
+    }
+  }
+
+  document.querySelectorAll('[data-tab]').forEach(btn => {
+    btn.addEventListener('click', function(){ document.querySelectorAll('[data-tab]').forEach(b=>b.classList.remove('active')); this.classList.add('active'); currentTab=this.dataset.tab; renderExport(); });
+  });
+
+  colorPick.addEventListener('input', ()=>{ hexInput.value=colorPick.value; generate(); });
+  hexInput.addEventListener('input', ()=>{ const v=hexInput.value.trim(); if(/^#[0-9a-fA-F]{6}$/.test(v))generate(); });
+  paletteName.addEventListener('input', renderExport);
+
+  document.getElementById('copy-config-btn').addEventListener('click', function(){currentTab='config';document.getElementById('tab-config').click();renderExport();setTimeout(()=>window.DevUtils.copyToClipboard(exportOutput.textContent,this),50);});
+  document.getElementById('copy-css-btn').addEventListener('click', function(){currentTab='css';document.getElementById('tab-css').click();renderExport();setTimeout(()=>window.DevUtils.copyToClipboard(exportOutput.textContent,this),50);});
+  document.getElementById('copy-hex-btn').addEventListener('click', function(){currentTab='hex';document.getElementById('tab-hex').click();renderExport();setTimeout(()=>window.DevUtils.copyToClipboard(exportOutput.textContent,this),50);});
+  document.getElementById('copy-output-btn').addEventListener('click', function(){window.DevUtils.copyToClipboard(exportOutput.textContent,this);});
+
+  generate();
+})();
+</script>
+</body>
+</html>

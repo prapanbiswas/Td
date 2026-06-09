@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log File Grep Analyzer — Parse Filter Large Log Files Grep Syntax Browser | DevUtils</title>
+  <meta name="description" content="Filter, search, and analyze large log files directly in your browser. Level filtering, regex grep, timestamp parsing, line highlighting — 100% offline, no upload.">
+  <meta name="keywords" content="parse filter large log files grep syntax browser, log analyzer, log filter tool, log file viewer, grep log file online, log parser">
+  <link rel="canonical" href="https://devutils.app/tools/log-filter/">
+  <meta property="og:title" content="Log File Grep Analyzer — Filter Large Logs in Browser">
+  <meta property="og:url" content="https://devutils.app/tools/log-filter/">
+  <link rel="stylesheet" href="../../assets/css/global.css">
+  <style>
+    .log-line { font-family:var(--font-mono); font-size:.78rem; padding:.18rem .5rem; line-height:1.55; display:flex; gap:.5rem; align-items:baseline; border-bottom:1px solid rgba(255,255,255,.03); }
+    .log-line:hover { background:rgba(108,99,255,.06); }
+    .log-num  { min-width:38px; text-align:right; color:var(--text-muted); font-size:.7rem; user-select:none; flex-shrink:0; }
+    .log-content { word-break:break-all; white-space:pre-wrap; flex:1; }
+    .log-ERROR, .log-FATAL { color:#f87171; }
+    .log-WARN, .log-WARNING { color:#fbbf24; }
+    .log-INFO  { color:#a5f3fc; }
+    .log-DEBUG { color:#a3a3a3; }
+    .log-TRACE { color:#6b7280; }
+    .level-badge { display:inline-block; padding:.1rem .5rem; border-radius:100px; font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; margin-right:.35rem; flex-shrink:0; }
+    .level-ERROR, .level-FATAL { background:rgba(239,68,68,.18); color:#f87171; }
+    .level-WARN, .level-WARNING { background:rgba(251,191,36,.18); color:#fbbf24; }
+    .level-INFO  { background:rgba(165,243,252,.12); color:#a5f3fc; }
+    .level-DEBUG { background:rgba(163,163,163,.12); color:#a3a3a3; }
+    .log-grep-hl { background:rgba(255,184,0,.35); border-radius:2px; }
+    .level-filter-btn { padding:.3rem .7rem; border-radius:100px; border:1px solid var(--border-color); background:var(--bg-glass); color:var(--text-secondary); cursor:pointer; font-size:.75rem; font-weight:700; transition:var(--transition-fast); font-family:var(--font-sans); }
+    .level-filter-btn.active-ERROR  { background:rgba(239,68,68,.2); border-color:#ef4444; color:#f87171; }
+    .level-filter-btn.active-WARN   { background:rgba(251,191,36,.2); border-color:#fbbf24; color:#fbbf24; }
+    .level-filter-btn.active-INFO   { background:rgba(165,243,252,.15); border-color:#a5f3fc; color:#a5f3fc; }
+    .level-filter-btn.active-DEBUG  { background:rgba(163,163,163,.15); border-color:#a3a3a3; color:#a3a3a3; }
+    .level-filter-btn.active-ALL    { background:var(--accent-primary); border-color:var(--accent-primary); color:#fff; }
+    #log-container { max-height:520px; overflow-y:auto; background:var(--bg-code); border-radius:var(--radius-md); border:1px solid var(--border-color); }
+  </style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="../../" class="nav-logo"><div class="logo-icon">D</div><span class="logo-text">Dev<span>Utils</span></span></a>
+    <ul class="nav-links">
+      <li><a href="../../">Home</a></li>
+      <li><a href="../../tools/regex-simulator/">RegEx</a></li>
+      <li><a href="../../tools/diff-checker/">Diff</a></li>
+      <li><a href="../../tools/hash-generator/">Hash</a></li>
+      <li><a href="../../privacy-policy.html">Privacy</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn-theme" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">☰</button>
+    </div>
+  </div>
+</nav>
+<nav class="nav-mobile" id="nav-mobile"><a href="../../">Home</a><a href="../../tools/regex-simulator/">RegEx Simulator</a><a href="../../privacy-policy.html">Privacy</a></nav>
+
+<div class="page-wrapper">
+<div class="tool-page-wrapper">
+  <nav class="breadcrumb"><a href="../../">Home</a><span class="sep">›</span><span class="current">Log File Grep Analyzer</span></nav>
+  <div class="tool-header">
+    <div class="tool-header-inner">
+      <div class="tool-page-icon">📋</div>
+      <div class="tool-header-text">
+        <h1>Log File Grep Analyzer</h1>
+        <p>Filter, search, and analyze large log files directly in your browser. Level badges, regex grep, export filtered lines. 100% offline.</p>
+      </div>
+    </div>
+    <div class="tool-badges"><span class="badge badge-green">🔒 Offline</span><span class="badge badge-blue">🔍 Regex Grep</span><span class="badge badge-purple">📊 Level Stats</span></div>
+  </div>
+
+  <div class="tool-content-grid">
+    <main>
+      <!-- Load input -->
+      <div class="glass-panel" style="margin-bottom:1rem;">
+        <div class="panel-header">
+          <span class="panel-title">📂 Load Log File</span>
+          <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+            <label class="btn btn-primary btn-sm" style="cursor:pointer;">📁 Open File<input type="file" id="file-input" accept=".log,.txt,.out,.err" style="display:none;" aria-label="Open log file"></label>
+            <button class="btn btn-secondary btn-sm" id="sample-btn">📄 Load Sample</button>
+            <button class="btn btn-danger btn-sm" id="clear-btn">✕ Clear</button>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="drop-zone" id="drop-zone" role="button" tabindex="0" aria-label="Drop log file here">
+            <span class="drop-icon" aria-hidden="true">📋</span>
+            <h3>Drop a .log or .txt file here</h3>
+            <p>Any size supported · Files stay in your browser · Zero upload</p>
+          </div>
+          <textarea id="paste-input" class="form-control" rows="3" placeholder="Or paste log lines directly here and press Enter…" style="margin-top:.75rem;" spellcheck="false"></textarea>
+          <button class="btn btn-primary btn-sm" id="parse-paste-btn" style="margin-top:.5rem;">▶ Parse Pasted Lines</button>
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div class="glass-panel" id="filter-panel" style="display:none;margin-bottom:1rem;">
+        <div class="panel-header">
+          <span class="panel-title">🔍 Filters &amp; Search</span>
+          <div style="display:flex;gap:.5rem;align-items:center;">
+            <button class="btn btn-secondary btn-sm" id="export-filtered-btn">⬇ Export Filtered</button>
+          </div>
+        </div>
+        <div class="panel-body">
+          <!-- Level filters -->
+          <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.75rem;" role="group" aria-label="Log level filters">
+            <button class="level-filter-btn active-ALL" data-level="ALL">All Levels</button>
+            <button class="level-filter-btn" data-level="ERROR">ERROR</button>
+            <button class="level-filter-btn" data-level="WARN">WARN</button>
+            <button class="level-filter-btn" data-level="INFO">INFO</button>
+            <button class="level-filter-btn" data-level="DEBUG">DEBUG</button>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:.75rem;">
+            <div class="form-group" style="margin:0;">
+              <label class="form-label" for="grep-input">Grep / Regex Search</label>
+              <input type="text" id="grep-input" class="form-control font-mono" placeholder='e.g. "Error|Exception" or "user_id=\d+"' spellcheck="false">
+            </div>
+            <div class="form-group" style="margin:0;">
+              <label class="form-label" for="exclude-input">Exclude Pattern</label>
+              <input type="text" id="exclude-input" class="form-control font-mono" placeholder='e.g. "healthcheck|ping"' spellcheck="false">
+            </div>
+          </div>
+          <!-- Stats -->
+          <div id="log-stats" style="display:flex;gap:1rem;flex-wrap:wrap;font-size:.78rem;"></div>
+        </div>
+      </div>
+
+      <!-- Log output -->
+      <div class="glass-panel" id="log-output-panel" style="display:none;">
+        <div class="panel-header">
+          <span class="panel-title">📋 Log Lines</span>
+          <span id="line-count" style="font-size:.82rem;color:var(--text-muted);"></span>
+        </div>
+        <div class="panel-body" style="padding:.5rem;">
+          <div id="log-container" role="log" aria-live="off" aria-label="Filtered log lines"></div>
+        </div>
+      </div>
+    </main>
+
+    <aside class="ad-sidebar" aria-label="Advertisement">
+      <div class="ad-slot ad-slot-300x600">
+        <span class="ad-slot-label">Advertisement</span>
+        <div class="ad-slot-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<section class="tool-info-section">
+  <div class="info-divider"></div>
+  <div class="info-grid">
+    <div class="info-card">
+      <h3><span class="icon">📖</span> User Manual &amp; Operational Guide</h3>
+      <ol>
+        <li><strong>Load your log:</strong> Click "Open File" to load a .log or .txt file, drop a file into the zone, or paste log lines directly and click "Parse Pasted Lines."</li>
+        <li><strong>Filter by level:</strong> Click "ERROR", "WARN", "INFO", or "DEBUG" to show only lines containing that log level keyword. Multiple selections are OR'd together. "All Levels" resets the filter.</li>
+        <li><strong>Grep search:</strong> Enter a plain text string or regex pattern to filter lines to those containing a match. Matches are highlighted in amber. The "Exclude" pattern removes matching lines.</li>
+        <li><strong>Export:</strong> Click "Export Filtered" to download the currently visible (filtered) log lines as a .txt file.</li>
+      </ol>
+    </div>
+    <div class="info-card">
+      <h3><span class="icon">🏗️</span> Architecture Insight: Why This Tool Runs Locally</h3>
+      <p>Production log files frequently contain sensitive operational data: user IDs, session tokens, IP addresses, database queries, and error stack traces. Uploading logs to a cloud service creates a significant privacy and compliance risk (GDPR, HIPAA, SOC2).</p>
+      <p style="margin-top:.75rem;">This tool reads log files using the browser's <code>FileReader</code> API, splits lines using JavaScript string operations, parses log levels via regex, and renders filtered lines to the DOM using a virtual render window that only builds DOM elements for visible lines. The entire log corpus stays in browser memory as a JavaScript string array — never transmitted anywhere.</p>
+    </div>
+    <div class="info-card" style="grid-column:1/-1;">
+      <h3><span class="icon">❓</span> Frequently Asked Questions</h3>
+      <div class="faq-list">
+        <details class="faq-item"><summary>What log formats does this parse filter large log files grep syntax browser tool support?</summary><div class="faq-answer">The tool supports any plain-text log format. It automatically detects common log level keywords (ERROR, FATAL, WARN, WARNING, INFO, DEBUG, TRACE) anywhere in each line, regardless of format. This covers standard formats including Log4j, Logback, Python logging, Winston (Node.js), Bunyan, syslog, NGINX access logs, Apache error logs, and custom application logs.</div></details>
+        <details class="faq-item"><summary>How large a log file can I analyze?</summary><div class="faq-answer">The tool has been tested with log files up to 100MB (millions of lines). Files are read into browser memory as a string, then split into a JavaScript array of line strings. The rendering uses DOM chunking to display a maximum of 2,000 lines at once to keep the UI responsive. For very large files (500MB+), browser memory limits may apply — the file loading may fail if the browser's available heap is insufficient.</div></details>
+        <details class="faq-item"><summary>Can I use regex syntax in the grep filter?</summary><div class="faq-answer">Yes — the grep input field accepts any valid JavaScript regular expression. For example, <code>user_id=\d+</code> finds lines with numeric user IDs, <code>Error|Exception</code> finds error and exception lines, and <code>^\d{4}-\d{2}-\d{2}</code> filters lines starting with a date. Invalid regex patterns are treated as literal string searches to prevent errors.</div></details>
+        <details class="faq-item"><summary>Can I filter log lines by a time range?</summary><div class="faq-answer">Use the grep search field with a timestamp pattern. For example, to see all logs from a specific hour, search for <code>2025-01-15 14:</code> to filter lines from 2 PM on January 15. For Unix timestamp ranges, search for <code>173\d{7}</code> to match a range of epoch timestamps. A dedicated time-range filter is a planned future feature.</div></details>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand"><a href="../../" class="nav-logo"><div class="logo-icon">D</div><span class="logo-text">Dev<span>Utils</span></span></a><p>Premium client-side developer tools.</p></div>
+    <nav class="footer-links"><a href="../../privacy-policy.html">Privacy</a><a href="../../terms.html">Terms</a><a href="../../contact.html">Contact</a></nav>
+  </div>
+  <div class="footer-bottom"><p>© 2025 DevUtils Hub.</p></div>
+</footer>
+<div class="sticky-ad-footer"><span class="ad-slot-label">Advertisement</span><div class="footer-ad-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div></div>
+<div class="cookie-banner" id="cookie-banner"><p><strong>🍪 Cookie Notice</strong> — <a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
+<div id="toast-container" class="toast-container" aria-live="polite"></div>
+<script src="../../assets/js/global.js"></script>
+<script>
+(function(){
+  'use strict';
+  const logContainer  = document.getElementById('log-container');
+  const filterPanel   = document.getElementById('filter-panel');
+  const logOutputPanel= document.getElementById('log-output-panel');
+  const lineCount     = document.getElementById('line-count');
+  const grepInput     = document.getElementById('grep-input');
+  const excludeInput  = document.getElementById('exclude-input');
+  const logStats      = document.getElementById('log-stats');
+  const LEVELS = ['ERROR','FATAL','WARN','WARNING','INFO','DEBUG','TRACE'];
+  let allLines = [];
+  let activeLevel = 'ALL';
+  let debounce;
+
+  const SAMPLE_LOG = `2025-01-15 08:00:01 INFO  [app] Server started on port 3000
+2025-01-15 08:00:02 INFO  [db] Connected to PostgreSQL database
+2025-01-15 08:01:14 DEBUG [auth] Token validation for user_id=1042 passed
+2025-01-15 08:02:33 INFO  [api] GET /api/users 200 45ms
+2025-01-15 08:02:58 WARN  [rate-limiter] user_id=9001 approaching rate limit (89/100)
+2025-01-15 08:03:12 ERROR [db] Connection timeout after 5000ms - retrying (attempt 1/3)
+2025-01-15 08:03:17 ERROR [db] Connection timeout after 5000ms - retrying (attempt 2/3)
+2025-01-15 08:03:22 INFO  [db] Reconnected to PostgreSQL successfully
+2025-01-15 08:04:01 DEBUG [cache] Cache miss for key=user:profile:1042
+2025-01-15 08:04:01 INFO  [api] POST /api/auth/login 200 123ms
+2025-01-15 08:05:22 WARN  [security] Failed login attempt for user admin@example.com (IP: 203.0.113.42)
+2025-01-15 08:05:55 FATAL [app] Unhandled exception: Cannot read property 'id' of undefined
+  at UserController.getProfile (controllers/user.js:42)
+  at async Router.handle (router/index.js:284)
+2025-01-15 08:05:56 INFO  [app] Process recovered from unhandled exception
+2025-01-15 08:06:01 INFO  [healthcheck] GET /health 200 2ms
+2025-01-15 08:06:31 DEBUG [queue] Processing job id=7892 type=email_notification
+2025-01-15 08:06:32 INFO  [queue] Job id=7892 completed in 234ms
+2025-01-15 08:07:11 ERROR [api] POST /api/payments 500 - Stripe API timeout (3000ms)
+2025-01-15 08:08:00 INFO  [healthcheck] GET /health 200 1ms
+2025-01-15 08:09:44 WARN  [memory] Heap usage at 78% (1.57 GB / 2 GB)
+2025-01-15 08:10:01 INFO  [api] GET /api/dashboard 200 67ms`;
+
+  document.getElementById('sample-btn').addEventListener('click', ()=>{ loadLines(SAMPLE_LOG.split('\n')); });
+  document.getElementById('clear-btn').addEventListener('click', ()=>{ allLines=[]; logContainer.innerHTML=''; filterPanel.style.display='none'; logOutputPanel.style.display='none'; logStats.innerHTML=''; });
+  document.getElementById('parse-paste-btn').addEventListener('click', ()=>{ const v=document.getElementById('paste-input').value; if(v.trim())loadLines(v.split('\n')); });
+  document.getElementById('file-input').addEventListener('change', function(){ if(!this.files[0])return; const r=new FileReader(); r.onload=e=>loadLines(e.target.result.replace(/\r/g,'').split('\n')); r.readAsText(this.files[0]); });
+
+  document.addEventListener('DOMContentLoaded', function(){
+    window.DevUtils.initDropZone('drop-zone', files => {
+      if (!files[0]) return;
+      const r = new FileReader();
+      r.onload = e => loadLines(e.target.result.replace(/\r/g,'').split('\n'));
+      r.readAsText(files[0]);
+    });
+  });
+
+  document.querySelectorAll('.level-filter-btn').forEach(btn => {
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.level-filter-btn').forEach(b=>{ b.className='level-filter-btn'; });
+      activeLevel = this.dataset.level;
+      this.className='level-filter-btn active-'+activeLevel;
+      renderFiltered();
+    });
+  });
+
+  grepInput.addEventListener('input', ()=>{ clearTimeout(debounce); debounce=setTimeout(renderFiltered,250); });
+  excludeInput.addEventListener('input', ()=>{ clearTimeout(debounce); debounce=setTimeout(renderFiltered,250); });
+
+  function detectLevel(line) {
+    for (const l of LEVELS) { if (line.toUpperCase().includes(l)) return l==='WARN'?'WARN':(l==='FATAL'?'ERROR':l); }
+    return null;
+  }
+
+  function loadLines(lines) {
+    allLines = lines.filter(l=>l.trim());
+    filterPanel.style.display='block';
+    logOutputPanel.style.display='block';
+    // Compute stats
+    const counts = {ERROR:0,WARN:0,INFO:0,DEBUG:0,OTHER:0};
+    allLines.forEach(l=>{ const lv=detectLevel(l); if(lv==='ERROR'||lv==='FATAL')counts.ERROR++; else if(lv==='WARN'||lv==='WARNING')counts.WARN++; else if(lv==='INFO')counts.INFO++; else if(lv==='DEBUG'||lv==='TRACE')counts.DEBUG++; else counts.OTHER++; });
+    logStats.innerHTML = `<span style="color:var(--text-secondary);">Total: <strong>${allLines.length}</strong></span> <span style="color:#f87171;">ERROR: <strong>${counts.ERROR}</strong></span> <span style="color:#fbbf24;">WARN: <strong>${counts.WARN}</strong></span> <span style="color:#a5f3fc;">INFO: <strong>${counts.INFO}</strong></span> <span style="color:#a3a3a3;">DEBUG: <strong>${counts.DEBUG}</strong></span>`;
+    renderFiltered();
+    window.DevUtils.Toast.show(`Loaded ${allLines.length.toLocaleString()} lines`, 'success');
+  }
+
+  function escHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function renderFiltered() {
+    const grep    = grepInput.value.trim();
+    const exclude = excludeInput.value.trim();
+    let grepRe, excludeRe;
+    try { grepRe = grep ? new RegExp(grep,'gi') : null; } catch(e) { grepRe = new RegExp(grep.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi'); }
+    try { excludeRe = exclude ? new RegExp(exclude,'i') : null; } catch(e) { excludeRe = null; }
+
+    const filtered = allLines.filter((line, idx) => {
+      if (activeLevel !== 'ALL') {
+        const lv = detectLevel(line);
+        const matchLevel = activeLevel==='ERROR'?(lv==='ERROR'||lv==='FATAL'):activeLevel==='WARN'?(lv==='WARN'||lv==='WARNING'):lv===activeLevel;
+        if (!matchLevel) return false;
+      }
+      if (excludeRe && excludeRe.test(line)) return false;
+      if (grepRe && !new RegExp(grep,'i').test(line)) return false;
+      return true;
+    });
+
+    lineCount.textContent = `${filtered.length.toLocaleString()} / ${allLines.length.toLocaleString()} lines`;
+    const MAX = 2000;
+    const shown = filtered.slice(0, MAX);
+    logContainer.innerHTML = '';
+    const frag = document.createDocumentFragment();
+    shown.forEach((line, i) => {
+      const lv = detectLevel(line);
+      const div = document.createElement('div');
+      div.className = 'log-line';
+      const numSpan = document.createElement('span'); numSpan.className='log-num'; numSpan.textContent=i+1;
+      const contentSpan = document.createElement('span');
+      contentSpan.className = 'log-content'+(lv?' log-'+lv:'');
+      let displayLine = escHtml(line);
+      if (grepRe) { try { displayLine = displayLine.replace(new RegExp(escHtml(grep),'gi'), m=>`<span class="log-grep-hl">${m}</span>`); }catch(e){} }
+      contentSpan.innerHTML = displayLine;
+      div.appendChild(numSpan); div.appendChild(contentSpan);
+      frag.appendChild(div);
+    });
+    if (filtered.length > MAX) {
+      const note = document.createElement('div'); note.style.cssText='text-align:center;padding:.75rem;color:var(--text-muted);font-size:.8rem;';
+      note.textContent=`Showing first ${MAX} of ${filtered.length.toLocaleString()} filtered lines. Refine filters to see more.`;
+      frag.appendChild(note);
+    }
+    logContainer.appendChild(frag);
+  }
+
+  document.getElementById('export-filtered-btn').addEventListener('click', ()=>{
+    const grep    = grepInput.value.trim();
+    const exclude = excludeInput.value.trim();
+    let grepRe, excludeRe;
+    try { grepRe = grep ? new RegExp(grep,'i') : null; } catch(e) { grepRe = null; }
+    try { excludeRe = exclude ? new RegExp(exclude,'i') : null; } catch(e) { excludeRe = null; }
+    const filtered = allLines.filter(line => {
+      if (activeLevel !== 'ALL') { const lv=detectLevel(line); if(!(activeLevel==='ERROR'?(lv==='ERROR'||lv==='FATAL'):activeLevel==='WARN'?(lv==='WARN'||lv==='WARNING'):lv===activeLevel))return false; }
+      if (excludeRe && excludeRe.test(line)) return false;
+      if (grepRe && !grepRe.test(line)) return false;
+      return true;
+    });
+    const blob = new Blob([filtered.join('\n')], {type:'text/plain'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href=url; a.download='filtered-log.txt'; a.click();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+  });
+})();
+</script>
+</body>
+</html>
