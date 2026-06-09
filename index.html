@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevUtils Hub — Fast Client Side Developer Utility Tools</title>
+  <meta name="description" content="15+ premium, zero-server browser-based developer tools. Run locally for complete privacy: EXIF purger, WebP converter, JSON visualizer, JWT inspector, regex diagrams, and more. No upload, no tracking.">
+  <meta name="keywords" content="fast client side developer utility tools hub, browser tools, offline developer utilities, privacy-first tools, web developer toolkit">
+  <link rel="canonical" href="https://devutils.app/">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="DevUtils Hub — Fast Client Side Developer Utility Tools">
+  <meta property="og:description" content="15+ premium zero-server developer tools. Process files and data locally in your browser — no uploads, 100% private, works offline.">
+  <meta property="og:url" content="https://devutils.app/">
+  <meta property="og:image" content="https://devutils.app/assets/og-home.png">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DevUtils Hub — Fast Client Side Developer Utility Tools">
+  <meta name="twitter:description" content="15+ premium zero-server developer tools. 100% private, works offline.">
+  <!-- Preload -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="assets/css/global.css">
+  <style>
+    .home-section-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .home-section-title .line {
+      flex: 1;
+      height: 1px;
+      background: var(--border-color);
+    }
+    .privacy-strip {
+      background: rgba(16, 185, 129, 0.07);
+      border: 1px solid rgba(16, 185, 129, 0.18);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      max-width: var(--content-max);
+      margin: 0 auto 2.5rem;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .privacy-strip .ps-icon { font-size: 1.8rem; }
+    .privacy-strip h3 { font-size: 0.95rem; font-weight: 700; color: #10b981; margin-bottom: 0.2rem; }
+    .privacy-strip p { font-size: 0.82rem; color: var(--text-secondary); }
+    .tool-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border-color);
+    }
+    .launch-link {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent-primary);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="site-nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="DevUtils Home">
+      <div class="logo-icon" aria-hidden="true">D</div>
+      <span class="logo-text">Dev<span>Utils</span></span>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="/" aria-current="page">Home</a></li>
+      <li><a href="/tools/hash-generator/">Hash Gen</a></li>
+      <li><a href="/tools/jwt-inspector/">JWT</a></li>
+      <li><a href="/tools/json-visualizer/">JSON</a></li>
+      <li><a href="/tools/diff-checker/">Diff</a></li>
+      <li><a href="/privacy-policy.html">Privacy</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn-theme" id="theme-toggle" aria-label="Toggle dark/light mode">☀️</button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<nav class="nav-mobile" id="nav-mobile" aria-label="Mobile navigation">
+  <a href="/">Home</a>
+  <a href="/tools/exif-purger/">EXIF Purger</a>
+  <a href="/tools/webp-cruncher/">WebP Converter</a>
+  <a href="/tools/json-visualizer/">JSON Visualizer</a>
+  <a href="/tools/jwt-inspector/">JWT Inspector</a>
+  <a href="/tools/hash-generator/">Hash Generator</a>
+  <a href="/tools/diff-checker/">Diff Checker</a>
+  <a href="/tools/regex-simulator/">RegEx Simulator</a>
+  <a href="/privacy-policy.html">Privacy Policy</a>
+  <button class="btn-theme" id="theme-toggle-mobile" style="width:auto;border-radius:8px;padding:0.4rem 0.75rem;">☀️ Toggle Theme</button>
+</nav>
+
+<div class="page-wrapper">
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-badge" aria-label="Platform status">⚡ 100% Client-Side · Zero Upload · Offline Ready</div>
+    <h1>Premium Developer Utility<br>Tools That Run Locally</h1>
+    <p>A curated hub of 15 high-performance tools. Every computation runs inside your browser—your files never leave your device. Works fully offline. Forever free.</p>
+    <div class="hero-stats" role="list" aria-label="Platform statistics">
+      <div class="hero-stat" role="listitem">
+        <span class="num">15+</span>
+        <span class="label">Utility Tools</span>
+      </div>
+      <div class="hero-stat" role="listitem">
+        <span class="num">0ms</span>
+        <span class="label">Server Latency</span>
+      </div>
+      <div class="hero-stat" role="listitem">
+        <span class="num">100%</span>
+        <span class="label">Data Private</span>
+      </div>
+      <div class="hero-stat" role="listitem">
+        <span class="num">∞</span>
+        <span class="label">File Size Limit</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Search -->
+  <div style="max-width:var(--content-max);margin:0 auto;padding:0 1.5rem;">
+    <div class="search-bar" role="search" aria-label="Search developer tools">
+      <span class="search-icon" aria-hidden="true">🔍</span>
+      <input type="search" id="tool-search" placeholder="Search tools by name or keyword…" aria-label="Search tools">
+    </div>
+
+    <!-- Category Tabs -->
+    <div class="category-tabs" role="tablist" aria-label="Tool categories">
+      <button class="tab-btn active" data-cat="all" role="tab" aria-selected="true">All Tools</button>
+      <button class="tab-btn" data-cat="image" role="tab" aria-selected="false">🖼 Image</button>
+      <button class="tab-btn" data-cat="encode" role="tab" aria-selected="false">🔐 Encode</button>
+      <button class="tab-btn" data-cat="code" role="tab" aria-selected="false">⚙️ Code</button>
+      <button class="tab-btn" data-cat="text" role="tab" aria-selected="false">📝 Text</button>
+      <button class="tab-btn" data-cat="visual" role="tab" aria-selected="false">🎨 Visual</button>
+    </div>
+  </div>
+
+  <!-- Privacy Strip -->
+  <div style="max-width:var(--content-max);margin:0 auto;padding:0 1.5rem;">
+    <div class="privacy-strip" role="note" aria-label="Privacy guarantee">
+      <span class="ps-icon" aria-hidden="true">🔒</span>
+      <div>
+        <h3>Zero-Upload Privacy Guarantee</h3>
+        <p>Every tool on this platform runs exclusively within your browser's JavaScript engine. No files, no strings, no metadata are ever transmitted to any server. You can disconnect from the internet and every tool will still work perfectly.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tools Grid -->
+  <section class="tools-section" aria-labelledby="tools-heading">
+    <h2 class="home-section-title" id="tools-heading">
+      Developer Tools
+      <span class="line" aria-hidden="true"></span>
+    </h2>
+    <div class="tools-grid" id="tools-grid">
+
+      <!-- EXIF Purger -->
+      <a href="/tools/exif-purger/" class="tool-card" data-cat="image" aria-label="Open Private Local EXIF Purger tool">
+        <div class="tool-card-header">
+          <div class="tool-card-icon" aria-hidden="true">📷</div>
+          <div class="tool-card-meta">
+            <h3>Private Local EXIF Purger</h3>
+            <p>Strip all metadata, GPS coords, device info, and timestamps from JPEG/PNG images — entirely offline.</p>
+          </div>
+        </div>
+        <div class="tool-card-tags">
+          <span class="tag">Offline</span>
+          <span class="tag">Privacy</span>
+          <span class="tag">Image</span>
+        </div>
+        <div class="tool-card-footer">
+          <span class="launch-link">Launch tool →</span>
+          <span class="tool-card-arrow" aria-hidden="true">›</span>
+        </div>
+      </a>
+
+      <!-- WebP Cruncher -->
+      <a href="/tools/webp-cruncher/" class="tool-card" data-cat="image" aria-label="Open Bulk WebP/AVIF Converter tool">
+        <div class="tool-card-header">
+          <div class="tool-card-icon" aria-hidden="true">🖼️</div>
+          <div class="tool-card-meta">
+            <h3>Bulk WebP/AVIF Converter</h3>
+            <p>Batch convert PNG, JPEG, and GIF images to WebP or AVIF format with quality control, locally.</p>
+          </div>
+        </div>
+        <div class="tool-card-tags">
+          <span class="tag">Batch</span>
+          <span class="tag">WebP</span>
+          <span class="tag">AVIF</span>
+        </div>
+        <div class="tool-card-footer">
+          <span class="launch-link">Launch tool →</span>
+          <span class="tool-card-arrow" aria-hidden="true">›</span>
+        </div>
+      </a>
+
+      <!-- JSON Visualizer -->
+      <a href="/tools/json-visualizer/" class="tool-card" data-cat="code" aria-label="Open Canvas JSON Node Visualizer tool">
+        <div class="tool-card-header">
+          <div class="tool-card-icon" aria-hidden="true">🌐</div>
+          <div class="tool-card-meta">
+            <h3>Canvas JSON Node Visualizer</h3>
+            <p>Paste any JSON structure and render it as a rich, interactive, collapsible node-tree map.</p>
+          </div>
+        </div>
+        <div class="tool-card-tags">
+          <span class="tag">JSON</span>
+          <span class="tag">Tree</span>
+          <span class="tag">Visual</span>
+        </div>
+        <div class="tool-card-footer">
+          <span class="launch-link">Launch tool →</span>
+          <span class="tool-card-arrow" aria-hidden="true">›</span>
+        </div>
+      </a>
+
+      <!-- SVG Renderer -->
+      <a href="/tools/svg-renderer/" class="tool-card" data-cat="image" aria-label="Open Raw SVG Path-to-PNG Studio tool">
+        <div class="tool-card-header">
+          <div class="tool-card-icon" aria-hidden="true">✏️</div>
+          <div class="tool-card-meta">
+            <h3>Raw SVG Path-to-PNG Studio</h3>
+            <p>Paste raw SVG code or path strings, preview instantly, and export to pixel-perfect PNG at any resolution.</p>
+          </div>
+        </div>
+        <div class="tool-card-tags">
+          <span class="tag">SVG</span>
+          <span class="tag">PNG</span>
+          <span class="tag">Export</span>
+        </div>
+        <div class="tool-card-footer">
+          <span class="launch-link">Launch tool →</span>
+          <span class="tool-card-arrow" aria-hidden="true">›</span>
+        </div>
+      </a>
+
+      <!-- Cron Explainer -->
+      <a href="/tools/cron-explainer/" class="tool-card" data-cat="code" aria-label="Open Visual Cron Expression Explainer tool">
+        <div class="tool-card-header">
+          <div class="tool-card-icon" aria-hidden="true">⏰</div>
+          <div class="tool-card-meta">
+            <h3>Visual Cron Expression Explainer</h3>
+            <p>Decode any cron schedule string into plain English, show next 10 run times, and build schedules visually.</p>
+          </div>
+        </div>
+        <div class="tool-card-tags">
+          <span class="tag">Cron</span>
+          <span class="tag">Scheduler</span>
+          <span class="tag">DevOps</span>
+        </div>
+        <div class="tool-card-footer">
+          <span class="launch-link">Launch tool →</span>
+          <span class="tool-card-arrow" aria-hidden="true">›</span>
+        </div>
+      </a>
+
+      <!-- JWT Inspector -->
+      <a href="/tools/jwt-inspector/" class="tool-card" data-cat="encode" aria-label="Open Client-Side Secure JWT Inspector tool">
+        <div class="tool-card-header">
+          <div class="tool-card-icon" aria-hidden="true">🔑</div>
+          <div class="tool-card-meta">
+            <h3>Client-Side Secure JWT Inspector</h3>
+            <p>Decode and inspect JWT token headers and payloads safely — never transmitted, processed 100% offline.</p>
+          </div>
+        </div>
+        <div class="tool-card-tags">
+          <span class="tag">JWT</span>
+          <span class="tag">Auth</span>
+          <span class="tag">Secure</span>
+        </div>
+        <div class="tool-card-footer">
+          <span class="launch-link">Launch tool →</span>
+          <span class="tool-card-arrow" aria-hidden="true">›</span>
+        </div>
+      </a>
+
+      <!-- Glass Studio -->
+      <a href="/tools/glass-studio/" class="tool-card" data-cat="visual" aria-label="Open Glassmorphic UI CSS Lab tool">
+        <div class="tool-card-header">
+          <div class="tool-card-icon" aria-hidden="true">💎</div>
+          <div class="tool-card-meta">
+            <h3>Glassmorphic UI CSS Lab</h3>
+            <p>Generate premium Apple-style glassmorphism CSS with live preview. Export ready-to-use CSS variables.</p>
+          </div>
+        </div>
+        <div class="tool-card-tags">
+          <span class="tag">CSS</span>
+          <span class="tag">Glass</span>
+          <span class="tag">UI Design</span>
+        </div>
+        <div class="tool-card-footer">
+          <span class="launch-link">Launch tool →</span>
+          <span class="tool-card-arrow" aria-hidden="true">›</span>
+        </div>
+      </a>
+
+      <!-- Table Builder -->
+      <a href="/tools/table-builder/" class="tool-card" data-cat="text" aria-label="Open Drag-and-Drop Markdown Grid tool">
+        <div class="tool-card-header">
+          <div class="tool-card-icon" aria-hidden="true">📊</div>
+          <div class="tool-card-meta">
+            <h3>Drag-and-Drop Markdown Grid</h3>
+            <p>Click cells to edit, drag to reorder columns and rows, and instantly export perfect Markdown table syntax.</p>
+          </div>
+        </div>
+        <div class="tool-card-tags">
+          <span class="tag">Markdown</span>
+          <span class="tag">Table</span>
+          <span class="tag">Editor</span>
+        </div>
+        <div class="tool-card-footer">
+          <span class="launch-link">Launch tool →</span>
+          <span class="tool-card-arrow" aria-hidden="true">›</span>
+        </div>
+      </a>
+
+      <!-- RegEx Simulator -->
+      <a href="/tools/regex-simulator/" class="tool-card" data-cat="code" aria-label="Open RegEx Railroad Diagram Vector tool">
+        <div class="tool-card-header">
+          <div class="tool-card-icon" aria-hidden="true">🔮</div>
+          <div class="tool-card-meta">
+            <h3>RegEx Railroad Diagram Vector</h3>
+            <p>Type a regular expression and see live match highlighting, capture groups, and a visual railroad diagram.</p>
+          </div>
+        </div>
+        <div class="tool-card-tags">
+          <span class="tag">RegEx</span>
+          <span class="tag">Diagram</span>
+          <span class="tag">Visual</span>
+        </div>
+        <div class="tool-card-footer">
+          <span class="launch-link">Launch tool →</span>
+          <span class="tool-card-arrow" aria-hidden="true">›</span>
+        </div>
+      </a>
+
+      <!-- Tailwind Master -->
+      <a href="/tools/tailwind-master/" class="tool-card" data-cat="visual" aria-label="Open Tailwind Palette Master Engine tool">
+        <div class="tool-card-header">
+          <div class="tool-card-icon" aria-hidden="true">🎨</div>
+          <div class="tool-card-meta">
+            <h3>Tailwind Palette Master Engine</h3>
+            <p>Generate full 50–950 shade palettes from any hex seed, preview in real-time, and export as Tailwind config.</p>
+          </div>
+        </div>
+        <div class="tool-card-tags">
+          <span class="tag">Tailwind</span>
+          <span class="tag">Colors</span>
+          <span class="tag">CSS</span>
+        </div>
+        <div class="tool-card-footer">
+          <span class="launch-link">Launch tool →</span>
+          <span class="tool-card-arrow" aria-hidden="true">›</span>
+        </div>
+      </a>
+
+      <!-- String Encoder -->
+      <a href="/tools/string-encoder/" class="tool-card" data-cat="encode" aria-label="Open URL & Base64 Bitstream Engine tool">
+        <div class="tool-card-header">
+          <div class="tool-card-icon" aria-hidden="true">🔄</div>
+          <div class="tool-card-meta">
+            <h3>URL & Base64 Bitstream Engine</h3>
+            <p>Encode/decode Base64, URL strings, and HTML entities. Instantly preview Base64 image payloads in-browser.</p>
+          </div>
+        </div>
+        <div class="tool-card-tags">
+          <span class="tag">Base64</span>
+          <span class="tag">URL Encode</span>
+          <span class="tag">Encode</span>
+        </div>
+        <div class="tool-card-footer">
+          <span class="launch-link">Launch tool →</span>
+          <span class="tool-card-arrow" aria-hidden="true">›</span>
+        </div>
+      </a>
+
+      <!-- Diff Checker -->
+      <a href="/tools/diff-checker/" class="tool-card" data-cat="text" aria-label="Open Clean Local Text Diff Tool">
+        <div class="tool-card-header">
+          <div class="tool-card-icon" aria-hidden="true">📄</div>
+          <div class="tool-card-meta">
+            <h3>Clean Local Text Diff Tool</h3>
+            <p>Paste two text blocks for a line-by-line, color-coded diff comparison — completely client-side, zero upload.</p>
+          </div>
+        </div>
+        <div class="tool-card-tags">
+          <span class="tag">Diff</span>
+          <span class="tag">Compare</span>
+          <span class="tag">Text</span>
+        </div>
+        <div class="tool-card-footer">
+          <span class="launch-link">Launch tool →</span>
+          <span class="tool-card-arrow" aria-hidden="true">›</span>
+        </div>
+      </a>
+
+      <!-- YAML Transformer -->
+      <a href="/tools/yaml-transformer/" class="tool-card" data-cat="code" aria-label="Open Frontmatter YAML to JSON Parser tool">
+        <div class="tool-card-header">
+          <div class="tool-card-icon" aria-hidden="true">⚙️</div>
+          <div class="tool-card-meta">
+            <h3>Frontmatter YAML to JSON Parser</h3>
+            <p>Paste YAML or Markdown frontmatter and transform it instantly into validated, pretty-printed JSON output.</p>
+          </div>
+        </div>
+        <div class="tool-card-tags">
+          <span class="tag">YAML</span>
+          <span class="tag">JSON</span>
+          <span class="tag">Frontmatter</span>
+        </div>
+        <div class="tool-card-footer">
+          <span class="launch-link">Launch tool →</span>
+          <span class="tool-card-arrow" aria-hidden="true">›</span>
+        </div>
+      </a>
+
+      <!-- Hash Generator -->
+      <a href="/tools/hash-generator/" class="tool-card" data-cat="encode" aria-label="Open Crypto Text Hash Simulator tool">
+        <div class="tool-card-header">
+          <div class="tool-card-icon" aria-hidden="true">🔐</div>
+          <div class="tool-card-meta">
+            <h3>Crypto Text Hash Simulator</h3>
+            <p>Generate SHA-256, SHA-512, SHA-1, and MD5 hashes from any text string using the native Web Crypto API.</p>
+          </div>
+        </div>
+        <div class="tool-card-tags">
+          <span class="tag">SHA-256</span>
+          <span class="tag">Hash</span>
+          <span class="tag">Crypto</span>
+        </div>
+        <div class="tool-card-footer">
+          <span class="launch-link">Launch tool →</span>
+          <span class="tool-card-arrow" aria-hidden="true">›</span>
+        </div>
+      </a>
+
+      <!-- Log Filter -->
+      <a href="/tools/log-filter/" class="tool-card" data-cat="text" aria-label="Open Offline Large Log File Analyzer tool">
+        <div class="tool-card-header">
+          <div class="tool-card-icon" aria-hidden="true">📋</div>
+          <div class="tool-card-meta">
+            <h3>Offline Large Log File Analyzer</h3>
+            <p>Open multi-gigabyte log files, filter by keyword or severity level, and jump to specific line numbers instantly.</p>
+          </div>
+        </div>
+        <div class="tool-card-tags">
+          <span class="tag">Logs</span>
+          <span class="tag">Filter</span>
+          <span class="tag">Large Files</span>
+        </div>
+        <div class="tool-card-footer">
+          <span class="launch-link">Launch tool →</span>
+          <span class="tool-card-arrow" aria-hidden="true">›</span>
+        </div>
+      </a>
+
+    </div><!-- /tools-grid -->
+  </section>
+
+  <!-- SEO Content Block -->
+  <section class="tool-info-section" aria-labelledby="about-heading">
+    <div class="info-divider"></div>
+    <div class="info-grid">
+      <div class="info-card">
+        <h3 id="about-heading"><span class="icon" aria-hidden="true">⚡</span> Why Client-Side Tools Are Superior</h3>
+        <p>Traditional web tools upload your data to a remote server, introduce network latency, create privacy risks, and break when the provider goes offline or throttles usage. Every tool on DevUtils Hub operates entirely within your browser's JavaScript execution sandbox.</p>
+        <p style="margin-top:0.75rem;">When you drop a file or paste sensitive text, it stays in your device's RAM. The Web Crypto API, Canvas API, and File API give modern browsers all the horsepower needed to process complex data structures, convert media formats, and compute cryptographic hashes at native speed — without a single byte leaving your machine.</p>
+      </div>
+      <div class="info-card">
+        <h3><span class="icon" aria-hidden="true">🎯</span> Built for Developers Who Value Speed</h3>
+        <p>Every tool in this hub is engineered to respond instantly. Zero build-step loading delays, zero framework hydration overhead, zero CDN round-trips for core functionality. The entire site is built with semantic HTML5, modern CSS3, and vanilla JavaScript — the fastest possible stack for utility tooling.</p>
+        <ul style="margin-top:0.75rem;">
+          <li>✅ Works on any modern browser without plugins</li>
+          <li>✅ No account, no sign-up, no rate limits</li>
+          <li>✅ Keyboard accessible and screen-reader friendly</li>
+          <li>✅ Fully responsive — desktop, tablet, and mobile</li>
+          <li>✅ Dark and light mode with preference memory</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div><!-- /page-wrapper -->
+
+<!-- Site Footer -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo" aria-label="DevUtils Home">
+        <div class="logo-icon" aria-hidden="true">D</div>
+        <span class="logo-text">Dev<span>Utils</span></span>
+      </a>
+      <p>Premium client-side developer utility tools. Zero server, zero upload, zero compromise on privacy. Built with plain HTML, CSS, and JavaScript.</p>
+    </div>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="/privacy-policy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms of Service</a>
+      <a href="/cookie-policy.html">Cookie Policy</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/sitemap.xml">Sitemap</a>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 DevUtils Hub. All rights reserved. All tools run locally in your browser.</p>
+    <p>No files are uploaded. No data is collected. <a href="/privacy-policy.html" style="color:var(--accent-primary);">Learn more →</a></p>
+  </div>
+</footer>
+
+<!-- Cookie Consent Banner -->
+<div class="cookie-banner" id="cookie-banner" role="dialog" aria-labelledby="cookie-title" aria-modal="false">
+  <p id="cookie-title"><strong>🍪 Cookie & Privacy Notice</strong><br>We use minimal local storage to remember your theme preference. Our advertising partner Google may use cookies for personalized ads. <a href="/cookie-policy.html">Learn more</a></p>
+  <div class="cookie-actions">
+    <button class="btn btn-primary btn-sm" id="cookie-accept">Accept All</button>
+    <button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button>
+  </div>
+</div>
+
+<!-- Sticky Footer Ad -->
+<div class="sticky-ad-footer" role="complementary" aria-label="Advertisement">
+  <span class="ad-slot-label">Advertisement</span>
+  <div class="footer-ad-inner">
+    <!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT -->
+    <!-- 728x90 Leaderboard / Responsive Ad Unit -->
+    <!-- Replace this comment block with your AdSense <ins> tag -->
+  </div>
+</div>
+
+<div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+<script src="assets/js/global.js"></script>
+</body>
+</html>

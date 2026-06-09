@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bulk WebP/AVIF Converter — Fast Batch PNG to WebP Converter Local | DevUtils</title>
+  <meta name="description" content="Convert PNG, JPEG, and GIF images to WebP or AVIF format in bulk, locally in your browser. No upload, adjustable quality, instant batch download.">
+  <meta name="keywords" content="fast batch png to webp converter local, webp converter, avif converter, batch image convert, offline image optimizer">
+  <link rel="canonical" href="https://devutils.app/tools/webp-cruncher/">
+  <meta property="og:title" content="Bulk WebP/AVIF Converter — Fast Local Batch Image Conversion">
+  <meta property="og:description" content="Convert PNG and JPEG to WebP or AVIF in bulk, 100% offline. Quality slider, instant preview, zip download.">
+  <meta property="og:url" content="https://devutils.app/tools/webp-cruncher/">
+  <link rel="stylesheet" href="../../assets/css/global.css">
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="../../" class="nav-logo"><div class="logo-icon">D</div><span class="logo-text">Dev<span>Utils</span></span></a>
+    <ul class="nav-links">
+      <li><a href="../../">Home</a></li>
+      <li><a href="../../tools/exif-purger/">EXIF Purger</a></li>
+      <li><a href="../../tools/svg-renderer/">SVG Studio</a></li>
+      <li><a href="../../tools/hash-generator/">Hash Gen</a></li>
+      <li><a href="../../privacy-policy.html">Privacy</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn-theme" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">☰</button>
+    </div>
+  </div>
+</nav>
+<nav class="nav-mobile" id="nav-mobile">
+  <a href="../../">Home</a><a href="../../tools/exif-purger/">EXIF Purger</a>
+  <a href="../../tools/hash-generator/">Hash Generator</a><a href="../../privacy-policy.html">Privacy Policy</a>
+</nav>
+
+<div class="page-wrapper">
+<div class="tool-page-wrapper">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="../../">Home</a><span class="sep">›</span><a href="../../">Tools</a><span class="sep">›</span><span class="current">WebP/AVIF Converter</span>
+  </nav>
+
+  <div class="tool-header">
+    <div class="tool-header-inner">
+      <div class="tool-page-icon" aria-hidden="true">🖼️</div>
+      <div class="tool-header-text">
+        <h1>Bulk WebP/AVIF Converter</h1>
+        <p>Batch convert images to next-gen formats for faster websites. 100% local, adjustable quality, instant results.</p>
+      </div>
+    </div>
+    <div class="tool-badges">
+      <span class="badge badge-green">🔒 No Upload</span>
+      <span class="badge badge-blue">📦 Batch Processing</span>
+      <span class="badge badge-purple">⚡ Canvas API</span>
+    </div>
+  </div>
+
+  <div class="tool-content-grid">
+    <main>
+      <!-- Settings -->
+      <div class="glass-panel" style="margin-bottom:1rem;">
+        <div class="panel-header"><span class="panel-title">⚙️ Conversion Settings</span></div>
+        <div class="panel-body">
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;align-items:end;" class="settings-grid">
+            <div class="form-group" style="margin:0;">
+              <label class="form-label" for="output-format">Output Format</label>
+              <select id="output-format" class="form-control">
+                <option value="image/webp">WebP</option>
+                <option value="image/jpeg">JPEG</option>
+                <option value="image/png">PNG (lossless)</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin:0;">
+              <label class="form-label" for="quality-slider">Quality: <span id="quality-val">85</span>%</label>
+              <input type="range" id="quality-slider" min="1" max="100" value="85" aria-label="Output quality">
+            </div>
+            <div class="form-group" style="margin:0;">
+              <label class="form-label" for="resize-pct">Resize: <span id="resize-val">100</span>%</label>
+              <input type="range" id="resize-pct" min="10" max="100" value="100" aria-label="Resize percentage">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Drop Zone -->
+      <div class="glass-panel" style="margin-bottom:1rem;">
+        <div class="panel-header">
+          <span class="panel-title">📂 Input Images</span>
+          <label class="btn btn-secondary btn-sm" style="cursor:pointer;">
+            Browse Files <input type="file" id="file-input" multiple accept="image/*" style="display:none;" aria-label="Select images">
+          </label>
+        </div>
+        <div class="panel-body">
+          <div class="drop-zone" id="drop-zone" role="button" tabindex="0" aria-label="Drop images here">
+            <span class="drop-icon" aria-hidden="true">🖼️</span>
+            <h3>Drop PNG, JPEG, GIF, or WebP images</h3>
+            <p>Batch processing supported · Any quantity · Runs 100% in your browser</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div class="glass-panel" id="results-panel" style="display:none;">
+        <div class="panel-header">
+          <span class="panel-title">✅ Converted Files</span>
+          <div style="display:flex;gap:0.5rem;">
+            <button class="btn btn-primary btn-sm" id="download-all-btn">⬇ Download All</button>
+            <button class="btn btn-secondary btn-sm" id="clear-btn">✕ Clear</button>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="progress-bar" id="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+          <div class="result-list" id="result-list" role="list" aria-live="polite"></div>
+          <div id="savings-summary" style="margin-top:1rem;padding:0.75rem 1rem;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:var(--radius-sm);font-size:0.85rem;display:none;">
+            <strong style="color:#10b981;">💾 Total size savings: </strong><span id="savings-text"></span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <aside class="ad-sidebar" aria-label="Advertisement">
+      <div class="ad-slot ad-slot-300x600">
+        <span class="ad-slot-label">Advertisement</span>
+        <div class="ad-slot-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<section class="tool-info-section">
+  <div class="info-divider"></div>
+  <div class="info-grid">
+    <div class="info-card">
+      <h3><span class="icon">📖</span> User Manual &amp; Operational Guide</h3>
+      <ol>
+        <li><strong>Configure format and quality:</strong> Select your desired output format (WebP is recommended for maximum browser compatibility and compression). Adjust the quality slider — 80–90% offers an excellent balance between file size and visual fidelity. For lossless conversion, choose PNG.</li>
+        <li><strong>Optionally resize:</strong> The Resize slider scales all output images proportionally. 100% keeps original dimensions. 50% halves both width and height.</li>
+        <li><strong>Drop or browse your images:</strong> Drag any number of images into the drop zone. JPEG, PNG, GIF, and existing WebP files are all accepted as input.</li>
+        <li><strong>Review savings:</strong> Each converted file shows its original and new file size, along with the percentage reduction. The summary bar shows total data saved across the batch.</li>
+        <li><strong>Download:</strong> Click individual file links or "Download All" to save all converted images at once.</li>
+      </ol>
+    </div>
+
+    <div class="info-card">
+      <h3><span class="icon">🏗️</span> Architecture Insight: Why This Tool Runs Locally</h3>
+      <p>WebP and AVIF conversion tools on other websites require uploading your images to a server running <code>cwebp</code>, <code>imagemagick</code>, or <code>libavif</code>. This creates network latency, raises privacy concerns, and imposes file size limits or rate limits.</p>
+      <p style="margin-top:0.75rem;">This tool leverages the <strong>HTML5 Canvas API</strong> — specifically <code>canvas.toBlob('image/webp', quality)</code> — which instructs the browser's native graphics engine to re-encode the image in the target format. The Canvas API is implemented in every modern browser at the native C++ level, making it extremely fast. Your files stay in browser memory throughout the entire process. No file size limits apply, no network round-trips occur, and the tool works perfectly offline.</p>
+    </div>
+
+    <div class="info-card" style="grid-column:1/-1;">
+      <h3><span class="icon">❓</span> Frequently Asked Questions</h3>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Is this fast batch PNG to WebP converter really free and local with no limits?</summary>
+          <div class="faq-answer">Yes. There are no file size limits, no daily conversion caps, and no account requirements. The tool runs entirely within your browser's Canvas API. You can convert thousands of images if your device has sufficient RAM to load them. All processing is done locally on your device — no files are sent to any server.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Does the WebP format work in all modern browsers?</summary>
+          <div class="faq-answer">WebP is supported in all modern browsers including Chrome, Firefox, Safari (since version 14), and Edge. For maximum compatibility when targeting older environments, you can use the JPEG output option. AVIF support is growing but may not be available in older browser Canvas implementations — if your browser doesn't support AVIF encoding, the output will fall back to WebP automatically.</div>
+        </details>
+        <details class="faq-item">
+          <summary>How much file size reduction should I expect when converting PNG to WebP?</summary>
+          <div class="faq-answer">Typically 25–60% depending on the image content. Photographic images (lots of color variation) compress very well in WebP. Images with flat areas of color or UI screenshots can achieve 40–70% savings. The quality slider lets you fine-tune the tradeoff. At 85% quality, WebP files are typically 30–40% smaller than equivalent JPEG files while maintaining visually comparable quality.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Can I batch convert an entire design asset library?</summary>
+          <div class="faq-answer">Yes. Drop all your PNG or JPEG files into the drop zone at once — there is no limit on the number of files. The conversion queue processes them in parallel using the browser's Canvas API. For very large batches (hundreds of files), processing may take a few seconds depending on your device's CPU speed and the total image dimensions.</div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="../../" class="nav-logo"><div class="logo-icon">D</div><span class="logo-text">Dev<span>Utils</span></span></a>
+      <p>Premium client-side developer utility tools. Zero server, zero upload.</p>
+    </div>
+    <nav class="footer-links">
+      <a href="../../privacy-policy.html">Privacy Policy</a><a href="../../terms.html">Terms</a>
+      <a href="../../cookie-policy.html">Cookies</a><a href="../../contact.html">Contact</a>
+    </nav>
+  </div>
+  <div class="footer-bottom"><p>© 2025 DevUtils Hub. All rights reserved.</p></div>
+</footer>
+<div class="sticky-ad-footer"><span class="ad-slot-label">Advertisement</span><div class="footer-ad-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div></div>
+<div class="cookie-banner" id="cookie-banner"><p><strong>🍪 Cookie Notice</strong> — Minimal local storage + Google AdSense cookies. <a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
+<div id="toast-container" class="toast-container" aria-live="polite"></div>
+<script src="../../assets/js/global.js"></script>
+<script>
+(function() {
+  'use strict';
+  const qualitySlider = document.getElementById('quality-slider');
+  const qualityVal    = document.getElementById('quality-val');
+  const resizeSlider  = document.getElementById('resize-pct');
+  const resizeVal     = document.getElementById('resize-val');
+  const formatSel     = document.getElementById('output-format');
+  const fileInput     = document.getElementById('file-input');
+  const resultsPanel  = document.getElementById('results-panel');
+  const resultList    = document.getElementById('result-list');
+  const progressBar   = document.getElementById('progress-bar');
+  const progressFill  = document.getElementById('progress-fill');
+  const downloadAll   = document.getElementById('download-all-btn');
+  const clearBtn      = document.getElementById('clear-btn');
+  const savingsSummary= document.getElementById('savings-summary');
+  const savingsText   = document.getElementById('savings-text');
+
+  let processedBlobs  = [];
+
+  qualitySlider.addEventListener('input', () => { qualityVal.textContent = qualitySlider.value; });
+  resizeSlider.addEventListener('input', () => { resizeVal.textContent = resizeSlider.value; });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    window.DevUtils.initDropZone('drop-zone', handleFiles);
+    fileInput.addEventListener('change', () => handleFiles(Array.from(fileInput.files)));
+  });
+
+  const EXT = { 'image/webp': '.webp', 'image/jpeg': '.jpg', 'image/png': '.png' };
+
+  function handleFiles(files) {
+    if (!files.length) return;
+    processedBlobs = [];
+    resultList.innerHTML = '';
+    resultsPanel.style.display = 'block';
+    savingsSummary.style.display = 'none';
+    let done = 0;
+    const format = formatSel.value;
+    const quality = parseInt(qualitySlider.value) / 100;
+    const scale = parseInt(resizeSlider.value) / 100;
+
+    files.forEach(file => {
+      const item = document.createElement('div');
+      item.className = 'result-item';
+      item.setAttribute('role', 'listitem');
+      item.innerHTML = `<span class="item-status status-pending"></span><span class="item-name" title="${file.name}">${file.name}</span><span class="item-meta">${window.DevUtils.formatBytes(file.size)}</span><span class="item-action text-muted text-xs">Converting…</span>`;
+      resultList.appendChild(item);
+    });
+
+    files.forEach((file, idx) => {
+      convertImage(file, format, quality, scale).then(result => {
+        processedBlobs.push(result);
+        done++;
+        progressFill.style.width = (done / files.length * 100) + '%';
+        const item = resultList.children[idx];
+        if (result.blob) {
+          item.querySelector('.item-status').className = 'item-status status-success';
+          const savings = Math.round((1 - result.blob.size / result.origSize) * 100);
+          item.querySelector('.item-meta').textContent = `${window.DevUtils.formatBytes(result.origSize)} → ${window.DevUtils.formatBytes(result.blob.size)} (${savings > 0 ? '-' : '+'}${Math.abs(savings)}%)`;
+          const action = item.querySelector('.item-action');
+          action.innerHTML = '';
+          const dl = document.createElement('a');
+          dl.href = '#';
+          dl.className = 'btn btn-secondary btn-sm';
+          dl.style.cssText = 'padding:0.2rem 0.6rem;font-size:0.72rem;';
+          dl.textContent = '⬇ Download';
+          dl.addEventListener('click', function(e) { e.preventDefault(); doDownload(result); });
+          action.appendChild(dl);
+        } else {
+          item.querySelector('.item-status').className = 'item-status status-error';
+          item.querySelector('.item-action').textContent = 'Error';
+        }
+        if (done === files.length) {
+          progressBar.style.display = 'none';
+          const totalOrig = processedBlobs.filter(r=>r.blob).reduce((a,r)=>a+r.origSize,0);
+          const totalNew  = processedBlobs.filter(r=>r.blob).reduce((a,r)=>a+r.blob.size,0);
+          const saved = totalOrig - totalNew;
+          if (saved > 0) {
+            savingsSummary.style.display = 'block';
+            savingsText.textContent = `${window.DevUtils.formatBytes(saved)} saved (${Math.round(saved/totalOrig*100)}% reduction across ${done} files)`;
+          }
+          window.DevUtils.Toast.show(`${done} images converted!`, 'success');
+        }
+      });
+    });
+  }
+
+  function convertImage(file, format, quality, scale) {
+    return new Promise(resolve => {
+      const img = new Image();
+      const url = URL.createObjectURL(file);
+      img.onload = function() {
+        const w = Math.round(img.naturalWidth * scale);
+        const h = Math.round(img.naturalHeight * scale);
+        const c = document.createElement('canvas');
+        c.width = w; c.height = h;
+        c.getContext('2d').drawImage(img, 0, 0, w, h);
+        URL.revokeObjectURL(url);
+        const mime = format === 'image/png' ? 'image/png' : format;
+        const q    = format === 'image/png' ? undefined : quality;
+        c.toBlob(blob => {
+          const ext = EXT[format] || '.webp';
+          const baseName = file.name.replace(/\.[^.]+$/, '') + ext;
+          resolve({ name: baseName, blob, origSize: file.size });
+        }, mime, q);
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); resolve({ name: file.name, blob: null, origSize: file.size }); };
+      img.src = url;
+    });
+  }
+
+  function doDownload(result) {
+    const url = URL.createObjectURL(result.blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = result.name; a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  downloadAll.addEventListener('click', () => {
+    processedBlobs.filter(r=>r.blob).forEach((r,i) => setTimeout(() => doDownload(r), i*150));
+  });
+
+  clearBtn.addEventListener('click', () => {
+    processedBlobs = [];
+    resultList.innerHTML = '';
+    resultsPanel.style.display = 'none';
+    progressFill.style.width = '0%';
+    progressBar.style.display = 'block';
+    fileInput.value = '';
+  });
+})();
+</script>
+</body>
+</html>

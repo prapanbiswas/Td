@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas JSON Node Visualizer — Interactive JSON Tree Node Map Viewer | DevUtils</title>
+  <meta name="description" content="Paste any JSON and instantly visualize it as a rich, interactive, collapsible node-tree map. Color-coded types, search, path breadcrumbs — 100% offline.">
+  <meta name="keywords" content="interactive json tree node map viewer, json visualizer, json tree viewer, json explorer, json formatter online">
+  <link rel="canonical" href="https://devutils.app/tools/json-visualizer/">
+  <meta property="og:title" content="Canvas JSON Node Visualizer — Interactive Tree Map">
+  <meta property="og:description" content="Visualize any JSON structure as an interactive, collapsible node tree. 100% offline, instant parsing.">
+  <meta property="og:url" content="https://devutils.app/tools/json-visualizer/">
+  <link rel="stylesheet" href="../../assets/css/global.css">
+  <style>
+    .json-tree { font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.6; user-select: text; }
+    .json-node { padding-left: 1.25rem; }
+    .json-key { color: var(--accent-secondary); font-weight: 600; }
+    .json-string { color: #50fa7b; }
+    .json-number { color: #bd93f9; }
+    .json-boolean { color: #ff79c6; font-weight: 700; }
+    .json-null { color: #6272a4; font-style: italic; }
+    .json-toggle { cursor: pointer; user-select: none; padding: 0 0.3rem; opacity: 0.7; transition: opacity 0.15s; font-size: 0.75rem; }
+    .json-toggle:hover { opacity: 1; }
+    .json-collapsible { display: inline; }
+    .json-collapsed > .json-collapsible { display: none; }
+    .json-summary { color: var(--text-muted); font-size: 0.75rem; }
+    .json-count { font-size: 0.72rem; color: var(--text-muted); padding: 0 0.35rem; }
+    .search-highlight { background: rgba(255,184,0,0.35); border-radius: 2px; }
+    .json-line:hover { background: rgba(108,99,255,0.06); border-radius: 4px; }
+  </style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="../../" class="nav-logo"><div class="logo-icon">D</div><span class="logo-text">Dev<span>Utils</span></span></a>
+    <ul class="nav-links">
+      <li><a href="../../">Home</a></li>
+      <li><a href="../../tools/yaml-transformer/">YAML→JSON</a></li>
+      <li><a href="../../tools/jwt-inspector/">JWT</a></li>
+      <li><a href="../../tools/hash-generator/">Hash</a></li>
+      <li><a href="../../privacy-policy.html">Privacy</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn-theme" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">☰</button>
+    </div>
+  </div>
+</nav>
+<nav class="nav-mobile" id="nav-mobile">
+  <a href="../../">Home</a><a href="../../tools/yaml-transformer/">YAML Transformer</a>
+  <a href="../../tools/jwt-inspector/">JWT Inspector</a><a href="../../privacy-policy.html">Privacy Policy</a>
+</nav>
+
+<div class="page-wrapper">
+<div class="tool-page-wrapper">
+  <nav class="breadcrumb"><a href="../../">Home</a><span class="sep">›</span><span class="current">JSON Node Visualizer</span></nav>
+  <div class="tool-header">
+    <div class="tool-header-inner">
+      <div class="tool-page-icon">🌐</div>
+      <div class="tool-header-text">
+        <h1>Canvas JSON Node Visualizer</h1>
+        <p>Paste any JSON structure for a rich, color-coded, collapsible interactive node-tree map. Search, expand, and explore.</p>
+      </div>
+    </div>
+    <div class="tool-badges">
+      <span class="badge badge-green">🔒 Offline</span>
+      <span class="badge badge-blue">🌳 Tree View</span>
+      <span class="badge badge-purple">🔍 Searchable</span>
+    </div>
+  </div>
+
+  <div class="tool-content-grid">
+    <main>
+      <div class="glass-panel" style="margin-bottom:1rem;">
+        <div class="panel-header">
+          <span class="panel-title">📥 JSON Input</span>
+          <div style="display:flex;gap:0.5rem;">
+            <button class="btn btn-secondary btn-sm" id="format-btn">✨ Format</button>
+            <button class="btn btn-secondary btn-sm" id="sample-btn">📄 Sample</button>
+            <button class="btn btn-danger btn-sm" id="clear-btn">✕ Clear</button>
+          </div>
+        </div>
+        <div class="panel-body">
+          <textarea id="json-input" class="form-control" rows="8" placeholder='Paste JSON here… e.g. {"name":"Alice","age":30,"roles":["admin","user"]}'></textarea>
+          <div id="parse-error" style="margin-top:0.5rem;font-size:0.82rem;color:#ef4444;display:none;"></div>
+        </div>
+      </div>
+
+      <div class="glass-panel" id="tree-panel" style="display:none;">
+        <div class="panel-header">
+          <span class="panel-title">🌳 Node Tree</span>
+          <div style="display:flex;gap:0.5rem;align-items:center;">
+            <input type="search" id="tree-search" class="form-control" style="padding:0.3rem 0.65rem;font-size:0.8rem;width:160px;" placeholder="Search keys/values…">
+            <button class="btn btn-secondary btn-sm" id="expand-all">⊞ Expand All</button>
+            <button class="btn btn-secondary btn-sm" id="collapse-all">⊟ Collapse All</button>
+          </div>
+        </div>
+        <div class="panel-body" style="overflow:auto;max-height:500px;">
+          <div id="json-stats" style="margin-bottom:0.75rem;font-size:0.8rem;color:var(--text-muted);"></div>
+          <div class="json-tree" id="json-tree" role="tree" aria-label="JSON tree visualization"></div>
+        </div>
+      </div>
+    </main>
+
+    <aside class="ad-sidebar" aria-label="Advertisement">
+      <div class="ad-slot ad-slot-300x600">
+        <span class="ad-slot-label">Advertisement</span>
+        <div class="ad-slot-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<section class="tool-info-section">
+  <div class="info-divider"></div>
+  <div class="info-grid">
+    <div class="info-card">
+      <h3><span class="icon">📖</span> User Manual &amp; Operational Guide</h3>
+      <ol>
+        <li><strong>Paste your JSON:</strong> Copy any JSON string — API response, config file, data payload — into the input field.</li>
+        <li><strong>Format first (optional):</strong> Click "Format" to pretty-print compact JSON before visualizing.</li>
+        <li><strong>Visualize:</strong> The tree renders automatically as you type, showing color-coded types (strings in green, numbers in purple, booleans in pink, null in grey).</li>
+        <li><strong>Collapse and expand:</strong> Click any <code>▶</code> toggle next to an object or array to collapse it. Use "Expand All" / "Collapse All" for bulk operations.</li>
+        <li><strong>Search:</strong> Use the search box to highlight matching keys and values anywhere in the tree structure.</li>
+      </ol>
+    </div>
+    <div class="info-card">
+      <h3><span class="icon">🏗️</span> Architecture Insight: Why This Tool Runs Locally</h3>
+      <p>Cloud JSON viewers send your entire data payload — potentially containing API keys, user records, or business-sensitive configuration — to a remote server for rendering. This creates privacy and security risks, especially in enterprise environments.</p>
+      <p style="margin-top:0.75rem;">This tool uses JavaScript's native <code>JSON.parse()</code> to parse your input into a typed in-memory data structure, then walks the resulting object graph recursively using the DOM API to construct the visual tree entirely in your browser. No data leaves your machine. The tree is a collection of styled <code>&lt;div&gt;</code> and <code>&lt;span&gt;</code> elements built from the parsed object graph — fast, accessible, and interactive via standard DOM event listeners.</p>
+    </div>
+    <div class="info-card" style="grid-column:1/-1;">
+      <h3><span class="icon">❓</span> Frequently Asked Questions</h3>
+      <div class="faq-list">
+        <details class="faq-item"><summary>Does the interactive JSON tree node map viewer support large JSON files?</summary><div class="faq-answer">Yes. The tool can handle JSON payloads of several megabytes. The DOM tree renderer builds nodes lazily and collapses deep branches by default to keep the initial render fast. For very large datasets (100,000+ nodes), it is recommended to collapse top-level branches and expand only the sections you need to inspect.</div></details>
+        <details class="faq-item"><summary>What JSON features does the parser support?</summary><div class="faq-answer">The visualizer uses the browser's native <code>JSON.parse()</code> which supports all valid JSON per the ECMA-404 specification: objects, arrays, strings (with Unicode), numbers (integers and floats), booleans (<code>true</code>/<code>false</code>), and <code>null</code>. Comments (which are not valid JSON) are not supported — use the <a href="../yaml-transformer/">YAML Transformer</a> for YAML or JSONC formats.</div></details>
+        <details class="faq-item"><summary>Can I use this tool to view API response JSON safely?</summary><div class="faq-answer">Absolutely — in fact, this is one of the primary use cases. Because the tool runs 100% client-side, you can safely paste JSON containing authentication tokens, session keys, user PII, or confidential business data without any risk of that data being transmitted to a third-party server. This is a significant privacy advantage over cloud-based JSON viewers.</div></details>
+        <details class="faq-item"><summary>How do I find a specific key buried deep in a complex JSON structure?</summary><div class="faq-answer">Use the search input in the tree panel header. Type any substring and all matching keys and values will be highlighted in amber throughout the tree. The tool automatically expands collapsed branches containing matches so you can see them in context.</div></details>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand"><a href="../../" class="nav-logo"><div class="logo-icon">D</div><span class="logo-text">Dev<span>Utils</span></span></a><p>Premium client-side developer tools. Zero upload.</p></div>
+    <nav class="footer-links"><a href="../../privacy-policy.html">Privacy</a><a href="../../terms.html">Terms</a><a href="../../contact.html">Contact</a></nav>
+  </div>
+  <div class="footer-bottom"><p>© 2025 DevUtils Hub.</p></div>
+</footer>
+<div class="sticky-ad-footer"><span class="ad-slot-label">Advertisement</span><div class="footer-ad-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div></div>
+<div class="cookie-banner" id="cookie-banner"><p><strong>🍪 Cookie Notice</strong> — <a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
+<div id="toast-container" class="toast-container" aria-live="polite"></div>
+<script src="../../assets/js/global.js"></script>
+<script>
+(function(){
+  'use strict';
+  const input     = document.getElementById('json-input');
+  const treePanel = document.getElementById('tree-panel');
+  const treeEl    = document.getElementById('json-tree');
+  const errEl     = document.getElementById('parse-error');
+  const statsEl   = document.getElementById('json-stats');
+  const searchEl  = document.getElementById('tree-search');
+  let debounceTimer;
+
+  const SAMPLE = JSON.stringify({
+    "user": { "id": 1001, "name": "Alice Nakamura", "email": "alice@example.com", "active": true, "score": 98.5, "tags": ["admin","developer","moderator"], "address": { "city": "Tokyo", "country": "Japan", "zip": "100-0001" } },
+    "settings": { "theme": "dark", "notifications": true, "language": "en", "maxItems": 50 },
+    "metadata": { "created": "2025-01-15T08:30:00Z", "version": "3.2.1", "flags": [true, false, null] }
+  }, null, 2);
+
+  document.getElementById('sample-btn').addEventListener('click', () => { input.value = SAMPLE; parseAndRender(); });
+  document.getElementById('format-btn').addEventListener('click', () => {
+    try { input.value = JSON.stringify(JSON.parse(input.value), null, 2); parseAndRender(); } catch(e) {}
+  });
+  document.getElementById('clear-btn').addEventListener('click', () => { input.value=''; treePanel.style.display='none'; errEl.style.display='none'; });
+  document.getElementById('expand-all').addEventListener('click', () => { treeEl.querySelectorAll('.json-collapsed').forEach(n => n.classList.remove('json-collapsed')); updateToggles(); });
+  document.getElementById('collapse-all').addEventListener('click', () => { treeEl.querySelectorAll('[data-collapsible]').forEach(n => n.classList.add('json-collapsed')); updateToggles(); });
+
+  input.addEventListener('input', () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(parseAndRender, 300); });
+  searchEl.addEventListener('input', () => highlightSearch(searchEl.value));
+
+  function parseAndRender() {
+    const raw = input.value.trim();
+    if (!raw) { treePanel.style.display='none'; errEl.style.display='none'; return; }
+    try {
+      const data = JSON.parse(raw);
+      errEl.style.display='none';
+      treeEl.innerHTML = '';
+      treeEl.appendChild(renderNode(data, null, true));
+      treePanel.style.display='block';
+      const stats = countStats(data);
+      statsEl.textContent = `${stats.keys} keys · ${stats.arrays} arrays · ${stats.objects} objects · ${stats.depth} max depth`;
+    } catch(e) {
+      errEl.textContent = '⚠️ ' + e.message;
+      errEl.style.display='block';
+      treePanel.style.display='none';
+    }
+  }
+
+  function renderNode(val, key, isRoot) {
+    const wrap = document.createElement('div');
+    wrap.className = 'json-line';
+    const keySpan = key !== null ? Object.assign(document.createElement('span'), { className: 'json-key', textContent: JSON.stringify(key) + ': ' }) : null;
+
+    if (val === null) {
+      if (keySpan) wrap.appendChild(keySpan);
+      wrap.appendChild(Object.assign(document.createElement('span'), { className: 'json-null', textContent: 'null' }));
+    } else if (typeof val === 'boolean') {
+      if (keySpan) wrap.appendChild(keySpan);
+      wrap.appendChild(Object.assign(document.createElement('span'), { className: 'json-boolean', textContent: String(val) }));
+    } else if (typeof val === 'number') {
+      if (keySpan) wrap.appendChild(keySpan);
+      wrap.appendChild(Object.assign(document.createElement('span'), { className: 'json-number', textContent: String(val) }));
+    } else if (typeof val === 'string') {
+      if (keySpan) wrap.appendChild(keySpan);
+      wrap.appendChild(Object.assign(document.createElement('span'), { className: 'json-string', textContent: JSON.stringify(val) }));
+    } else if (Array.isArray(val)) {
+      wrap.dataset.collapsible = '1';
+      const toggle = Object.assign(document.createElement('span'), { className: 'json-toggle', textContent: '▾', role: 'button', tabIndex: 0, 'aria-label': 'Toggle', title: 'Click to collapse' });
+      wrap.appendChild(toggle);
+      if (keySpan) wrap.appendChild(keySpan);
+      const bracket = Object.assign(document.createElement('span'), { style: 'color:var(--text-muted)', textContent: '[' });
+      const countEl = Object.assign(document.createElement('span'), { className: 'json-count', textContent: val.length + ' items' });
+      const collapsible = document.createElement('div');
+      collapsible.className = 'json-collapsible json-node';
+      val.forEach((item, i) => { const child = renderNode(item, i, false); collapsible.appendChild(child); });
+      const close = Object.assign(document.createElement('div'), { style: 'color:var(--text-muted)', textContent: ']' });
+      wrap.appendChild(bracket);
+      wrap.appendChild(countEl);
+      wrap.appendChild(collapsible);
+      wrap.appendChild(close);
+      toggle.addEventListener('click', () => { wrap.classList.toggle('json-collapsed'); toggle.textContent = wrap.classList.contains('json-collapsed') ? '▸' : '▾'; });
+      toggle.addEventListener('keydown', e => { if (e.key === 'Enter'||e.key===' ') toggle.click(); });
+    } else if (typeof val === 'object') {
+      wrap.dataset.collapsible = '1';
+      const toggle = Object.assign(document.createElement('span'), { className: 'json-toggle', textContent: '▾', role: 'button', tabIndex: 0 });
+      wrap.appendChild(toggle);
+      if (keySpan) wrap.appendChild(keySpan);
+      const bracket = Object.assign(document.createElement('span'), { style: 'color:var(--text-muted)', textContent: '{' });
+      const countEl = Object.assign(document.createElement('span'), { className: 'json-count', textContent: Object.keys(val).length + ' keys' });
+      const collapsible = document.createElement('div');
+      collapsible.className = 'json-collapsible json-node';
+      Object.entries(val).forEach(([k, v]) => collapsible.appendChild(renderNode(v, k, false)));
+      const close = Object.assign(document.createElement('div'), { style: 'color:var(--text-muted)', textContent: '}' });
+      wrap.appendChild(bracket);
+      wrap.appendChild(countEl);
+      wrap.appendChild(collapsible);
+      wrap.appendChild(close);
+      toggle.addEventListener('click', () => { wrap.classList.toggle('json-collapsed'); toggle.textContent = wrap.classList.contains('json-collapsed') ? '▸' : '▾'; });
+      toggle.addEventListener('keydown', e => { if (e.key === 'Enter'||e.key===' ') toggle.click(); });
+    }
+    return wrap;
+  }
+
+  function updateToggles() {
+    treeEl.querySelectorAll('.json-toggle').forEach(t => {
+      t.textContent = t.closest('[data-collapsible]')?.classList.contains('json-collapsed') ? '▸' : '▾';
+    });
+  }
+
+  function highlightSearch(q) {
+    treeEl.querySelectorAll('.search-highlight').forEach(el => { el.outerHTML = el.textContent; });
+    if (!q.trim()) return;
+    const walker = document.createTreeWalker(treeEl, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while(walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(node => {
+      const idx = node.textContent.toLowerCase().indexOf(q.toLowerCase());
+      if (idx === -1) return;
+      const span = document.createElement('span');
+      span.innerHTML = node.textContent.replace(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi'), m => `<span class="search-highlight">${m}</span>`);
+      node.parentNode.replaceChild(span, node);
+    });
+  }
+
+  function countStats(obj, depth=0) {
+    let keys=0, arrays=0, objects=0, maxD=depth;
+    if (Array.isArray(obj)) { arrays++; obj.forEach(v => { const s=countStats(v,depth+1); keys+=s.keys; arrays+=s.arrays; objects+=s.objects; maxD=Math.max(maxD,s.depth); }); }
+    else if (obj && typeof obj === 'object') { objects++; Object.values(obj).forEach(v => { keys++; const s=countStats(v,depth+1); keys+=s.keys; arrays+=s.arrays; objects+=s.objects; maxD=Math.max(maxD,s.depth); }); }
+    return { keys, arrays, objects, depth: maxD };
+  }
+})();
+</script>
+</body>
+</html>

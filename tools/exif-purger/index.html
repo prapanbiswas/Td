@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Private Local EXIF Purger — Secure Offline Photo Metadata Remover | DevUtils</title>
+  <meta name="description" content="Instantly strip all EXIF metadata, GPS coordinates, camera info, and timestamps from JPEG and PNG images — 100% offline. Your photos never leave your browser.">
+  <meta name="keywords" content="secure offline photo metadata remover free, exif remover, strip exif data, remove gps from photo, exif purger online">
+  <link rel="canonical" href="https://devutils.app/tools/exif-purger/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Private Local EXIF Purger — Strip Photo Metadata Offline">
+  <meta property="og:description" content="Remove all EXIF metadata, GPS data, and camera fingerprints from images locally in your browser. No upload, no server, 100% private.">
+  <meta property="og:url" content="https://devutils.app/tools/exif-purger/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../../assets/css/global.css">
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="../../" class="nav-logo"><div class="logo-icon">D</div><span class="logo-text">Dev<span>Utils</span></span></a>
+    <ul class="nav-links">
+      <li><a href="../../">Home</a></li>
+      <li><a href="../../tools/hash-generator/">Hash Gen</a></li>
+      <li><a href="../../tools/jwt-inspector/">JWT</a></li>
+      <li><a href="../../tools/webp-cruncher/">WebP</a></li>
+      <li><a href="../../privacy-policy.html">Privacy</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn-theme" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">☰</button>
+    </div>
+  </div>
+</nav>
+<nav class="nav-mobile" id="nav-mobile">
+  <a href="../../">Home</a><a href="../../tools/webp-cruncher/">WebP Converter</a>
+  <a href="../../tools/jwt-inspector/">JWT Inspector</a><a href="../../tools/hash-generator/">Hash Generator</a>
+  <a href="../../privacy-policy.html">Privacy Policy</a>
+</nav>
+
+<div class="page-wrapper">
+<div class="tool-page-wrapper">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="../../">Home</a><span class="sep" aria-hidden="true">›</span>
+    <a href="../../">Tools</a><span class="sep" aria-hidden="true">›</span>
+    <span class="current">EXIF Purger</span>
+  </nav>
+
+  <div class="tool-header">
+    <div class="tool-header-inner">
+      <div class="tool-page-icon" aria-hidden="true">📷</div>
+      <div class="tool-header-text">
+        <h1>Private Local EXIF Purger</h1>
+        <p>Strip all metadata from photos — GPS, camera model, timestamps, author info. Fully offline, zero upload.</p>
+      </div>
+    </div>
+    <div class="tool-badges">
+      <span class="badge badge-green">🔒 100% Offline</span>
+      <span class="badge badge-blue">⚡ Instant Processing</span>
+      <span class="badge badge-purple">🖼 JPEG + PNG</span>
+    </div>
+  </div>
+
+  <div class="tool-content-grid">
+    <!-- Main Tool Area -->
+    <main>
+      <!-- Drop Zone -->
+      <div class="glass-panel" style="margin-bottom:1rem;">
+        <div class="panel-header">
+          <span class="panel-title">📂 Drop Images Here</span>
+          <label class="btn btn-secondary btn-sm" style="cursor:pointer;">
+            Browse Files <input type="file" id="file-input" multiple accept="image/jpeg,image/png,image/jpg" style="display:none;" aria-label="Select image files">
+          </label>
+        </div>
+        <div class="panel-body">
+          <div class="drop-zone" id="drop-zone" role="button" tabindex="0" aria-label="Drop images here or click to browse">
+            <span class="drop-icon" aria-hidden="true">🗂️</span>
+            <h3>Drag &amp; drop JPEG or PNG images</h3>
+            <p>Or <span class="browse-link" id="browse-trigger">click to browse files</span> · Batch supported · Any file size</p>
+          </div>
+          <div id="file-list" style="margin-top:1rem;display:none;">
+            <div class="progress-bar" id="progress-bar" style="display:none;">
+              <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div class="result-list" id="result-list" role="list" aria-live="polite" aria-label="Processing results"></div>
+            <div style="display:flex;gap:0.5rem;margin-top:1rem;flex-wrap:wrap;" id="action-buttons">
+              <button class="btn btn-primary" id="download-all-btn" style="display:none;">⬇ Download All Cleaned Images</button>
+              <button class="btn btn-secondary btn-sm" id="clear-btn">✕ Clear</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats Panel -->
+      <div class="glass-panel" id="stats-panel" style="display:none;">
+        <div class="panel-header"><span class="panel-title">📊 Processing Statistics</span></div>
+        <div class="panel-body">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;text-align:center;">
+            <div><div id="stat-files" style="font-size:1.8rem;font-weight:800;color:var(--accent-primary);">0</div><div class="text-sm text-muted">Files Processed</div></div>
+            <div><div id="stat-saved" style="font-size:1.8rem;font-weight:800;color:#10b981;">0 KB</div><div class="text-sm text-muted">Metadata Removed</div></div>
+            <div><div id="stat-time" style="font-size:1.8rem;font-weight:800;color:var(--accent-secondary);">0ms</div><div class="text-sm text-muted">Processing Time</div></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Ad Sidebar -->
+    <aside class="ad-sidebar" aria-label="Advertisement">
+      <div class="ad-slot ad-slot-300x600">
+        <span class="ad-slot-label">Advertisement</span>
+        <div class="ad-slot-inner">
+          <!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT -->
+          <!-- 300x600 Half Page Ad Unit — Place AdSense <ins> tag here -->
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<!-- SEO / Info Section -->
+<section class="tool-info-section" aria-labelledby="info-heading">
+  <div class="info-divider"></div>
+  <div class="info-grid">
+    <div class="info-card">
+      <h3 id="info-heading"><span class="icon" aria-hidden="true">📖</span> User Manual &amp; Operational Guide</h3>
+      <ol>
+        <li><strong>Drop your files:</strong> Drag one or multiple JPEG or PNG images into the drop zone above, or click "Browse Files" to open a file picker. Batch processing is fully supported.</li>
+        <li><strong>Automatic processing:</strong> Each file is immediately decoded and redrawn onto an HTML5 Canvas element. This redraw operation creates a brand-new pixel buffer that contains only the visual image data — all EXIF metadata is permanently discarded in this step.</li>
+        <li><strong>Review results:</strong> The results list will show each filename, its original size, the cleaned size, and the amount of metadata data removed.</li>
+        <li><strong>Download:</strong> Click the individual download link next to each file, or use "Download All Cleaned Images" to get all processed files at once. Files are saved with the original filename plus a <code>_clean</code> suffix.</li>
+        <li><strong>Verify:</strong> Open any processed image in a metadata viewer or run <code>exiftool filename.jpg</code> — you will see only safe, non-identifying fields remain.</li>
+      </ol>
+    </div>
+
+    <div class="info-card">
+      <h3><span class="icon" aria-hidden="true">🏗️</span> Architecture Insight: Why This Tool Runs Locally</h3>
+      <p>EXIF metadata is embedded in the binary header of JPEG and PNG files as a structured data block. Traditional "EXIF remover" websites work by uploading your full image file to a remote server, processing it there, and sending it back — exposing your private photos and their GPS coordinates to third-party infrastructure.</p>
+      <p style="margin-top:0.75rem;">This tool works entirely differently. When you drop an image, the browser's <strong>File API</strong> reads the raw binary data into memory on your device. The <strong>Canvas API</strong> then decodes the image pixels and redraws them onto a clean <code>&lt;canvas&gt;</code> element. Because the Canvas API only understands raw pixel data (not JPEG metadata headers), the output from <code>canvas.toBlob('image/jpeg')</code> contains only the visual content — with zero EXIF, GPS, author, copyright, or camera model data. The entire operation runs in the browser's sandboxed JavaScript engine, using your device's CPU. No network request is ever made. Disconnecting from the internet before using this tool provides the same result.</p>
+    </div>
+
+    <div class="info-card" style="grid-column: 1 / -1;">
+      <h3><span class="icon" aria-hidden="true">❓</span> Frequently Asked Questions</h3>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Does this secure offline photo metadata remover work without an internet connection?</summary>
+          <div class="faq-answer">Yes, completely. The EXIF Purger tool uses only the browser's built-in Canvas API and File API. Once the page has loaded, you can disconnect from the internet entirely and the tool will continue to work identically. No network requests are made during file processing. This makes it ideal for use on sensitive documents in air-gapped or restricted network environments.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Which metadata fields are removed from JPEG photos?</summary>
+          <div class="faq-answer">The Canvas redraw method removes <em>all</em> EXIF data, including: GPS coordinates (latitude, longitude, altitude), device make and model, lens information, focal length and aperture, capture date and time, software version, author and copyright strings, camera serial numbers, and any custom application-specific metadata blocks. The output is a clean JPEG containing only the raw pixel data.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Does removing EXIF data reduce the image quality?</summary>
+          <div class="faq-answer">A minimal re-encoding step occurs when the Canvas draws and exports the image (JPEG uses lossy compression). The quality is set to 0.92 (92%), which is considered visually lossless for practical purposes and is indistinguishable from the original to the human eye. PNG images are re-encoded losslessly (Canvas PNG export is always lossless), so PNG output has no quality loss at all.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Can I use the free EXIF purger tool for commercial workflows?</summary>
+          <div class="faq-answer">Yes. DevUtils Hub is free to use for both personal and commercial purposes as described in our <a href="../../terms.html">Terms of Service</a>. You can safely use this tool to strip metadata from product photos, press images, client deliverables, or any commercial use case without any usage fees or attribution requirements.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Is this tool safe for removing GPS data from photos before sharing on social media?</summary>
+          <div class="faq-answer">Yes, this is one of the primary use cases. Before sharing photos publicly on social media, news platforms, or any public channel, processing them through the EXIF Purger ensures that GPS coordinates embedded by your smartphone camera are permanently removed. Because processing is offline, your unprocessed photos with GPS data are never exposed to any server or third-party service.</div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="../../" class="nav-logo"><div class="logo-icon">D</div><span class="logo-text">Dev<span>Utils</span></span></a>
+      <p>Premium client-side developer utility tools. Zero server, zero upload, zero compromise on privacy.</p>
+    </div>
+    <nav class="footer-links">
+      <a href="../../privacy-policy.html">Privacy Policy</a><a href="../../terms.html">Terms</a>
+      <a href="../../cookie-policy.html">Cookies</a><a href="../../contact.html">Contact</a>
+      <a href="../../">All Tools</a>
+    </nav>
+  </div>
+  <div class="footer-bottom"><p>© 2025 DevUtils Hub. All rights reserved. All processing is local — your images never leave your device.</p></div>
+</footer>
+
+<div class="sticky-ad-footer" aria-label="Advertisement">
+  <span class="ad-slot-label">Advertisement</span>
+  <div class="footer-ad-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div>
+</div>
+
+<div class="cookie-banner" id="cookie-banner" role="dialog" aria-modal="false">
+  <p><strong>🍪 Cookie Notice</strong> — We use minimal local storage for preferences. Google AdSense may use cookies for personalized ads. <a href="../../cookie-policy.html">Learn more</a></p>
+  <div class="cookie-actions">
+    <button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button>
+    <button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button>
+  </div>
+</div>
+
+<div id="toast-container" class="toast-container" aria-live="polite"></div>
+<script src="../../assets/js/global.js"></script>
+<script>
+(function() {
+  'use strict';
+
+  const fileInput   = document.getElementById('file-input');
+  const browseBtn   = document.getElementById('browse-trigger');
+  const fileList    = document.getElementById('file-list');
+  const resultList  = document.getElementById('result-list');
+  const downloadAll = document.getElementById('download-all-btn');
+  const clearBtn    = document.getElementById('clear-btn');
+  const statsPanel  = document.getElementById('stats-panel');
+  const progressBar = document.getElementById('progress-bar');
+  const progressFill= document.getElementById('progress-fill');
+
+  let processedFiles = [];
+
+  browseBtn.addEventListener('click', () => fileInput.click());
+
+  document.addEventListener('DOMContentLoaded', function() {
+    window.DevUtils.initDropZone('drop-zone', handleFiles);
+    fileInput.addEventListener('change', () => handleFiles(Array.from(fileInput.files)));
+  });
+
+  function handleFiles(files) {
+    if (!files.length) return;
+    files = files.filter(f => /^image\/(jpeg|jpg|png)$/i.test(f.type));
+    if (!files.length) { window.DevUtils.Toast.show('Please select JPEG or PNG images only.', 'error'); return; }
+    fileList.style.display = 'block';
+    progressBar.style.display = 'block';
+    const startTime = performance.now();
+    let done = 0;
+
+    files.forEach(file => {
+      const item = createResultItem(file.name, file.size, 'pending');
+      resultList.appendChild(item);
+    });
+
+    files.forEach((file, idx) => {
+      processImage(file).then(result => {
+        processedFiles.push(result);
+        done++;
+        progressFill.style.width = (done / files.length * 100) + '%';
+        updateResultItem(resultList.children[resultList.children.length - files.length + idx], result);
+        if (done === files.length) {
+          const elapsed = Math.round(performance.now() - startTime);
+          progressBar.style.display = 'none';
+          downloadAll.style.display = 'inline-flex';
+          statsPanel.style.display = 'block';
+          updateStats(processedFiles, elapsed);
+          window.DevUtils.Toast.show(`${files.length} image${files.length>1?'s':''} cleaned successfully!`, 'success');
+        }
+      });
+    });
+  }
+
+  function processImage(file) {
+    return new Promise((resolve) => {
+      const img = new Image();
+      const url = URL.createObjectURL(file);
+      img.onload = function() {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        URL.revokeObjectURL(url);
+        const mimeType = file.type === 'image/png' ? 'image/png' : 'image/jpeg';
+        const quality = mimeType === 'image/jpeg' ? 0.92 : undefined;
+        canvas.toBlob(blob => {
+          const cleanName = file.name.replace(/(\.[^.]+)$/, '_clean$1');
+          resolve({ name: file.name, cleanName, originalSize: file.size, cleanSize: blob.size, blob, success: true });
+        }, mimeType, quality);
+      };
+      img.onerror = function() {
+        URL.revokeObjectURL(url);
+        resolve({ name: file.name, cleanName: file.name, originalSize: file.size, cleanSize: 0, blob: null, success: false });
+      };
+      img.src = url;
+    });
+  }
+
+  function createResultItem(name, size, status) {
+    const item = document.createElement('div');
+    item.className = 'result-item';
+    item.setAttribute('role', 'listitem');
+    item.innerHTML = `
+      <span class="item-status status-pending" aria-label="Processing"></span>
+      <span class="item-name" title="${name}">${name}</span>
+      <span class="item-meta">${window.DevUtils.formatBytes(size)}</span>
+      <span class="item-action" style="font-size:0.78rem;color:var(--text-muted);">Processing…</span>`;
+    return item;
+  }
+
+  function updateResultItem(item, result) {
+    const status = item.querySelector('.item-status');
+    const action = item.querySelector('.item-action');
+    if (result.success && result.blob) {
+      status.className = 'item-status status-success';
+      status.setAttribute('aria-label', 'Success');
+      const saved = result.originalSize - result.cleanSize;
+      item.querySelector('.item-meta').textContent = `${window.DevUtils.formatBytes(result.originalSize)} → ${window.DevUtils.formatBytes(result.cleanSize)}`;
+      action.innerHTML = `<a href="#" class="btn btn-secondary btn-sm" style="padding:0.2rem 0.6rem;font-size:0.72rem;" data-idx="${processedFiles.length-1}">⬇ Download</a>`;
+      action.querySelector('a').addEventListener('click', function(e) {
+        e.preventDefault();
+        const idx = parseInt(this.dataset.idx);
+        downloadFile(processedFiles[idx]);
+      });
+    } else {
+      status.className = 'item-status status-error';
+      status.setAttribute('aria-label', 'Error');
+      action.textContent = 'Failed';
+    }
+  }
+
+  function downloadFile(result) {
+    const url = URL.createObjectURL(result.blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = result.cleanName;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  function updateStats(files, elapsed) {
+    const successful = files.filter(f => f.success);
+    const totalSaved = successful.reduce((a, f) => a + (f.originalSize - f.cleanSize), 0);
+    document.getElementById('stat-files').textContent = successful.length;
+    document.getElementById('stat-saved').textContent = window.DevUtils.formatBytes(Math.max(0, totalSaved));
+    document.getElementById('stat-time').textContent = elapsed + 'ms';
+  }
+
+  downloadAll.addEventListener('click', function() {
+    const successful = processedFiles.filter(f => f.success && f.blob);
+    if (!successful.length) return;
+    successful.forEach((f, i) => setTimeout(() => downloadFile(f), i * 200));
+    window.DevUtils.Toast.show(`Downloading ${successful.length} cleaned images…`, 'info');
+  });
+
+  clearBtn.addEventListener('click', function() {
+    processedFiles = [];
+    resultList.innerHTML = '';
+    fileList.style.display = 'none';
+    statsPanel.style.display = 'none';
+    downloadAll.style.display = 'none';
+    progressFill.style.width = '0%';
+    fileInput.value = '';
+  });
+})();
+</script>
+</body>
+</html>

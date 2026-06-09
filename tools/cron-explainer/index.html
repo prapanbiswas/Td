@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visual Cron Expression Explainer — Cron Schedule Generator Human Text Translation | DevUtils</title>
+  <meta name="description" content="Decode any cron expression into plain English instantly. See next 10 run times, build schedules visually, and validate cron syntax — 100% offline.">
+  <meta name="keywords" content="cron schedule generator human text translation, cron expression explainer, cron decoder, cron parser online, crontab validator">
+  <link rel="canonical" href="https://devutils.app/tools/cron-explainer/">
+  <meta property="og:title" content="Visual Cron Expression Explainer — Human-Text Cron Decoder">
+  <meta property="og:url" content="https://devutils.app/tools/cron-explainer/">
+  <link rel="stylesheet" href="../../assets/css/global.css">
+  <style>
+    .cron-field { display:flex; flex-direction:column; gap:0.3rem; align-items:center; }
+    .cron-field input { text-align:center; font-family:var(--font-mono); font-size:1.1rem; font-weight:700; width:70px; }
+    .cron-field label { font-size:0.7rem; text-transform:uppercase; letter-spacing:.08em; color:var(--text-muted); }
+    .cron-fields { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+    .cron-sep { font-size:1.4rem; color:var(--text-muted); align-self:center; padding-top:16px; }
+    .explanation-badge { display:inline-flex; align-items:center; gap:.4rem; padding:.4rem .9rem; background:rgba(108,99,255,.1); border:1px solid rgba(108,99,255,.2); border-radius:100px; font-size:.85rem; font-weight:600; color:var(--accent-primary); margin:.3rem; }
+    .run-time-item { font-family:var(--font-mono); font-size:.82rem; padding:.4rem .75rem; background:var(--bg-input); border-radius:6px; border:1px solid var(--border-color); }
+    .preset-btn { padding:.35rem .8rem; border-radius:100px; font-size:.78rem; font-weight:600; background:var(--bg-glass); border:1px solid var(--border-color); color:var(--text-secondary); cursor:pointer; transition:var(--transition-fast); font-family:var(--font-sans); white-space:nowrap; }
+    .preset-btn:hover { background:var(--accent-primary); border-color:var(--accent-primary); color:#fff; }
+  </style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="../../" class="nav-logo"><div class="logo-icon">D</div><span class="logo-text">Dev<span>Utils</span></span></a>
+    <ul class="nav-links">
+      <li><a href="../../">Home</a></li>
+      <li><a href="../../tools/jwt-inspector/">JWT</a></li>
+      <li><a href="../../tools/hash-generator/">Hash</a></li>
+      <li><a href="../../tools/regex-simulator/">RegEx</a></li>
+      <li><a href="../../privacy-policy.html">Privacy</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn-theme" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">☰</button>
+    </div>
+  </div>
+</nav>
+<nav class="nav-mobile" id="nav-mobile"><a href="../../">Home</a><a href="../../tools/jwt-inspector/">JWT Inspector</a><a href="../../privacy-policy.html">Privacy</a></nav>
+
+<div class="page-wrapper">
+<div class="tool-page-wrapper">
+  <nav class="breadcrumb"><a href="../../">Home</a><span class="sep">›</span><span class="current">Cron Expression Explainer</span></nav>
+  <div class="tool-header">
+    <div class="tool-header-inner">
+      <div class="tool-page-icon">⏰</div>
+      <div class="tool-header-text">
+        <h1>Visual Cron Expression Explainer</h1>
+        <p>Decode any cron schedule to plain English, see the next 10 run times, and build schedules with presets. Fully offline.</p>
+      </div>
+    </div>
+    <div class="tool-badges"><span class="badge badge-green">🔒 Offline</span><span class="badge badge-blue">📅 Next Run Times</span><span class="badge badge-purple">⚡ Real-Time</span></div>
+  </div>
+
+  <div class="tool-content-grid">
+    <main>
+      <!-- Full expression input -->
+      <div class="glass-panel" style="margin-bottom:1rem;">
+        <div class="panel-header"><span class="panel-title">⌨️ Cron Expression</span></div>
+        <div class="panel-body">
+          <div style="display:flex;gap:.75rem;align-items:center;margin-bottom:1rem;flex-wrap:wrap;">
+            <input type="text" id="cron-full" class="form-control font-mono" style="max-width:320px;font-size:1.1rem;letter-spacing:.05em;" value="*/5 * * * *" placeholder="* * * * *" spellcheck="false">
+            <div id="valid-badge" style="font-size:.82rem;font-weight:600;padding:.3rem .75rem;border-radius:100px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);color:#10b981;">✓ Valid</div>
+          </div>
+          <!-- Field breakdown -->
+          <div class="cron-fields" id="cron-fields">
+            <div class="cron-field"><label for="f-min">Minute</label><input type="text" id="f-min" class="form-control" value="*/5"></div>
+            <span class="cron-sep" aria-hidden="true">·</span>
+            <div class="cron-field"><label for="f-hour">Hour</label><input type="text" id="f-hour" class="form-control" value="*"></div>
+            <span class="cron-sep" aria-hidden="true">·</span>
+            <div class="cron-field"><label for="f-dom">Day (Month)</label><input type="text" id="f-dom" class="form-control" value="*"></div>
+            <span class="cron-sep" aria-hidden="true">·</span>
+            <div class="cron-field"><label for="f-month">Month</label><input type="text" id="f-month" class="form-control" value="*"></div>
+            <span class="cron-sep" aria-hidden="true">·</span>
+            <div class="cron-field"><label for="f-dow">Day (Week)</label><input type="text" id="f-dow" class="form-control" value="*"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Presets -->
+      <div class="glass-panel" style="margin-bottom:1rem;">
+        <div class="panel-header"><span class="panel-title">⚡ Common Presets</span></div>
+        <div class="panel-body" style="display:flex;flex-wrap:wrap;gap:.5rem;">
+          <button class="preset-btn" data-cron="* * * * *">Every minute</button>
+          <button class="preset-btn" data-cron="*/5 * * * *">Every 5 min</button>
+          <button class="preset-btn" data-cron="0 * * * *">Every hour</button>
+          <button class="preset-btn" data-cron="0 0 * * *">Daily midnight</button>
+          <button class="preset-btn" data-cron="0 9 * * 1-5">Weekdays 9 AM</button>
+          <button class="preset-btn" data-cron="0 0 * * 0">Weekly Sunday</button>
+          <button class="preset-btn" data-cron="0 0 1 * *">Monthly 1st</button>
+          <button class="preset-btn" data-cron="0 0 1 1 *">Yearly Jan 1</button>
+          <button class="preset-btn" data-cron="30 23 * * *">11:30 PM daily</button>
+          <button class="preset-btn" data-cron="*/15 9-17 * * 1-5">Every 15m 9-5 weekdays</button>
+        </div>
+      </div>
+
+      <!-- Explanation + next runs -->
+      <div class="glass-panel" id="explain-panel">
+        <div class="panel-header"><span class="panel-title">📖 Human-Readable Explanation</span></div>
+        <div class="panel-body">
+          <div id="explanation" style="font-size:1.05rem;font-weight:600;color:var(--text-primary);margin-bottom:1rem;line-height:1.6;">Every 5 minutes</div>
+          <div id="field-explanations" style="display:flex;flex-wrap:wrap;margin-bottom:1.25rem;"></div>
+          <div class="divider"></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;">
+            <h4 style="font-size:.85rem;font-weight:700;color:var(--text-secondary);">Next 10 Run Times</h4>
+            <span style="font-size:.75rem;color:var(--text-muted);" id="tz-note"></span>
+          </div>
+          <div id="run-times" style="display:flex;flex-direction:column;gap:.4rem;"></div>
+        </div>
+      </div>
+    </main>
+
+    <aside class="ad-sidebar" aria-label="Advertisement">
+      <div class="ad-slot ad-slot-300x600">
+        <span class="ad-slot-label">Advertisement</span>
+        <div class="ad-slot-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<section class="tool-info-section">
+  <div class="info-divider"></div>
+  <div class="info-grid">
+    <div class="info-card">
+      <h3><span class="icon">📖</span> User Manual &amp; Operational Guide</h3>
+      <ol>
+        <li><strong>Enter your cron expression:</strong> Type a standard 5-field cron expression in the main input (<code>minute hour day-of-month month day-of-week</code>), or click a preset button to load a common pattern.</li>
+        <li><strong>Field-level editing:</strong> Each field has its own editable input below the main expression. Changes sync bidirectionally — editing either the full expression or individual fields updates the other.</li>
+        <li><strong>Read the explanation:</strong> The human-readable summary updates in real time, translating the schedule into plain English (e.g., "Every weekday at 9:00 AM").</li>
+        <li><strong>Check run times:</strong> The "Next 10 Run Times" panel shows the next 10 scheduled execution moments in your local timezone, helping you verify the schedule behaves as expected.</li>
+      </ol>
+    </div>
+    <div class="info-card">
+      <h3><span class="icon">🏗️</span> Architecture Insight: Why This Tool Runs Locally</h3>
+      <p>Cron expressions often contain sensitive schedule information for security-critical jobs (database backups, key rotations, batch payment processing). This tool implements a pure JavaScript cron parser that runs entirely in your browser without transmitting any data to remote servers.</p>
+      <p style="margin-top:.75rem;">The explanation engine maps each field's value through a set of pattern-matching rules (wildcards, step values, range lists, named values) and composes human-readable sentences. The "Next Run Times" feature implements a forward-iteration scheduler that advances a <code>Date</code> object minute by minute until the cron expression matches — all within your browser's JavaScript engine.</p>
+    </div>
+    <div class="info-card" style="grid-column:1/-1;">
+      <h3><span class="icon">❓</span> Frequently Asked Questions</h3>
+      <div class="faq-list">
+        <details class="faq-item"><summary>What is the correct format for a cron expression to translate into human text?</summary><div class="faq-answer">Standard cron uses 5 fields separated by spaces: <code>MINUTE HOUR DOM MONTH DOW</code>. Minute ranges from 0–59, Hour from 0–23, Day-of-Month from 1–31, Month from 1–12 (or JAN–DEC), and Day-of-Week from 0–7 (0 and 7 both mean Sunday, or use SUN–SAT). Supported operators: <code>*</code> (any), <code>*/n</code> (every n), <code>a-b</code> (range), <code>a,b,c</code> (list), <code>a-b/n</code> (stepped range).</div></details>
+        <details class="faq-item"><summary>Does the cron schedule generator support seconds or 6-field cron expressions?</summary><div class="faq-answer">The standard 5-field POSIX cron format is supported. Some systems (Spring, Quartz, AWS EventBridge) use 6-field cron with a seconds prefix or year suffix. These are not supported in this tool — if you have a 6-field expression, remove the seconds field or year field to use the standard 5-field format.</div></details>
+        <details class="faq-item"><summary>How are the "Next Run Times" calculated and in which timezone?</summary><div class="faq-answer">Run times are calculated by advancing a JavaScript <code>Date</code> object from the current moment, checking each minute against the cron expression. All times are displayed in your local browser timezone, as reported by the JavaScript <code>Intl.DateTimeFormat</code> API. The timezone identifier is shown next to the "Next 10 Run Times" heading.</div></details>
+        <details class="faq-item"><summary>Can I validate a cron expression for an AWS Lambda scheduled event or Kubernetes CronJob?</summary><div class="faq-answer">Yes, for standard cron syntax validation. Note that AWS EventBridge uses a 6-field format (year field added) and requires day-of-month and day-of-week to be mutually exclusive using <code>?</code>. Kubernetes CronJobs follow standard 5-field cron and are fully compatible with this tool. Always verify against your target platform's cron documentation for edge cases.</div></details>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand"><a href="../../" class="nav-logo"><div class="logo-icon">D</div><span class="logo-text">Dev<span>Utils</span></span></a><p>Premium client-side developer tools.</p></div>
+    <nav class="footer-links"><a href="../../privacy-policy.html">Privacy</a><a href="../../terms.html">Terms</a><a href="../../contact.html">Contact</a></nav>
+  </div>
+  <div class="footer-bottom"><p>© 2025 DevUtils Hub.</p></div>
+</footer>
+<div class="sticky-ad-footer"><span class="ad-slot-label">Advertisement</span><div class="footer-ad-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div></div>
+<div class="cookie-banner" id="cookie-banner"><p><strong>🍪 Cookie Notice</strong> — <a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
+<div id="toast-container" class="toast-container" aria-live="polite"></div>
+<script src="../../assets/js/global.js"></script>
+<script>
+(function(){
+  'use strict';
+  const fullInput = document.getElementById('cron-full');
+  const fMin = document.getElementById('f-min'), fHour = document.getElementById('f-hour');
+  const fDom = document.getElementById('f-dom'), fMonth = document.getElementById('f-month'), fDow = document.getElementById('f-dow');
+  const explanationEl = document.getElementById('explanation');
+  const fieldExpl = document.getElementById('field-explanations');
+  const runTimesEl = document.getElementById('run-times');
+  const validBadge = document.getElementById('valid-badge');
+  const tzNote = document.getElementById('tz-note');
+  tzNote.textContent = 'Timezone: ' + (Intl.DateTimeFormat().resolvedOptions().timeZone || 'local');
+
+  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const DAYS   = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+  function syncFieldsFromFull() {
+    const parts = fullInput.value.trim().split(/\s+/);
+    if (parts.length === 5) {
+      fMin.value=parts[0]; fHour.value=parts[1]; fDom.value=parts[2]; fMonth.value=parts[3]; fDow.value=parts[4];
+    }
+  }
+
+  function syncFullFromFields() {
+    fullInput.value = [fMin.value,fHour.value,fDom.value,fMonth.value,fDow.value].join(' ');
+  }
+
+  fullInput.addEventListener('input', () => { syncFieldsFromFull(); updateAll(); });
+  [fMin,fHour,fDom,fMonth,fDow].forEach(f => f.addEventListener('input', () => { syncFullFromFields(); updateAll(); }));
+
+  document.querySelectorAll('.preset-btn').forEach(btn => {
+    btn.addEventListener('click', () => { fullInput.value = btn.dataset.cron; syncFieldsFromFull(); updateAll(); });
+  });
+
+  function explainField(val, type) {
+    if (val === '*') return 'every ' + type;
+    if (/^\*\/(\d+)$/.test(val)) return 'every ' + val.split('/')[1] + ' ' + type + (parseInt(val.split('/')[1])>1?'s':'');
+    if (/^(\d+)-(\d+)$/.test(val)) { const m=val.match(/^(\d+)-(\d+)$/); return type + ' ' + m[1] + ' through ' + m[2]; }
+    if (/^(\d+)-(\d+)\/(\d+)$/.test(val)) { const m=val.match(/^(\d+)-(\d+)\/(\d+)$/); return 'every '+m[3]+' '+type+'s from '+m[1]+' to '+m[2]; }
+    if (val.includes(',')) return type + ' ' + val.split(',').join(', ');
+    if (/^\d+$/.test(val)) return 'at '+type+' ' + val;
+    return val;
+  }
+
+  function buildExplanation(parts) {
+    const [min, hour, dom, month, dow] = parts;
+    let s = 'Runs ';
+    if (min==='*'&&hour==='*') s += 'every minute';
+    else if (/^\*\/(\d+)$/.test(min)&&hour==='*') s += 'every '+min.split('/')[1]+' minutes';
+    else if (min==='0'&&/^\*\/(\d+)$/.test(hour)) s += 'every '+hour.split('/')[1]+' hours';
+    else if (min==='0'&&hour==='*') s += 'at the start of every hour';
+    else if (/^\d+$/.test(min)&&/^\d+$/.test(hour)) s += 'at '+(hour.padStart(2,'0'))+':'+min.padStart(2,'0');
+    else s += explainField(min,'minute') + ', ' + explainField(hour,'hour');
+
+    if (dom!=='*') s += ', on day '+dom+' of the month';
+    if (month!=='*') s += ', in month '+month;
+    if (dow!=='*') {
+      const dayMap = {'0':'Sunday','1':'Monday','2':'Tuesday','3':'Wednesday','4':'Thursday','5':'Friday','6':'Saturday','7':'Sunday'};
+      if (dow==='1-5') s += ', on weekdays';
+      else if (dow==='0,6'||dow==='6,0') s += ', on weekends';
+      else s += ', on ' + dow.split(',').map(d=>dayMap[d]||d).join(' and ');
+    }
+    return s;
+  }
+
+  function matchField(val, now, min, max, namesArr) {
+    if (val==='*') return true;
+    const n = now;
+    const parts = val.split(',');
+    return parts.some(part => {
+      if (/^\*\/(\d+)$/.test(part)) { const step=parseInt(part.split('/')[1]); return (n-min)%step===0; }
+      if (/^(\d+)-(\d+)$/.test(part)) { const m=part.match(/^(\d+)-(\d+)$/); return n>=parseInt(m[1])&&n<=parseInt(m[2]); }
+      if (/^(\d+)-(\d+)\/(\d+)$/.test(part)) { const m=part.match(/^(\d+)-(\d+)\/(\d+)$/); return n>=parseInt(m[1])&&n<=parseInt(m[2])&&(n-parseInt(m[1]))%parseInt(m[3])===0; }
+      if (/^\d+$/.test(part)) return parseInt(part)===n;
+      return false;
+    });
+  }
+
+  function getNextRuns(expr, count=10) {
+    const parts = expr.trim().split(/\s+/);
+    if (parts.length!==5) return [];
+    const [min,hour,dom,month,dow] = parts;
+    const runs = []; let d = new Date(); d.setSeconds(0,0); d.setMinutes(d.getMinutes()+1);
+    let iterations = 0;
+    while (runs.length < count && iterations < 525600) {
+      iterations++;
+      const ok = matchField(min,d.getMinutes(),0,59)&&matchField(hour,d.getHours(),0,23)&&matchField(dom,d.getDate(),1,31)&&matchField(month,d.getMonth()+1,1,12)&&matchField(dow,d.getDay(),0,6);
+      if (ok) runs.push(new Date(d));
+      d.setMinutes(d.getMinutes()+1);
+    }
+    return runs;
+  }
+
+  function updateAll() {
+    const expr = fullInput.value.trim();
+    const parts = expr.split(/\s+/);
+    if (parts.length!==5) { validBadge.style.background='rgba(239,68,68,.1)'; validBadge.style.color='#ef4444'; validBadge.textContent='✕ Invalid'; explanationEl.textContent='Enter a valid 5-field cron expression'; return; }
+    validBadge.style.background='rgba(16,185,129,.1)'; validBadge.style.color='#10b981'; validBadge.textContent='✓ Valid';
+    explanationEl.textContent = buildExplanation(parts);
+
+    const labels = ['minute','hour','day-of-month','month','day-of-week'];
+    fieldExpl.innerHTML = '';
+    parts.forEach((p,i) => {
+      const b = document.createElement('span');
+      b.className = 'explanation-badge';
+      b.textContent = labels[i]+': '+p;
+      fieldExpl.appendChild(b);
+    });
+
+    const runs = getNextRuns(expr);
+    runTimesEl.innerHTML = '';
+    runs.forEach(d => {
+      const el = document.createElement('div');
+      el.className = 'run-time-item';
+      el.textContent = d.toLocaleString(undefined, { weekday:'short', year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
+      runTimesEl.appendChild(el);
+    });
+    if (!runs.length) { runTimesEl.innerHTML = '<div class="text-muted text-sm">Could not compute next run times.</div>'; }
+  }
+
+  updateAll();
+})();
+</script>
+</body>
+</html>
