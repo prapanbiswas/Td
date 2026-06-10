@@ -128,18 +128,36 @@ body::before {
   transition: background 0.3s var(--ease-out);
 }
 
-/* ── Navigation ── */
+/* ── Navigation — Always-Navy Glass ── */
 .site-nav {
   position: sticky;
   top: 0;
   z-index: 1000;
   height: var(--nav-height);
-  background: var(--nav-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--nav-border);
-  box-shadow: var(--shadow-sm);
-  transition: background 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
+  /* Navy glassmorphism — same in both themes */
+  background: rgba(6, 12, 35, 0.88);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.05),
+    0 4px 32px rgba(0, 0, 0, 0.45);
+  transition: none;
+}
+
+/* Gradient accent underline */
+.site-nav::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 210, 63, 0.4) 30%,
+    rgba(0, 245, 212, 0.3) 70%,
+    transparent 100%
+  );
 }
 
 .nav-inner {
@@ -153,6 +171,7 @@ body::before {
   gap: 1rem;
 }
 
+/* Nav always uses light text regardless of page theme (navy background) */
 .nav-logo {
   display: flex;
   align-items: center;
@@ -161,12 +180,12 @@ body::before {
   font-size: 1.15rem;
   font-weight: 800;
   letter-spacing: -0.04em;
-  color: var(--text-primary);
+  color: #E8EDF5;
   flex-shrink: 0;
 }
 
 .logo-duck { flex-shrink: 0; display: block; }
-.nav-logo .logo-text { color: var(--text-primary); }
+.nav-logo .logo-text { color: #E8EDF5; }
 .nav-logo .logo-text span { color: var(--accent-primary); }
 
 .nav-links {
@@ -180,7 +199,7 @@ body::before {
   display: block;
   padding: 0.4rem 0.75rem;
   border-radius: var(--radius-sm);
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.6);
   text-decoration: none;
   font-size: 0.875rem;
   font-weight: 500;
@@ -199,7 +218,7 @@ body::before {
   gap: 0.5rem;
 }
 
-/* ── Theme Toggle Button ── */
+/* ── Theme Toggle — navy-aware ── */
 .theme-toggle {
   display: flex;
   align-items: center;
@@ -207,11 +226,10 @@ body::before {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  border: 1px solid var(--border-strong);
-  background: var(--bg-glass);
-  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
   cursor: pointer;
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.7);
   transition: var(--transition-fast);
   flex-shrink: 0;
   padding: 0;
@@ -220,20 +238,19 @@ body::before {
 .theme-toggle:hover {
   border-color: var(--accent-primary);
   color: var(--accent-primary);
-  background: rgba(255, 210, 63, 0.1);
+  background: rgba(255, 210, 63, 0.12);
   transform: rotate(15deg) scale(1.05);
 }
 
 .theme-toggle svg { display: block; pointer-events: none; }
 
-/* Sun icon — shown in dark mode (click to go light) */
+/* Sun icon — shown in dark mode; moon in light mode */
 .theme-toggle .icon-sun { display: block; }
 .theme-toggle .icon-moon { display: none; }
-
 [data-theme="light"] .theme-toggle .icon-sun { display: none; }
 [data-theme="light"] .theme-toggle .icon-moon { display: block; }
 
-/* ── Hamburger — Span-Based (no SVG glitch) ── */
+/* ── Hamburger — navy-aware, span-based ── */
 .nav-hamburger {
   display: none;
   flex-direction: column;
@@ -242,11 +259,11 @@ body::before {
   gap: 5px;
   width: 40px;
   height: 40px;
-  background: var(--bg-glass);
-  border: 1px solid var(--border-strong);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: var(--radius-sm);
   cursor: pointer;
-  color: var(--text-primary);
+  color: rgba(255, 255, 255, 0.8);
   flex-shrink: 0;
   padding: 0;
   transition: border-color 0.2s, background 0.2s, color 0.2s;
@@ -254,7 +271,7 @@ body::before {
 
 .nav-hamburger:hover {
   border-color: var(--accent-primary);
-  background: rgba(255, 210, 63, 0.1);
+  background: rgba(255, 210, 63, 0.12);
   color: var(--accent-primary);
 }
 
@@ -287,10 +304,10 @@ body::before {
 .nav-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  z-index: 998;
+  z-index: 1001;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.35s ease;
@@ -308,7 +325,7 @@ body::before {
   height: 100dvh;
   width: 300px;
   max-width: 85vw;
-  z-index: 999;
+  z-index: 1002;
   display: flex;
   flex-direction: column;
   overflow: hidden;
