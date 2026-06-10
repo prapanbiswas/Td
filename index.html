@@ -11,24 +11,17 @@
   <meta property="og:title" content="ToolDuck.xyz — 19 Free Developer Tools, No Upload Required">
   <meta property="og:description" content="Hash generators, JWT inspectors, image tools, diff checkers and more — all running 100% in your browser with zero server uploads.">
   <meta property="og:url" content="https://toolduck.xyz/">
+  <meta property="og:image" content="https://toolduck.xyz/assets/images/duck-thumbsup.png">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://toolduck.xyz/assets/images/duck-thumbsup.png">
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#FFD23F">
+  <script>
+    (function(){var t=localStorage.getItem('toolduck-theme');var d=window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.setAttribute('data-theme',t||(d?'dark':'light'));})();
+  </script>
   <link rel="stylesheet" href="assets/css/global.css">
-  <style>
-    .privacy-strip {
-      background: rgba(0, 245, 212, 0.06);
-      border: 1px solid rgba(0, 245, 212, 0.18);
-      border-radius: var(--radius-lg);
-      padding: 1rem 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      max-width: var(--content-max);
-      margin: 0 auto 2.5rem;
-      flex-wrap: wrap;
-    }
-    .privacy-strip p { font-size: 0.88rem; color: var(--text-secondary); margin: 0; }
-    .privacy-strip strong { color: var(--accent-secondary); }
-  </style>
 </head>
 <body>
 
@@ -48,9 +41,11 @@
       <li><a href="/privacy-policy.html">Privacy</a></li>
     </ul>
     <div class="nav-actions">
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-          <path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <line class="bar bar-top" x1="3" y1="5" x2="17" y2="5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line class="bar bar-mid" x1="3" y1="10" x2="17" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line class="bar bar-bot" x1="3" y1="15" x2="17" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
       </button>
     </div>
@@ -579,7 +574,7 @@
     </div>
 
     <div class="footer-bottom-bar">
-      <p>© 2025 ToolDuck.xyz — All tools run 100% in your browser.</p>
+      <p>© 2026 ToolDuck.xyz — All tools run 100% in your browser.</p>
       <div class="footer-bottom-links">
         <a href="/privacy-policy.html">Privacy</a>
         <a href="/terms.html">Terms</a>

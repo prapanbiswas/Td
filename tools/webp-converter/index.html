@@ -9,6 +9,13 @@
   <meta property="og:title" content="WebP Converter — ToolDuck.xyz">
   <meta property="og:description" content="Convert JPEG, PNG, GIF to WebP in-browser. Batch, quality control, zero upload.">
   <meta property="og:url" content="https://toolduck.xyz/tools/webp-converter/">
+    <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#FFD23F">
+    <script>
+    (function(){var t=localStorage.getItem('toolduck-theme');var d=window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.setAttribute('data-theme',t||(d?'dark':'light'));})();
+  </script>
   <link rel="stylesheet" href="../../assets/css/global.css">
   <style>
     .file-list { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem; max-height: 320px; overflow-y: auto; }
@@ -34,7 +41,13 @@
       <li><a href="../../privacy-policy.html">Privacy</a></li>
     </ul>
     <div class="nav-actions">
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+            <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <line class="bar bar-top" x1="3" y1="5" x2="17" y2="5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line class="bar bar-mid" x1="3" y1="10" x2="17" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line class="bar bar-bot" x1="3" y1="15" x2="17" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
     </div>
   </div>
 </nav>
