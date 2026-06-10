@@ -31,10 +31,12 @@
   </style>
 </head>
 <body>
+
+<!-- ═══════════════════════ NAV ═══════════════════════ -->
 <nav class="site-nav">
   <div class="nav-inner">
     <a href="/" class="nav-logo">
-      <svg class="logo-duck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="32" height="32" aria-hidden="true"><ellipse cx="15" cy="26" rx="11" ry="8" fill="#FFD23F"/><circle cx="22" cy="15" r="7" fill="#FFD23F"/><path d="M28 14 L34 16 L28 18Z" fill="#FF9F0A"/><ellipse cx="9" cy="25" rx="5" ry="3.5" fill="#E8BC00" transform="rotate(-10 9 25)"/><rect x="16.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><rect x="22.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><line x1="21.5" y1="12.6" x2="22.5" y2="12.6" stroke="#00F5D4" stroke-width="1.1"/><circle cx="26" cy="12" r="1.1" fill="#0B0F19"/></svg>
+      <img src="/assets/images/duck-logo.png" alt="ToolDuck logo" class="nav-logo-img" width="44" height="44">
       <span class="logo-text">tool<span>duck</span>.xyz</span>
     </a>
     <ul class="nav-links">
@@ -46,7 +48,11 @@
       <li><a href="/privacy-policy.html">Privacy</a></li>
     </ul>
     <div class="nav-actions">
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">☰</button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+          <path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
     </div>
   </div>
 </nav>
@@ -65,44 +71,101 @@
 
 <div class="page-wrapper">
 
-  <section class="hero">
-    <div class="hero-badge">🦆 19 Tools &nbsp;·&nbsp; 100% Offline &nbsp;·&nbsp; Zero Upload</div>
-    <h1>Developer Tools That<br>Actually Respect Your Privacy</h1>
-    <p>Every tool on ToolDuck runs entirely in your browser. Your files, tokens, and secrets never leave your machine. No accounts, no tracking, no nonsense.</p>
-    <div class="hero-stats">
-      <div class="hero-stat"><span class="num">19</span><span class="label">Free Tools</span></div>
-      <div class="hero-stat"><span class="num">0</span><span class="label">Server Uploads</span></div>
-      <div class="hero-stat"><span class="num">0</span><span class="label">Accounts Needed</span></div>
-      <div class="hero-stat"><span class="num">∞</span><span class="label">Uses / Month</span></div>
+  <!-- ═══════════════════════ HERO ═══════════════════════ -->
+  <section class="hero-layout">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" style="color:#FFD23F;stroke:currentColor;stroke-width:1.6;stroke-linecap:round">
+          <path d="M7 1v2M7 11v2M1 7h2M11 7h2M2.9 2.9l1.4 1.4M9.7 9.7l1.4 1.4M2.9 11.1l1.4-1.4M9.7 4.3l1.4-1.4"/>
+          <circle cx="7" cy="7" r="2.5" stroke="currentColor"/>
+        </svg>
+        19 Tools &nbsp;·&nbsp; 100% Offline &nbsp;·&nbsp; Zero Upload
+      </div>
+      <h1>Developer Tools That<br>Actually Respect Your Privacy</h1>
+      <p>Every tool on ToolDuck runs entirely in your browser. Your files, tokens, and secrets never leave your machine. No accounts, no tracking, no nonsense.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="num">19</span><span class="label">Free Tools</span></div>
+        <div class="hero-stat"><span class="num">0</span><span class="label">Server Uploads</span></div>
+        <div class="hero-stat"><span class="num">0</span><span class="label">Accounts Needed</span></div>
+        <div class="hero-stat"><span class="num">∞</span><span class="label">Uses / Month</span></div>
+      </div>
+    </div>
+    <div class="hero-mascot-wrap">
+      <img src="/assets/images/duck-thumbsup.png" alt="ToolDuck mascot giving a thumbs up" class="hero-mascot" width="260">
     </div>
   </section>
 
+  <!-- ═══════════════════════ TOOLS SECTION ═══════════════════════ -->
   <div class="tools-section">
 
+    <!-- Privacy Strip -->
     <div class="privacy-strip">
-      <span style="font-size:1.4rem">🔒</span>
+      <span class="privacy-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="9" width="12" height="9" rx="2"/>
+          <path d="M7 9V6.5a3 3 0 0 1 6 0V9"/>
+          <circle cx="10" cy="13.5" r="1.2" fill="currentColor" stroke="none"/>
+        </svg>
+      </span>
       <p><strong>100% private by design.</strong> Everything runs client-side using browser APIs. No files or text are ever sent to a server. Works offline after first load.</p>
     </div>
 
+    <!-- Search -->
     <div class="search-bar">
-      <span class="search-icon">🔍</span>
+      <span class="search-icon" aria-hidden="true">
+        <svg width="17" height="17" viewBox="0 0 17 17" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+          <circle cx="7.5" cy="7.5" r="5"/>
+          <path d="M12 12l3.5 3.5"/>
+        </svg>
+      </span>
       <input type="search" id="tool-search" placeholder="Search 19 tools…" aria-label="Search tools">
     </div>
 
+    <!-- Category Tabs -->
     <div class="category-tabs" role="tablist">
       <button class="tab-btn active" data-cat="all" role="tab">All Tools</button>
-      <button class="tab-btn" data-cat="image" role="tab">🖼 Image</button>
-      <button class="tab-btn" data-cat="dev" role="tab">⚙️ Dev</button>
-      <button class="tab-btn" data-cat="css" role="tab">🎨 CSS / UI</button>
-      <button class="tab-btn" data-cat="text" role="tab">📝 Text</button>
+      <button class="tab-btn" data-cat="image" role="tab">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="1" y="2" width="12" height="10" rx="1.5"/>
+          <circle cx="4.5" cy="5.5" r="1"/>
+          <path d="M1 9l3-3 2.5 2.5 2-2 3.5 4"/>
+        </svg>
+        Image
+      </button>
+      <button class="tab-btn" data-cat="dev" role="tab">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 4L1 7l3 3M10 4l3 3-3 3M8 2l-2 10"/>
+        </svg>
+        Dev
+      </button>
+      <button class="tab-btn" data-cat="css" role="tab">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 1v3M7 10v3M1 7h3M10 7h3M2.9 2.9l2.1 2.1M9 9l2.1 2.1M2.9 11.1l2.1-2.1M9 5l2.1-2.1"/>
+          <circle cx="7" cy="7" r="2"/>
+        </svg>
+        CSS / UI
+      </button>
+      <button class="tab-btn" data-cat="text" role="tab">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M2 3h10M2 6h7M2 9h9M2 12h5"/>
+        </svg>
+        Text
+      </button>
     </div>
 
+    <!-- Tools Grid -->
     <div class="tools-grid">
 
-      <!-- IMAGE TOOLS -->
+      <!-- ── IMAGE TOOLS ── -->
+
       <a href="/tools/image-compressor/" class="tool-card" data-cat="image">
         <div class="tool-card-header">
-          <div class="tool-card-icon">🗜️</div>
+          <div class="tool-card-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="5" width="18" height="12" rx="2"/>
+              <path d="M8 11h6M11 8l-3 3 3 3"/>
+            </svg>
+          </div>
           <div class="tool-card-meta">
             <h3>Image Compressor</h3>
             <p>Compress JPEG, PNG and WebP images locally. Adjustable quality, instant preview, one-click download.</p>
@@ -114,7 +177,13 @@
 
       <a href="/tools/png-to-webp/" class="tool-card" data-cat="image">
         <div class="tool-card-header">
-          <div class="tool-card-icon">🖼️</div>
+          <div class="tool-card-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="8" height="8" rx="1.5"/>
+              <rect x="12" y="10" width="8" height="8" rx="1.5"/>
+              <path d="M10 8h2M10 8l-2-2M10 8l-2 2"/>
+            </svg>
+          </div>
           <div class="tool-card-meta">
             <h3>PNG to WebP Converter</h3>
             <p>Convert PNG images to WebP format in-browser. Batch processing, quality control, instant download.</p>
@@ -126,7 +195,14 @@
 
       <a href="/tools/webp-converter/" class="tool-card" data-cat="image">
         <div class="tool-card-header">
-          <div class="tool-card-icon">🔄</div>
+          <div class="tool-card-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 4.5A8 8 0 0 1 19 11"/>
+              <path d="M17 4.5l-3.5.5.5-3.5"/>
+              <path d="M5 17.5A8 8 0 0 1 3 11"/>
+              <path d="M5 17.5l3.5-.5-.5 3.5"/>
+            </svg>
+          </div>
           <div class="tool-card-meta">
             <h3>WebP Converter</h3>
             <p>Convert PNG, JPEG and GIF to WebP format in-browser. Adjustable quality, batch download.</p>
@@ -138,7 +214,11 @@
 
       <a href="/tools/svg-optimizer/" class="tool-card" data-cat="image">
         <div class="tool-card-header">
-          <div class="tool-card-icon">✨</div>
+          <div class="tool-card-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11,2 13.5,8.5 20,9 15.5,13.5 17,20 11,16.5 5,20 6.5,13.5 2,9 8.5,8.5"/>
+            </svg>
+          </div>
           <div class="tool-card-meta">
             <h3>SVG Optimizer</h3>
             <p>Clean and minify SVG code in-browser. Remove comments, whitespace, and unnecessary attributes.</p>
@@ -150,7 +230,12 @@
 
       <a href="/tools/metadata-stripper/" class="tool-card" data-cat="image">
         <div class="tool-card-header">
-          <div class="tool-card-icon">🔒</div>
+          <div class="tool-card-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 2L3 6v5c0 5 3.6 9.3 8 10 4.4-.7 8-5 8-10V6L11 2z"/>
+              <path d="M8 11l2 2 4-4"/>
+            </svg>
+          </div>
           <div class="tool-card-meta">
             <h3>Metadata Stripper</h3>
             <p>Strip all EXIF metadata from JPEG and PNG images in-browser. Camera info, timestamps, comments gone.</p>
@@ -162,7 +247,13 @@
 
       <a href="/tools/location-remover/" class="tool-card" data-cat="image">
         <div class="tool-card-header">
-          <div class="tool-card-icon">📍</div>
+          <div class="tool-card-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 2C8.2 2 6 4.2 6 7c0 4.5 5 11 5 11s5-6.5 5-11c0-2.8-2.2-5-5-5z"/>
+              <circle cx="11" cy="7" r="2"/>
+              <path d="M3 3l16 16"/>
+            </svg>
+          </div>
           <div class="tool-card-meta">
             <h3>GPS Location Remover</h3>
             <p>Remove GPS coordinates and location data from photos before sharing. 100% local, zero upload.</p>
@@ -174,7 +265,13 @@
 
       <a href="/tools/svg-renderer/" class="tool-card" data-cat="image">
         <div class="tool-card-header">
-          <div class="tool-card-icon">✏️</div>
+          <div class="tool-card-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 17.5L14.5 6l2.5 2.5L5.5 20H3v-2.5z"/>
+              <path d="M12.5 8l2 2"/>
+              <path d="M16 3l3 3-1.5 1.5-3-3L16 3z"/>
+            </svg>
+          </div>
           <div class="tool-card-meta">
             <h3>SVG to PNG Studio</h3>
             <p>Paste SVG code, preview live, and export to pixel-perfect PNG at any resolution. Canvas-powered.</p>
@@ -184,10 +281,15 @@
         <span class="tool-card-arrow">→</span>
       </a>
 
-      <!-- DEV TOOLS -->
+      <!-- ── DEV TOOLS ── -->
+
       <a href="/tools/hash-generator/" class="tool-card" data-cat="dev">
         <div class="tool-card-header">
-          <div class="tool-card-icon">🔐</div>
+          <div class="tool-card-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke-width="1.8" stroke-linecap="round">
+              <path d="M5 8h12M5 14h12M9 4l-2 14M15 4l-2 14"/>
+            </svg>
+          </div>
           <div class="tool-card-meta">
             <h3>SHA Hash Generator</h3>
             <p>Generate MD5, SHA-1, SHA-256 and SHA-512 hashes instantly. Compare checksums, verify integrity.</p>
@@ -199,7 +301,13 @@
 
       <a href="/tools/jwt-inspector/" class="tool-card" data-cat="dev">
         <div class="tool-card-header">
-          <div class="tool-card-icon">🔑</div>
+          <div class="tool-card-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="10" r="4"/>
+              <path d="M13 14l7 7"/>
+              <circle cx="9" cy="10" r="1.5" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
           <div class="tool-card-meta">
             <h3>JWT Inspector</h3>
             <p>Decode and inspect JWT tokens. View header, payload, and expiry. Runs fully offline.</p>
@@ -211,7 +319,15 @@
 
       <a href="/tools/json-visualizer/" class="tool-card" data-cat="dev">
         <div class="tool-card-header">
-          <div class="tool-card-icon">📊</div>
+          <div class="tool-card-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 3h-2a1 1 0 0 0-1 1v2M5 3v3M5 3h4"/>
+              <path d="M4 9v4M4 17v2a1 1 0 0 0 1 1h2"/>
+              <path d="M9 19h4M17 19h2a1 1 0 0 0 1-1v-2"/>
+              <path d="M18 13V9M18 5V3a1 1 0 0 0-1-1h-2"/>
+              <path d="M8 8h6v6H8z"/>
+            </svg>
+          </div>
           <div class="tool-card-meta">
             <h3>JSON Visualizer</h3>
             <p>Format, validate and explore JSON with a collapsible tree view. Syntax highlight, path copy.</p>
@@ -223,7 +339,12 @@
 
       <a href="/tools/cron-explainer/" class="tool-card" data-cat="dev">
         <div class="tool-card-header">
-          <div class="tool-card-icon">⏰</div>
+          <div class="tool-card-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="M11 7v4l2.5 2.5"/>
+            </svg>
+          </div>
           <div class="tool-card-meta">
             <h3>Cron Explainer</h3>
             <p>Decode any cron expression into plain English. See next 10 run times, build schedules visually.</p>
@@ -235,7 +356,15 @@
 
       <a href="/tools/diff-checker/" class="tool-card" data-cat="dev">
         <div class="tool-card-header">
-          <div class="tool-card-icon">⬛</div>
+          <div class="tool-card-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="8" height="16" rx="1.5"/>
+              <rect x="12" y="3" width="8" height="16" rx="1.5"/>
+              <path d="M5 7h2M5 10h2M5 13h2"/>
+              <path d="M15 7h2M15 13h2"/>
+              <path d="M15 10h1M17 10h1" stroke-dasharray="1 1"/>
+            </svg>
+          </div>
           <div class="tool-card-meta">
             <h3>Diff Checker</h3>
             <p>Compare two text blocks side-by-side with colour-coded line diff. Paste and see differences instantly.</p>
@@ -247,7 +376,13 @@
 
       <a href="/tools/yaml-transformer/" class="tool-card" data-cat="dev">
         <div class="tool-card-header">
-          <div class="tool-card-icon">🔄</div>
+          <div class="tool-card-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 8l-4 3 4 3"/>
+              <path d="M17 8l4 3-4 3"/>
+              <path d="M13 4l-4 14"/>
+            </svg>
+          </div>
           <div class="tool-card-meta">
             <h3>YAML ↔ JSON Transformer</h3>
             <p>Bidirectional YAML and JSON converter. Validate syntax, pretty-print, copy output instantly.</p>
@@ -259,7 +394,13 @@
 
       <a href="/tools/regex-simulator/" class="tool-card" data-cat="dev">
         <div class="tool-card-header">
-          <div class="tool-card-icon">🔍</div>
+          <div class="tool-card-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 6h3M3 11h5M3 16h7"/>
+              <rect x="11" y="4" width="9" height="14" rx="2"/>
+              <path d="M14 9l2-2 2 2M16 7v5"/>
+            </svg>
+          </div>
           <div class="tool-card-meta">
             <h3>RegEx Simulator</h3>
             <p>Test regular expressions with live match highlighting, group capture, and flag controls.</p>
@@ -269,10 +410,18 @@
         <span class="tool-card-arrow">→</span>
       </a>
 
-      <!-- CSS / UI -->
+      <!-- ── CSS / UI ── -->
+
       <a href="/tools/glass-studio/" class="tool-card" data-cat="css">
         <div class="tool-card-header">
-          <div class="tool-card-icon">🪟</div>
+          <div class="tool-card-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="18" height="14" rx="2.5"/>
+              <path d="M2 8h18" opacity=".5"/>
+              <rect x="5" y="11" width="7" height="5" rx="1.5" stroke-dasharray="2 1"/>
+              <circle cx="16" cy="13.5" r="2" stroke-dasharray="2 1"/>
+            </svg>
+          </div>
           <div class="tool-card-meta">
             <h3>Glassmorphism CSS Lab</h3>
             <p>Generate glass UI CSS with live preview. Blur, opacity, border — copy ready-to-use code instantly.</p>
@@ -284,7 +433,19 @@
 
       <a href="/tools/tailwind-master/" class="tool-card" data-cat="css">
         <div class="tool-card-header">
-          <div class="tool-card-icon">🎨</div>
+          <div class="tool-card-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="5" height="5" rx="1"/>
+              <rect x="8.5" y="2" width="5" height="5" rx="1"/>
+              <rect x="15" y="2" width="5" height="5" rx="1"/>
+              <rect x="2" y="8.5" width="5" height="5" rx="1"/>
+              <rect x="8.5" y="8.5" width="5" height="5" rx="1"/>
+              <rect x="15" y="8.5" width="5" height="5" rx="1"/>
+              <rect x="2" y="15" width="5" height="5" rx="1"/>
+              <rect x="8.5" y="15" width="5" height="5" rx="1"/>
+              <rect x="15" y="15" width="5" height="5" rx="1"/>
+            </svg>
+          </div>
           <div class="tool-card-meta">
             <h3>Tailwind Palette Master</h3>
             <p>Generate a full 50–950 Tailwind shade palette from any hex color. Preview swatches, export config.</p>
@@ -294,10 +455,17 @@
         <span class="tool-card-arrow">→</span>
       </a>
 
-      <!-- TEXT TOOLS -->
+      <!-- ── TEXT TOOLS ── -->
+
       <a href="/tools/string-encoder/" class="tool-card" data-cat="text">
         <div class="tool-card-header">
-          <div class="tool-card-icon">🔤</div>
+          <div class="tool-card-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 7l-3 4 3 4"/>
+              <path d="M18 7l3 4-3 4"/>
+              <path d="M14 4l-6 14"/>
+            </svg>
+          </div>
           <div class="tool-card-meta">
             <h3>String Encoder / Decoder</h3>
             <p>Base64, URL encode/decode, HTML entities, hex, ROT13 — all in one offline tool.</p>
@@ -309,7 +477,12 @@
 
       <a href="/tools/table-builder/" class="tool-card" data-cat="text">
         <div class="tool-card-header">
-          <div class="tool-card-icon">📋</div>
+          <div class="tool-card-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="18" height="16" rx="2"/>
+              <path d="M2 8h18M8 8v11M2 13h18"/>
+            </svg>
+          </div>
           <div class="tool-card-meta">
             <h3>Markdown Table Builder</h3>
             <p>Build and edit Markdown tables visually. Add rows/columns, align, export instantly.</p>
@@ -321,7 +494,11 @@
 
       <a href="/tools/log-filter/" class="tool-card" data-cat="text">
         <div class="tool-card-header">
-          <div class="tool-card-icon">📄</div>
+          <div class="tool-card-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 5h16l-6 7v6l-4-2V12L3 5z"/>
+            </svg>
+          </div>
           <div class="tool-card-meta">
             <h3>Log File Filter</h3>
             <p>Filter and grep large log files in-browser. Level filtering, regex search, timestamp parsing.</p>
@@ -334,30 +511,86 @@
     </div>
   </div>
 
+  <!-- ═══════════════════════ FOOTER ═══════════════════════ -->
   <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <a href="/" class="nav-logo">
-          <svg class="logo-duck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="28" height="28" aria-hidden="true"><ellipse cx="15" cy="26" rx="11" ry="8" fill="#FFD23F"/><circle cx="22" cy="15" r="7" fill="#FFD23F"/><path d="M28 14 L34 16 L28 18Z" fill="#FF9F0A"/><ellipse cx="9" cy="25" rx="5" ry="3.5" fill="#E8BC00" transform="rotate(-10 9 25)"/><rect x="16.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><rect x="22.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><line x1="21.5" y1="12.6" x2="22.5" y2="12.6" stroke="#00F5D4" stroke-width="1.1"/><circle cx="26" cy="12" r="1.1" fill="#0B0F19"/></svg>
-          <span class="logo-text">tool<span>duck</span>.xyz</span>
+    <div class="footer-main">
+
+      <!-- Brand Column -->
+      <div class="footer-col footer-col-brand">
+        <a href="/" class="footer-logo-row" aria-label="ToolDuck Home">
+          <img src="/assets/images/duck-logo.png" alt="ToolDuck logo" class="footer-logo-img" width="42" height="42">
+          <span class="footer-logo-text">tool<span>duck</span>.xyz</span>
         </a>
-        <p>Free, privacy-first developer tools. Everything runs in your browser — no uploads, no tracking, no nonsense.</p>
+        <p class="footer-desc">19 free developer tools that run entirely in your browser. No server uploads, no tracking, no accounts. Your data stays on your machine — always.</p>
+        <a href="/privacy-policy.html" class="footer-privacy-badge">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 1L2 3v3c0 3 1.8 5.5 4 6 2.2-.5 4-3 4-6V3L6 1z"/>
+          </svg>
+          100% Privacy-First
+        </a>
+        <img src="/assets/images/duck-waving.png" alt="ToolDuck mascot waving" class="footer-mascot-img" width="140">
       </div>
-      <nav class="footer-links" aria-label="Footer navigation">
+
+      <!-- Image Tools Column -->
+      <div class="footer-col">
+        <h4>Image Tools</h4>
+        <ul>
+          <li><a href="/tools/image-compressor/">Image Compressor</a></li>
+          <li><a href="/tools/png-to-webp/">PNG to WebP</a></li>
+          <li><a href="/tools/webp-converter/">WebP Converter</a></li>
+          <li><a href="/tools/svg-optimizer/">SVG Optimizer</a></li>
+          <li><a href="/tools/metadata-stripper/">Metadata Stripper</a></li>
+          <li><a href="/tools/location-remover/">GPS Location Remover</a></li>
+          <li><a href="/tools/svg-renderer/">SVG to PNG Studio</a></li>
+        </ul>
+      </div>
+
+      <!-- Dev Tools Column -->
+      <div class="footer-col">
+        <h4>Dev Tools</h4>
+        <ul>
+          <li><a href="/tools/hash-generator/">SHA Hash Generator</a></li>
+          <li><a href="/tools/jwt-inspector/">JWT Inspector</a></li>
+          <li><a href="/tools/json-visualizer/">JSON Visualizer</a></li>
+          <li><a href="/tools/cron-explainer/">Cron Explainer</a></li>
+          <li><a href="/tools/diff-checker/">Diff Checker</a></li>
+          <li><a href="/tools/yaml-transformer/">YAML ↔ JSON</a></li>
+          <li><a href="/tools/regex-simulator/">RegEx Simulator</a></li>
+          <li><a href="/tools/glass-studio/">Glassmorphism Lab</a></li>
+          <li><a href="/tools/tailwind-master/">Tailwind Palette</a></li>
+          <li><a href="/tools/string-encoder/">String Encoder</a></li>
+          <li><a href="/tools/table-builder/">Table Builder</a></li>
+          <li><a href="/tools/log-filter/">Log Filter</a></li>
+        </ul>
+      </div>
+
+      <!-- Company Column -->
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="/terms.html">Terms of Service</a></li>
+          <li><a href="/cookie-policy.html">Cookie Policy</a></li>
+          <li><a href="/contact.html">Contact Us</a></li>
+          <li><a href="/sitemap.xml">Sitemap</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom-bar">
+      <p>© 2025 ToolDuck.xyz — All tools run 100% in your browser.</p>
+      <div class="footer-bottom-links">
         <a href="/privacy-policy.html">Privacy</a>
         <a href="/terms.html">Terms</a>
-        <a href="/cookie-policy.html">Cookies</a>
-        <a href="/contact.html">Contact</a>
-      </nav>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2025 ToolDuck.xyz — All tools run 100% in your browser.</p>
-      <p><a href="/sitemap.xml">Sitemap</a></p>
+        <a href="/sitemap.xml">Sitemap</a>
+      </div>
     </div>
   </footer>
 
 </div>
 
+<!-- Cookie Banner -->
 <div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Cookie consent">
   <p>We use cookies only for anonymous analytics. All tools run 100% locally — your data never leaves your browser. <a href="/cookie-policy.html">Cookie Policy</a></p>
   <div class="cookie-actions">
@@ -366,6 +599,7 @@
   </div>
 </div>
 
+<!-- Sticky Ad Footer -->
 <div class="sticky-ad-footer" aria-label="Advertisement">
   <span class="ad-slot-label">Advertisement</span>
   <div class="footer-ad-inner">

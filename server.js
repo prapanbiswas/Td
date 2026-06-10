@@ -83,9 +83,9 @@ const server = http.createServer((req, res) => {
 
   // 404
   res.writeHead(404, { 'Content-Type': 'text/html' });
-  res.end('<!DOCTYPE html><html><head><title>404</title><link rel="stylesheet" href="/assets/css/global.css"></head><body style="display:grid;place-items:center;min-height:100vh;"><div style="text-align:center;"><h1 style="font-size:4rem;font-weight:900;color:var(--accent-primary);">404</h1><p style="color:var(--text-secondary);">Page not found</p><a href="/" style="color:var(--accent-primary);margin-top:1rem;display:inline-block;">← Back to DevUtils Hub</a></div></body></html>');
+  res.end('<!DOCTYPE html><html><head><title>404 — ToolDuck.xyz</title><link rel="stylesheet" href="/assets/css/global.css"></head><body style="display:grid;place-items:center;min-height:100vh;"><div style="text-align:center;"><img src="/assets/images/duck-404.png" alt="ToolDuck 404" style="width:180px;margin-bottom:1.5rem;filter:drop-shadow(0 12px 28px rgba(255,210,63,0.3))"><h1 style="font-size:4rem;font-weight:900;color:var(--accent-primary);">404</h1><p style="color:var(--text-secondary);margin-bottom:1.5rem;">Quack! That page doesn\'t exist.</p><a href="/" style="color:var(--accent-primary);font-weight:600;text-decoration:none;border:1px solid rgba(255,210,63,0.3);padding:0.5rem 1.25rem;border-radius:100px;background:rgba(255,210,63,0.08);">&larr; Back to ToolDuck</a></div></body></html>');
 });
 
 server.listen(PORT, '0.0.0.0', () => {
-  console.log(`DevUtils Hub running at http://0.0.0.0:${PORT}`);
+  console.log(`ToolDuck.xyz running at http://0.0.0.0:${PORT}`);
 });
