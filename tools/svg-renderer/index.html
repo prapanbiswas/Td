@@ -8,6 +8,7 @@
   <meta name="keywords" content="convert raw svg code string to png, svg to png, svg renderer, svg path preview, svg exporter online free">
   <link rel="canonical" href="https://toolduck.xyz/tools/svg-renderer/">
   <meta property="og:title" content="SVG Path-to-PNG Studio — Convert SVG Code to PNG Offline">
+  <meta property="og:description" content="Export SVG to PNG at any resolution — free, 100% browser-based, no upload required.">
   <meta property="og:url" content="https://toolduck.xyz/tools/svg-renderer/">
   <link rel="stylesheet" href="../../assets/css/global.css">
   <style>
@@ -18,7 +19,7 @@
 <body>
 <nav class="site-nav">
   <div class="nav-inner">
-    <a href="../../" class="nav-logo"><svg class="logo-duck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="32" height="32" aria-hidden="true"><ellipse cx="15" cy="26" rx="11" ry="8" fill="#FFD23F"/><circle cx="22" cy="15" r="7" fill="#FFD23F"/><path d="M28 14 L34 16 L28 18Z" fill="#FF9F0A"/><ellipse cx="9" cy="25" rx="5" ry="3.5" fill="#E8BC00" transform="rotate(-10 9 25)"/><rect x="16.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><rect x="22.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><line x1="21.5" y1="12.6" x2="22.5" y2="12.6" stroke="#00F5D4" stroke-width="1.1"/><circle cx="26" cy="12" r="1.1" fill="#0B0F19"/></svg><span class="logo-text">tool<span>duck</span>.xyz</span></a>
+    <a href="../../" class="nav-logo"><img src="../../assets/images/duck-logo.png" alt="ToolDuck logo" class="nav-logo-img" width="44" height="44"><span class="logo-text">tool<span>duck</span>.xyz</span></a>
     <ul class="nav-links">
       <li><a href="../../">Home</a></li>
       <li><a href="../../tools/webp-cruncher/">WebP</a></li>
@@ -27,7 +28,7 @@
       <li><a href="../../privacy-policy.html">Privacy</a></li>
     </ul>
     <div class="nav-actions">
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">☰</button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     </div>
   </div>
 </nav>
@@ -38,23 +39,23 @@
   <nav class="breadcrumb"><a href="../../">Home</a><span class="sep">›</span><span class="current">SVG Path-to-PNG Studio</span></nav>
   <div class="tool-header">
     <div class="tool-header-inner">
-      <div class="tool-page-icon">✏️</div>
+      <div class="tool-page-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21L17 8l3 3L7 24H4v-3z"/><path d="M15 10l3 3"/><path d="M20 4l4 4-2 2-4-4 2-2z"/></svg></div>
       <div class="tool-header-text">
         <h1>Raw SVG Path-to-PNG Studio</h1>
         <p>Paste SVG code, preview live, and export to PNG at any resolution. Ideal for converting icon paths to raster images offline.</p>
       </div>
     </div>
-    <div class="tool-badges"><span class="badge badge-green">🔒 Offline</span><span class="badge badge-blue">🖼 PNG Export</span><span class="badge badge-purple">⚡ Canvas API</span></div>
+    <div class="tool-badges"><span class="badge badge-green">Offline</span><span class="badge badge-blue">PNG Export</span><span class="badge badge-purple">Canvas API</span></div>
   </div>
 
   <div class="tool-content-grid">
     <main>
       <div class="glass-panel" style="margin-bottom:1rem;">
         <div class="panel-header">
-          <span class="panel-title">✏️ SVG Code Input</span>
+          <span class="panel-title">SVG Code Input</span>
           <div style="display:flex;gap:0.5rem;">
-            <button class="btn btn-secondary btn-sm" id="sample-btn">📄 Load Sample</button>
-            <button class="btn btn-danger btn-sm" id="clear-btn">✕ Clear</button>
+            <button class="btn btn-secondary btn-sm" id="sample-btn">Load Sample</button>
+            <button class="btn btn-danger btn-sm" id="clear-btn">Clear</button>
           </div>
         </div>
         <div class="panel-body">
@@ -65,7 +66,7 @@
 
       <div class="glass-panel" style="margin-bottom:1rem;" id="preview-panel">
         <div class="panel-header">
-          <span class="panel-title">👁 Live Preview</span>
+          <span class="panel-title">Live Preview</span>
           <div style="display:flex;gap:0.5rem;align-items:center;">
             <label class="form-label" style="margin:0;font-size:0.78rem;">BG:</label>
             <input type="color" id="bg-color" value="#ffffff" style="width:32px;height:28px;border:none;background:none;cursor:pointer;border-radius:4px;" aria-label="Background color">
@@ -82,8 +83,8 @@
         <div class="panel-body">
           <div id="svg-preview-wrap"><span style="color:var(--text-muted);font-size:0.85rem;">Preview will appear here…</span></div>
           <div style="margin-top:1rem;display:flex;gap:0.5rem;flex-wrap:wrap;" id="export-btns" style="display:none!important;">
-            <button class="btn btn-primary" id="export-png-btn" style="display:none;">⬇ Download PNG</button>
-            <button class="btn btn-secondary btn-sm" id="copy-svg-btn" style="display:none;" data-copy-target="svg-input">📋 Copy SVG</button>
+            <button class="btn btn-primary" id="export-png-btn" style="display:none;">Download PNG</button>
+            <button class="btn btn-secondary btn-sm" id="copy-svg-btn" style="display:none;" data-copy-target="svg-input">Copy SVG</button>
           </div>
           <div id="png-stats" style="font-size:0.78rem;color:var(--text-muted);margin-top:0.5rem;"></div>
         </div>
@@ -103,41 +104,9 @@
   <div class="info-divider"></div>
   <div class="info-grid">
     <div class="info-card">
-      <h3><span class="icon">📖</span> User Manual &amp; Operational Guide</h3>
+      <h3><span class="icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="1" width="14" height="16" rx="2"/><path d="M5 5h8M5 8h8M5 11h5"/></svg></span> User Manual &amp; Operational Guide</h3>
       <ol>
-        <li><strong>Paste SVG code:</strong> Enter a full <code>&lt;svg&gt;</code> element including the namespace attribute, or click "Load Sample" to see a working example.</li>
-        <li><strong>Live preview:</strong> The SVG renders instantly on a checkered background, showing transparency correctly.</li>
-        <li><strong>Choose background color:</strong> Pick a background fill for the exported PNG (default white). Choose the same color as your target page for seamless integration.</li>
-        <li><strong>Select export scale:</strong> Choose 1×, 2×, 4×, or 8× scale factors, or enter a custom pixel width. Higher scales produce sharper images for Retina/HiDPI displays.</li>
-        <li><strong>Export:</strong> Click "Download PNG" to export a pixel-perfect raster version of your SVG to your device.</li>
-      </ol>
-    </div>
-    <div class="info-card">
-      <h3><span class="icon">🏗️</span> Architecture Insight: Why This Tool Runs Locally</h3>
-      <p>SVG-to-PNG conversion traditionally requires server-side tools like Inkscape, CairoSVG, or headless Chromium — each requiring significant infrastructure. This tool uses a two-step browser-native approach: the SVG markup is serialized into a <strong>Blob URL</strong> and drawn into an <code>&lt;img&gt;</code> element, which is then painted onto an HTML5 <strong>Canvas</strong> at the target resolution using <code>ctx.drawImage()</code>. The canvas is then exported via <code>canvas.toBlob('image/png')</code>. The entire pipeline runs in browser memory — no server, no network latency, no file upload.</p>
-    </div>
-    <div class="info-card" style="grid-column:1/-1;">
-      <h3><span class="icon">❓</span> Frequently Asked Questions</h3>
-      <div class="faq-list">
-        <details class="faq-item"><summary>Can I convert a raw SVG path string (d attribute) to PNG without wrapping it in an SVG element?</summary><div class="faq-answer">The tool requires a complete <code>&lt;svg&gt;</code> element with a <code>viewBox</code> attribute to render correctly. If you have only a raw path <code>d</code> attribute string, wrap it: <code>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"&gt;&lt;path d="YOUR_PATH_DATA"/&gt;&lt;/svg&gt;</code>. Use "Load Sample" to see a working example of this pattern.</div></details>
-        <details class="faq-item"><summary>What export resolution should I use for Retina displays?</summary><div class="faq-answer">For standard Retina screens (2× device pixel ratio), use 2× export. For third-generation iPads or high-end Android displays (3×), use 4× export for crisp rendering. For print-quality assets at 300 DPI or higher, use the custom pixel size option to specify exact output dimensions.</div></details>
-        <details class="faq-item"><summary>Why does my exported PNG have a white background instead of transparent?</summary><div class="faq-answer">The background color picker defaults to white (#ffffff). To get a transparent PNG, note that the Canvas API's PNG export preserves transparency — but you need to set an alpha background. The current implementation fills a solid background before drawing the SVG. For truly transparent PNGs, choose a background color that matches your target, or use the SVG directly where transparency is supported.</div></details>
-        <details class="faq-item"><summary>Does the converter support SVG animations and filters?</summary><div class="faq-answer">SVG drawn into a Canvas via <code>drawImage()</code> renders a static snapshot — animations (SMIL, CSS) are captured at their initial state. CSS filters applied via <code>&lt;filter&gt;</code> elements are generally supported in modern browsers. Complex <code>foreignObject</code> elements (HTML inside SVG) may not render correctly due to browser security sandboxing of cross-origin content.</div></details>
-      </div>
-    </div>
-  </div>
-</section>
-</div>
-
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand"><a href="../../" class="nav-logo"><div class="logo-icon">D</div><span class="logo-text">Dev<span>Utils</span></span></a><p>Premium client-side developer tools.</p></div>
-    <nav class="footer-links"><a href="../../privacy-policy.html">Privacy</a><a href="../../terms.html">Terms</a><a href="../../contact.html">Contact</a></nav>
-  </div>
-  <div class="footer-bottom"><p>© 2025 ToolDuck.xyz</p></div>
-</footer>
-<div class="sticky-ad-footer"><span class="ad-slot-label">Advertisement</span><div class="footer-ad-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div></div>
-<div class="cookie-banner" id="cookie-banner"><p><strong>🍪 Cookie Notice</strong> — <a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
+        <li><a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
 <div id="toast-container" class="toast-container" aria-live="polite"></div>
 <script src="../../assets/js/global.js"></script>
 <script>

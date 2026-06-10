@@ -8,6 +8,7 @@
   <meta name="keywords" content="custom tailwind color palette shade picker, tailwind color generator, tailwind palette creator, tailwind css colors, tailwind shade generator">
   <link rel="canonical" href="https://toolduck.xyz/tools/tailwind-master/">
   <meta property="og:title" content="Tailwind Palette Master Engine — Generate Color Shades from Any Hex">
+  <meta property="og:description" content="Generate Tailwind color palettes — free, 100% browser-based, no upload required.">
   <meta property="og:url" content="https://toolduck.xyz/tools/tailwind-master/">
   <link rel="stylesheet" href="../../assets/css/global.css">
   <style>
@@ -26,7 +27,7 @@
 <body>
 <nav class="site-nav">
   <div class="nav-inner">
-    <a href="../../" class="nav-logo"><svg class="logo-duck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="32" height="32" aria-hidden="true"><ellipse cx="15" cy="26" rx="11" ry="8" fill="#FFD23F"/><circle cx="22" cy="15" r="7" fill="#FFD23F"/><path d="M28 14 L34 16 L28 18Z" fill="#FF9F0A"/><ellipse cx="9" cy="25" rx="5" ry="3.5" fill="#E8BC00" transform="rotate(-10 9 25)"/><rect x="16.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><rect x="22.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><line x1="21.5" y1="12.6" x2="22.5" y2="12.6" stroke="#00F5D4" stroke-width="1.1"/><circle cx="26" cy="12" r="1.1" fill="#0B0F19"/></svg><span class="logo-text">tool<span>duck</span>.xyz</span></a>
+    <a href="../../" class="nav-logo"><img src="../../assets/images/duck-logo.png" alt="ToolDuck logo" class="nav-logo-img" width="44" height="44"><span class="logo-text">tool<span>duck</span>.xyz</span></a>
     <ul class="nav-links">
       <li><a href="../../">Home</a></li>
       <li><a href="../../tools/glass-studio/">Glass CSS</a></li>
@@ -35,7 +36,7 @@
       <li><a href="../../privacy-policy.html">Privacy</a></li>
     </ul>
     <div class="nav-actions">
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">☰</button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     </div>
   </div>
 </nav>
@@ -46,20 +47,20 @@
   <nav class="breadcrumb"><a href="../../">Home</a><span class="sep">›</span><span class="current">Tailwind Palette Master</span></nav>
   <div class="tool-header">
     <div class="tool-header-inner">
-      <div class="tool-page-icon">🎨</div>
+      <div class="tool-page-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="6" height="6" rx="1.5"/><rect x="11" y="3" width="6" height="6" rx="1.5"/><rect x="19" y="3" width="6" height="6" rx="1.5"/><rect x="3" y="11" width="6" height="6" rx="1.5"/><rect x="11" y="11" width="6" height="6" rx="1.5"/><rect x="19" y="11" width="6" height="6" rx="1.5"/><rect x="3" y="19" width="6" height="6" rx="1.5"/><rect x="11" y="19" width="6" height="6" rx="1.5"/><rect x="19" y="19" width="6" height="6" rx="1.5"/></svg></div>
       <div class="tool-header-text">
         <h1>Tailwind Palette Master Engine</h1>
         <p>Generate a complete 50–950 shade scale from any hex color. Export as Tailwind config, CSS variables, or hex list.</p>
       </div>
     </div>
-    <div class="tool-badges"><span class="badge badge-green">🔒 Offline</span><span class="badge badge-blue">🎨 11 Shades</span><span class="badge badge-purple">⚡ Instant</span></div>
+    <div class="tool-badges"><span class="badge badge-green">Offline</span><span class="badge badge-blue">11 Shades</span><span class="badge badge-purple">Instant</span></div>
   </div>
 
   <div class="tool-content-grid">
     <main>
       <!-- Color input -->
       <div class="glass-panel" style="margin-bottom:1rem;">
-        <div class="panel-header"><span class="panel-title">🎨 Seed Color</span></div>
+        <div class="panel-header"><span class="panel-title">Seed Color</span></div>
         <div class="panel-body">
           <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem;">
             <div style="display:flex;align-items:center;gap:.75rem;">
@@ -74,9 +75,9 @@
               </div>
             </div>
             <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
-              <button class="btn btn-secondary btn-sm" id="copy-config-btn">📋 Copy tailwind.config</button>
-              <button class="btn btn-secondary btn-sm" id="copy-css-btn">📋 Copy CSS Variables</button>
-              <button class="btn btn-secondary btn-sm" id="copy-hex-btn">📋 Copy Hex List</button>
+              <button class="btn btn-secondary btn-sm" id="copy-config-btn">Copy tailwind.config</button>
+              <button class="btn btn-secondary btn-sm" id="copy-css-btn">Copy CSS Variables</button>
+              <button class="btn btn-secondary btn-sm" id="copy-hex-btn">Copy Hex List</button>
             </div>
           </div>
           <!-- Named presets -->
@@ -89,7 +90,7 @@
 
       <!-- Shade preview -->
       <div class="glass-panel" style="margin-bottom:1rem;">
-        <div class="panel-header"><span class="panel-title">🌈 Generated Shade Scale</span></div>
+        <div class="panel-header"><span class="panel-title">Generated Shade Scale</span></div>
         <div class="panel-body">
           <div class="shade-strip" id="shade-strip" role="list" aria-label="Color shade scale"></div>
           <p style="font-size:.75rem;color:var(--text-muted);margin-top:.75rem;">Click any swatch to copy its hex value to clipboard.</p>
@@ -98,7 +99,7 @@
 
       <!-- Config output -->
       <div class="glass-panel">
-        <div class="panel-header"><span class="panel-title">📋 Export Code</span></div>
+        <div class="panel-header"><span class="panel-title">Export Code</span></div>
         <div class="panel-body">
           <div style="display:flex;gap:.4rem;margin-bottom:.75rem;">
             <button class="tab-btn active" data-tab="config" id="tab-config">tailwind.config.js</button>
@@ -126,40 +127,9 @@
   <div class="info-divider"></div>
   <div class="info-grid">
     <div class="info-card">
-      <h3><span class="icon">📖</span> User Manual &amp; Operational Guide</h3>
+      <h3><span class="icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="1" width="14" height="16" rx="2"/><path d="M5 5h8M5 8h8M5 11h5"/></svg></span> User Manual &amp; Operational Guide</h3>
       <ol>
-        <li><strong>Pick a seed color:</strong> Use the color picker or type a hex value directly. The full 11-shade scale (50, 100, 200…900, 950) generates instantly.</li>
-        <li><strong>Use a preset:</strong> Click any Tailwind built-in palette chip to load that exact palette. Useful for referencing Tailwind defaults while customizing.</li>
-        <li><strong>Name your palette:</strong> Set the palette name (e.g., "brand", "primary") — this becomes the key in the Tailwind config export.</li>
-        <li><strong>Copy swatches:</strong> Click any shade box to copy its hex value. Switch the export tab to get tailwind.config.js format, CSS custom properties, or a plain hex list.</li>
-      </ol>
-    </div>
-    <div class="info-card">
-      <h3><span class="icon">🏗️</span> Architecture Insight: Why This Tool Runs Locally</h3>
-      <p>The shade generation algorithm converts the seed hex color to HSL (Hue-Saturation-Lightness) color space using pure JavaScript math, then applies a perceptually-uniform lightness curve across the 11 standard Tailwind shade stops (50–950). Saturation is slightly boosted at mid-range shades (400–600) to match Tailwind's visual design language. The entire color computation — hex→HSL→shade generation→HSL→hex — runs as arithmetic in your browser. The resulting config strings are assembled using template literals. No color computation library is needed.</p>
-    </div>
-    <div class="info-card" style="grid-column:1/-1;">
-      <h3><span class="icon">❓</span> Frequently Asked Questions</h3>
-      <div class="faq-list">
-        <details class="faq-item"><summary>How do I add a custom Tailwind color palette shade to my tailwind.config.js?</summary><div class="faq-answer">Copy the "tailwind.config.js" export from this tool and paste the color object into your Tailwind config's <code>theme.extend.colors</code> (to add alongside defaults) or <code>theme.colors</code> (to override defaults). For example: <code>module.exports = { theme: { extend: { colors: { brand: { 50: '#f5f3ff', ... 950: '#2e1065' } } } } }</code></div></details>
-        <details class="faq-item"><summary>Why do the generated shades look different from Tailwind's built-in palettes?</summary><div class="faq-answer">Tailwind's built-in palettes are hand-curated by designers for optimal perceptual uniformity and accessibility contrast ratios. The algorithmic generation here uses an HSL-based lightness curve which produces good results but may not perfectly replicate the manual curation. For production design systems, treat the generated palette as a starting point and adjust individual shade values as needed for your brand identity.</div></details>
-        <details class="faq-item"><summary>Can I use the exported CSS variables directly in a Tailwind CSS v4 project?</summary><div class="faq-answer">Yes. Tailwind CSS v4 uses CSS custom properties natively. Copy the "CSS Variables" export and add it to your <code>@theme</code> block or <code>:root</code> section. The variable naming convention uses <code>--color-{name}-{shade}</code> which aligns with Tailwind v4's theme variable convention.</div></details>
-        <details class="faq-item"><summary>How do I check if my generated palette has sufficient contrast for WCAG accessibility?</summary><div class="faq-answer">As a general rule, text on a shade-900 background should use shade-50 or white, and text on a shade-100 background should use shade-900 or black to meet WCAG AA contrast requirements (minimum 4.5:1 for normal text). Use a dedicated contrast checker tool after generating your palette to verify specific shade combinations. The generated shade-500 color is typically closest to your seed color and works well as a primary interactive color with white text on dark backgrounds.</div></details>
-      </div>
-    </div>
-  </div>
-</section>
-</div>
-
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand"><a href="../../" class="nav-logo"><div class="logo-icon">D</div><span class="logo-text">Dev<span>Utils</span></span></a><p>Premium client-side developer tools.</p></div>
-    <nav class="footer-links"><a href="../../privacy-policy.html">Privacy</a><a href="../../terms.html">Terms</a><a href="../../contact.html">Contact</a></nav>
-  </div>
-  <div class="footer-bottom"><p>© 2025 ToolDuck.xyz</p></div>
-</footer>
-<div class="sticky-ad-footer"><span class="ad-slot-label">Advertisement</span><div class="footer-ad-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div></div>
-<div class="cookie-banner" id="cookie-banner"><p><strong>🍪 Cookie Notice</strong> — <a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
+        <li><a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
 <div id="toast-container" class="toast-container" aria-live="polite"></div>
 <script src="../../assets/js/global.js"></script>
 <script>

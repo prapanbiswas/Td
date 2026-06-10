@@ -26,7 +26,7 @@
 <body>
 <nav class="site-nav">
   <div class="nav-inner">
-    <a href="../../" class="nav-logo"><svg class="logo-duck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="32" height="32" aria-hidden="true"><ellipse cx="15" cy="26" rx="11" ry="8" fill="#FFD23F"/><circle cx="22" cy="15" r="7" fill="#FFD23F"/><path d="M28 14 L34 16 L28 18Z" fill="#FF9F0A"/><ellipse cx="9" cy="25" rx="5" ry="3.5" fill="#E8BC00" transform="rotate(-10 9 25)"/><rect x="16.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><rect x="22.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><line x1="21.5" y1="12.6" x2="22.5" y2="12.6" stroke="#00F5D4" stroke-width="1.1"/><circle cx="26" cy="12" r="1.1" fill="#0B0F19"/></svg><span class="logo-text">tool<span>duck</span>.xyz</span></a>
+    <a href="../../" class="nav-logo"><img src="../../assets/images/duck-logo.png" alt="ToolDuck logo" class="nav-logo-img" width="44" height="44"><span class="logo-text">tool<span>duck</span>.xyz</span></a>
     <ul class="nav-links">
       <li><a href="../../">Home</a></li>
       <li><a href="../png-to-webp/">PNG→WebP</a></li>
@@ -34,7 +34,7 @@
       <li><a href="../../privacy-policy.html">Privacy</a></li>
     </ul>
     <div class="nav-actions">
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">☰</button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     </div>
   </div>
 </nav>
@@ -56,14 +56,14 @@
     <main>
       <div class="tool-header">
         <div class="tool-header-inner">
-          <div class="tool-page-icon">🗜️</div>
+          <div class="tool-page-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="22" height="16" rx="2.5"/><path d="M10 14h8M14 10l-4 4 4 4"/></svg></div>
           <div class="tool-header-text">
             <h1>Image Compressor</h1>
             <p>Compress JPEG, PNG or WebP images locally — no server upload, zero privacy risk.</p>
           </div>
         </div>
         <div class="tool-badges">
-          <span class="badge badge-green">✓ 100% Offline</span>
+          <span class="badge badge-green">100% Offline</span>
           <span class="badge badge-blue">Canvas API</span>
           <span class="badge badge-purple">JPEG · PNG · WebP</span>
         </div>
@@ -76,7 +76,7 @@
         <div class="panel-body">
           <div class="drop-zone" id="drop-zone">
             <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp" style="display:none">
-            <span class="drop-icon">🖼️</span>
+            <span class="drop-icon">️</span>
             <h3>Drop an image here</h3>
             <p>JPEG, PNG or WebP · Max 20 MB · <span class="browse-link" id="browse-link">Browse files</span></p>
           </div>
@@ -115,7 +115,7 @@
               </div>
             </div>
             <div style="margin-top:1rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
-              <button class="btn btn-primary" id="download-btn">⬇ Download</button>
+              <button class="btn btn-primary" id="download-btn">Download</button>
               <button class="btn btn-secondary" id="reset-btn">Reset</button>
             </div>
           </div>
@@ -136,7 +136,7 @@
   <div class="info-divider"></div>
   <div class="info-grid">
     <div class="info-card">
-      <h3><span class="icon">📖</span> User Manual</h3>
+      <h3><span class="icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="1" width="14" height="16" rx="2"/><path d="M5 5h8M5 8h8M5 11h5"/></svg></span> User Manual</h3>
       <ol>
         <li>Drop or select a JPEG, PNG or WebP image.</li>
         <li>Choose the output format (JPEG is smallest for photos).</li>
@@ -146,11 +146,11 @@
       </ol>
     </div>
     <div class="info-card">
-      <h3><span class="icon">⚙️</span> Architecture Insight</h3>
-      <p>The compressor draws your image onto an HTML5 <code>Canvas</code> element, then calls <code>canvas.toBlob()</code> with your chosen MIME type and quality value (0–1). This leverages the browser's native codec — the same engine used by the OS — with zero server involvement. PNG compression is lossless so the quality slider controls filtering only.</p>
+      <h3><span class="icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="9" r="3"/><path d="M9 1v3M9 14v3M1 9h3M14 9h3M3.2 3.2l2.1 2.1M12.7 12.7l2.1 2.1M3.2 14.8l2.1-2.1M12.7 5.3l2.1-2.1"/></svg></span> Architecture Insight</h3>
+      <p>The compressor draws your image onto an HTML5 <code>Canvas</code> element, then calls <code>canvas.toBlob()</code>with your chosen MIME type and quality value (0–1). This leverages the browser's native codec — the same engine used by the OS — with zero server involvement. PNG compression is lossless so the quality slider controls filtering only.</p>
     </div>
     <div class="info-card">
-      <h3><span class="icon">❓</span> FAQ</h3>
+      <h3><span class="icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="9" r="8"/><path d="M6.8 6.8a2.5 2.5 0 0 1 4.9.8c0 2-2.7 2.4-2.7 4"/><circle cx="9" cy="13.5" r=".5" fill="currentColor" stroke="none"/></svg></span> FAQ</h3>
       <div class="faq-list">
         <details class="faq-item"><summary>Does my image get uploaded anywhere?</summary><div class="faq-answer">No. The entire operation happens inside your browser using the Canvas API. Nothing is sent to any server.</div></details>
         <details class="faq-item"><summary>What quality setting should I use?</summary><div class="faq-answer">For photos: 75–85% JPEG gives excellent quality at roughly 70–80% size reduction. For graphics with text: use PNG or WebP at 90%+.</div></details>
@@ -161,15 +161,99 @@
   </div>
 </section>
 
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <a href="../../" class="nav-logo"><svg class="logo-duck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="28" height="28" aria-hidden="true"><ellipse cx="15" cy="26" rx="11" ry="8" fill="#FFD23F"/><circle cx="22" cy="15" r="7" fill="#FFD23F"/><path d="M28 14 L34 16 L28 18Z" fill="#FF9F0A"/><ellipse cx="9" cy="25" rx="5" ry="3.5" fill="#E8BC00" transform="rotate(-10 9 25)"/><rect x="16.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><rect x="22.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><line x1="21.5" y1="12.6" x2="22.5" y2="12.6" stroke="#00F5D4" stroke-width="1.1"/><circle cx="26" cy="12" r="1.1" fill="#0B0F19"/></svg><span class="logo-text">tool<span>duck</span>.xyz</span></a>
-      <p>Free, privacy-first developer tools — all running 100% in your browser.</p>
+
+<section class="related-tools-section">
+  <div class="related-tools-inner">
+    <h2 class="related-title">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 1L1.5 5v4.5c0 4.1 3 7.7 7.5 8.5 4.5-.8 7.5-4.4 7.5-8.5V5L9 1z"/></svg>
+      More Free Tools You Might Like
+    </h2>
+    <div class="related-tools-grid">
+      <a href="../../tools/png-to-webp/" class="related-tool-card">
+        <div class="related-tool-icon"><svg width="20" height="20" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="8" height="8" rx="1.5"/><rect x="12" y="10" width="8" height="8" rx="1.5"/><path d="M10 8h2M10 8l-2-2M10 8l-2 2"/></svg></div>
+        <div class="related-tool-meta">
+          <div class="related-tool-name">PNG to WebP Converter</div>
+          <div class="related-tool-desc">Convert PNG to WebP in-browser</div>
+        </div>
+        <span class="related-tool-badge">Image</span>
+        <span class="related-arrow">&rarr;</span>
+      </a>
+      <a href="../../tools/metadata-stripper/" class="related-tool-card">
+        <div class="related-tool-icon"><svg width="20" height="20" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2L3 6v5c0 5 3.6 9.3 8 10 4.4-.7 8-5 8-10V6L11 2z"/><path d="M8 11l2 2 4-4"/></svg></div>
+        <div class="related-tool-meta">
+          <div class="related-tool-name">Metadata Stripper</div>
+          <div class="related-tool-desc">Strip EXIF metadata from images</div>
+        </div>
+        <span class="related-tool-badge">Image</span>
+        <span class="related-arrow">&rarr;</span>
+      </a>
+      <a href="../../tools/webp-converter/" class="related-tool-card">
+        <div class="related-tool-icon"><svg width="20" height="20" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 4.5A8 8 0 0 1 19 11"/><path d="M17 4.5l-3.5.5.5-3.5"/><path d="M5 17.5A8 8 0 0 1 3 11"/><path d="M5 17.5l3.5-.5-.5 3.5"/></svg></div>
+        <div class="related-tool-meta">
+          <div class="related-tool-name">WebP Converter</div>
+          <div class="related-tool-desc">Convert any image to WebP format</div>
+        </div>
+        <span class="related-tool-badge">Image</span>
+        <span class="related-arrow">&rarr;</span>
+      </a>
     </div>
-    <nav class="footer-links"><a href="../../privacy-policy.html">Privacy</a><a href="../../terms.html">Terms</a><a href="../../cookie-policy.html">Cookies</a><a href="../../contact.html">Contact</a></nav>
   </div>
-  <div class="footer-bottom"><p>© 2025 ToolDuck.xyz</p></div>
+</section>
+<footer class="site-footer">
+  <div class="footer-main">
+    <div class="footer-col footer-col-brand">
+      <a href="../../" class="footer-logo-row" aria-label="ToolDuck Home">
+        <img src="../../assets/images/duck-logo.png" alt="ToolDuck logo" class="footer-logo-img" width="42" height="42">
+        <span class="footer-logo-text">tool<span>duck</span>.xyz</span>
+      </a>
+      <p class="footer-desc">19 free developer tools that run entirely in your browser. No server uploads, no tracking, no accounts. Your data stays on your machine.</p>
+      <a href="../../privacy-policy.html" class="footer-privacy-badge">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 1L2 3v3c0 3 1.8 5.5 4 6 2.2-.5 4-3 4-6V3L6 1z"/></svg>
+        100% Privacy-First
+      </a>
+    </div>
+    <div class="footer-col">
+      <h4>Popular Tools</h4>
+      <ul>
+        <li><a href="../../tools/hash-generator/">SHA Hash Generator</a></li>
+        <li><a href="../../tools/jwt-inspector/">JWT Inspector</a></li>
+        <li><a href="../../tools/image-compressor/">Image Compressor</a></li>
+        <li><a href="../../tools/diff-checker/">Diff Checker</a></li>
+        <li><a href="../../tools/regex-simulator/">RegEx Simulator</a></li>
+        <li><a href="../../tools/json-visualizer/">JSON Visualizer</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>More Tools</h4>
+      <ul>
+        <li><a href="../../tools/yaml-transformer/">YAML ↔ JSON</a></li>
+        <li><a href="../../tools/string-encoder/">String Encoder</a></li>
+        <li><a href="../../tools/glass-studio/">Glassmorphism Lab</a></li>
+        <li><a href="../../tools/tailwind-master/">Tailwind Palette</a></li>
+        <li><a href="../../tools/table-builder/">Table Builder</a></li>
+        <li><a href="../../tools/log-filter/">Log Filter</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="../../privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="../../terms.html">Terms of Service</a></li>
+        <li><a href="../../cookie-policy.html">Cookie Policy</a></li>
+        <li><a href="../../contact.html">Contact Us</a></li>
+        <li><a href="../../sitemap.xml">Sitemap</a></li>
+        <li><a href="../../">All 19 Tools</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom-bar">
+    <p>&copy; 2025 ToolDuck.xyz &mdash; All tools run 100% in your browser.</p>
+    <div class="footer-bottom-links">
+      <a href="../../privacy-policy.html">Privacy</a>
+      <a href="../../terms.html">Terms</a>
+      <a href="../../sitemap.xml">Sitemap</a>
+    </div>
+  </div>
 </footer>
 </div>
 

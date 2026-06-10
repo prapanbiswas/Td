@@ -8,6 +8,7 @@
   <meta name="keywords" content="parse filter large log files grep syntax browser, log analyzer, log filter tool, log file viewer, grep log file online, log parser">
   <link rel="canonical" href="https://toolduck.xyz/tools/log-filter/">
   <meta property="og:title" content="Log File Grep Analyzer — Filter Large Logs in Browser">
+  <meta property="og:description" content="Filter and grep large log files — free, 100% browser-based, no upload required.">
   <meta property="og:url" content="https://toolduck.xyz/tools/log-filter/">
   <link rel="stylesheet" href="../../assets/css/global.css">
   <style>
@@ -38,7 +39,7 @@
 <body>
 <nav class="site-nav">
   <div class="nav-inner">
-    <a href="../../" class="nav-logo"><svg class="logo-duck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="32" height="32" aria-hidden="true"><ellipse cx="15" cy="26" rx="11" ry="8" fill="#FFD23F"/><circle cx="22" cy="15" r="7" fill="#FFD23F"/><path d="M28 14 L34 16 L28 18Z" fill="#FF9F0A"/><ellipse cx="9" cy="25" rx="5" ry="3.5" fill="#E8BC00" transform="rotate(-10 9 25)"/><rect x="16.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><rect x="22.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><line x1="21.5" y1="12.6" x2="22.5" y2="12.6" stroke="#00F5D4" stroke-width="1.1"/><circle cx="26" cy="12" r="1.1" fill="#0B0F19"/></svg><span class="logo-text">tool<span>duck</span>.xyz</span></a>
+    <a href="../../" class="nav-logo"><img src="../../assets/images/duck-logo.png" alt="ToolDuck logo" class="nav-logo-img" width="44" height="44"><span class="logo-text">tool<span>duck</span>.xyz</span></a>
     <ul class="nav-links">
       <li><a href="../../">Home</a></li>
       <li><a href="../../tools/regex-simulator/">RegEx</a></li>
@@ -47,7 +48,7 @@
       <li><a href="../../privacy-policy.html">Privacy</a></li>
     </ul>
     <div class="nav-actions">
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">☰</button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     </div>
   </div>
 </nav>
@@ -58,13 +59,13 @@
   <nav class="breadcrumb"><a href="../../">Home</a><span class="sep">›</span><span class="current">Log File Grep Analyzer</span></nav>
   <div class="tool-header">
     <div class="tool-header-inner">
-      <div class="tool-page-icon">📋</div>
+      <div class="tool-page-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h20l-8 9v8l-4-2v-6L4 6z"/></svg></div>
       <div class="tool-header-text">
         <h1>Log File Grep Analyzer</h1>
         <p>Filter, search, and analyze large log files directly in your browser. Level badges, regex grep, export filtered lines. 100% offline.</p>
       </div>
     </div>
-    <div class="tool-badges"><span class="badge badge-green">🔒 Offline</span><span class="badge badge-blue">🔍 Regex Grep</span><span class="badge badge-purple">📊 Level Stats</span></div>
+    <div class="tool-badges"><span class="badge badge-green">Offline</span><span class="badge badge-blue">Regex Grep</span><span class="badge badge-purple">Level Stats</span></div>
   </div>
 
   <div class="tool-content-grid">
@@ -72,30 +73,30 @@
       <!-- Load input -->
       <div class="glass-panel" style="margin-bottom:1rem;">
         <div class="panel-header">
-          <span class="panel-title">📂 Load Log File</span>
+          <span class="panel-title">Load Log File</span>
           <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
-            <label class="btn btn-primary btn-sm" style="cursor:pointer;">📁 Open File<input type="file" id="file-input" accept=".log,.txt,.out,.err" style="display:none;" aria-label="Open log file"></label>
-            <button class="btn btn-secondary btn-sm" id="sample-btn">📄 Load Sample</button>
-            <button class="btn btn-danger btn-sm" id="clear-btn">✕ Clear</button>
+            <label class="btn btn-primary btn-sm" style="cursor:pointer;">Open File<input type="file" id="file-input" accept=".log,.txt,.out,.err" style="display:none;" aria-label="Open log file"></label>
+            <button class="btn btn-secondary btn-sm" id="sample-btn">Load Sample</button>
+            <button class="btn btn-danger btn-sm" id="clear-btn">Clear</button>
           </div>
         </div>
         <div class="panel-body">
           <div class="drop-zone" id="drop-zone" role="button" tabindex="0" aria-label="Drop log file here">
-            <span class="drop-icon" aria-hidden="true">📋</span>
+            <span class="drop-icon" aria-hidden="true"></span>
             <h3>Drop a .log or .txt file here</h3>
             <p>Any size supported · Files stay in your browser · Zero upload</p>
           </div>
           <textarea id="paste-input" class="form-control" rows="3" placeholder="Or paste log lines directly here and press Enter…" style="margin-top:.75rem;" spellcheck="false"></textarea>
-          <button class="btn btn-primary btn-sm" id="parse-paste-btn" style="margin-top:.5rem;">▶ Parse Pasted Lines</button>
+          <button class="btn btn-primary btn-sm" id="parse-paste-btn" style="margin-top:.5rem;">Parse Pasted Lines</button>
         </div>
       </div>
 
       <!-- Filters -->
       <div class="glass-panel" id="filter-panel" style="display:none;margin-bottom:1rem;">
         <div class="panel-header">
-          <span class="panel-title">🔍 Filters &amp; Search</span>
+          <span class="panel-title">Filters &amp; Search</span>
           <div style="display:flex;gap:.5rem;align-items:center;">
-            <button class="btn btn-secondary btn-sm" id="export-filtered-btn">⬇ Export Filtered</button>
+            <button class="btn btn-secondary btn-sm" id="export-filtered-btn">Export Filtered</button>
           </div>
         </div>
         <div class="panel-body">
@@ -125,7 +126,7 @@
       <!-- Log output -->
       <div class="glass-panel" id="log-output-panel" style="display:none;">
         <div class="panel-header">
-          <span class="panel-title">📋 Log Lines</span>
+          <span class="panel-title">Log Lines</span>
           <span id="line-count" style="font-size:.82rem;color:var(--text-muted);"></span>
         </div>
         <div class="panel-body" style="padding:.5rem;">
@@ -147,41 +148,9 @@
   <div class="info-divider"></div>
   <div class="info-grid">
     <div class="info-card">
-      <h3><span class="icon">📖</span> User Manual &amp; Operational Guide</h3>
+      <h3><span class="icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="1" width="14" height="16" rx="2"/><path d="M5 5h8M5 8h8M5 11h5"/></svg></span> User Manual &amp; Operational Guide</h3>
       <ol>
-        <li><strong>Load your log:</strong> Click "Open File" to load a .log or .txt file, drop a file into the zone, or paste log lines directly and click "Parse Pasted Lines."</li>
-        <li><strong>Filter by level:</strong> Click "ERROR", "WARN", "INFO", or "DEBUG" to show only lines containing that log level keyword. Multiple selections are OR'd together. "All Levels" resets the filter.</li>
-        <li><strong>Grep search:</strong> Enter a plain text string or regex pattern to filter lines to those containing a match. Matches are highlighted in amber. The "Exclude" pattern removes matching lines.</li>
-        <li><strong>Export:</strong> Click "Export Filtered" to download the currently visible (filtered) log lines as a .txt file.</li>
-      </ol>
-    </div>
-    <div class="info-card">
-      <h3><span class="icon">🏗️</span> Architecture Insight: Why This Tool Runs Locally</h3>
-      <p>Production log files frequently contain sensitive operational data: user IDs, session tokens, IP addresses, database queries, and error stack traces. Uploading logs to a cloud service creates a significant privacy and compliance risk (GDPR, HIPAA, SOC2).</p>
-      <p style="margin-top:.75rem;">This tool reads log files using the browser's <code>FileReader</code> API, splits lines using JavaScript string operations, parses log levels via regex, and renders filtered lines to the DOM using a virtual render window that only builds DOM elements for visible lines. The entire log corpus stays in browser memory as a JavaScript string array — never transmitted anywhere.</p>
-    </div>
-    <div class="info-card" style="grid-column:1/-1;">
-      <h3><span class="icon">❓</span> Frequently Asked Questions</h3>
-      <div class="faq-list">
-        <details class="faq-item"><summary>What log formats does this parse filter large log files grep syntax browser tool support?</summary><div class="faq-answer">The tool supports any plain-text log format. It automatically detects common log level keywords (ERROR, FATAL, WARN, WARNING, INFO, DEBUG, TRACE) anywhere in each line, regardless of format. This covers standard formats including Log4j, Logback, Python logging, Winston (Node.js), Bunyan, syslog, NGINX access logs, Apache error logs, and custom application logs.</div></details>
-        <details class="faq-item"><summary>How large a log file can I analyze?</summary><div class="faq-answer">The tool has been tested with log files up to 100MB (millions of lines). Files are read into browser memory as a string, then split into a JavaScript array of line strings. The rendering uses DOM chunking to display a maximum of 2,000 lines at once to keep the UI responsive. For very large files (500MB+), browser memory limits may apply — the file loading may fail if the browser's available heap is insufficient.</div></details>
-        <details class="faq-item"><summary>Can I use regex syntax in the grep filter?</summary><div class="faq-answer">Yes — the grep input field accepts any valid JavaScript regular expression. For example, <code>user_id=\d+</code> finds lines with numeric user IDs, <code>Error|Exception</code> finds error and exception lines, and <code>^\d{4}-\d{2}-\d{2}</code> filters lines starting with a date. Invalid regex patterns are treated as literal string searches to prevent errors.</div></details>
-        <details class="faq-item"><summary>Can I filter log lines by a time range?</summary><div class="faq-answer">Use the grep search field with a timestamp pattern. For example, to see all logs from a specific hour, search for <code>2025-01-15 14:</code> to filter lines from 2 PM on January 15. For Unix timestamp ranges, search for <code>173\d{7}</code> to match a range of epoch timestamps. A dedicated time-range filter is a planned future feature.</div></details>
-      </div>
-    </div>
-  </div>
-</section>
-</div>
-
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand"><a href="../../" class="nav-logo"><div class="logo-icon">D</div><span class="logo-text">Dev<span>Utils</span></span></a><p>Premium client-side developer tools.</p></div>
-    <nav class="footer-links"><a href="../../privacy-policy.html">Privacy</a><a href="../../terms.html">Terms</a><a href="../../contact.html">Contact</a></nav>
-  </div>
-  <div class="footer-bottom"><p>© 2025 ToolDuck.xyz</p></div>
-</footer>
-<div class="sticky-ad-footer"><span class="ad-slot-label">Advertisement</span><div class="footer-ad-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div></div>
-<div class="cookie-banner" id="cookie-banner"><p><strong>🍪 Cookie Notice</strong> — <a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
+        <li><a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
 <div id="toast-container" class="toast-container" aria-live="polite"></div>
 <script src="../../assets/js/global.js"></script>
 <script>

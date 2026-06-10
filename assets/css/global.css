@@ -1390,6 +1390,142 @@ details.faq-item .faq-answer {
   .panel-body { padding: 1rem; }
 }
 
+/* ── Info Card Icon SVG ── */
+.info-card h3 .icon {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, rgba(255,210,63,0.15), rgba(0,245,212,0.1));
+  border: 1px solid rgba(255,210,63,0.2);
+  display: grid;
+  place-items: center;
+  color: var(--accent-primary);
+  font-size: 1rem;
+}
+.info-card h3 .icon svg { display: block; stroke: currentColor; }
+
+/* ── Related Tools Section ── */
+.related-tools-section {
+  background: var(--bg-layer);
+  border-top: 1px solid var(--border-color);
+  padding: 3rem 1.5rem 3.5rem;
+  position: relative;
+  z-index: 1;
+}
+.related-tools-inner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+.related-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.related-title svg { color: var(--accent-primary); stroke: currentColor; flex-shrink: 0; }
+.related-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.related-tool-card {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.25rem;
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.related-tool-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s var(--ease-out);
+}
+.related-tool-card:hover {
+  background: var(--bg-glass-hover);
+  border-color: rgba(255,210,63,0.22);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.related-tool-card:hover::before { transform: scaleX(1); }
+.related-tool-icon {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, rgba(255,210,63,0.15), rgba(0,245,212,0.1));
+  border: 1px solid rgba(255,210,63,0.18);
+  display: grid;
+  place-items: center;
+  color: var(--accent-primary);
+}
+.related-tool-icon svg { display: block; stroke: currentColor; }
+.related-tool-meta { flex: 1; min-width: 0; }
+.related-tool-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.15rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.related-tool-desc {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.related-tool-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 100px;
+  background: rgba(0,245,212,0.08);
+  color: var(--accent-secondary);
+  border: 1px solid rgba(0,245,212,0.15);
+  white-space: nowrap;
+  flex-shrink: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.related-arrow {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  transition: var(--transition-fast);
+  flex-shrink: 0;
+}
+.related-tool-card:hover .related-arrow {
+  color: var(--accent-primary);
+  transform: translateX(4px);
+}
+@media (max-width: 900px) {
+  .related-tools-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .related-tools-grid { grid-template-columns: 1fr; }
+  .related-tools-section { padding: 2rem 1.25rem 2.5rem; }
+}
+
 /* ── Token colors for JWT / code ── */
 .token-header { color: #ff79c6; }
 .token-payload { color: #50fa7b; }

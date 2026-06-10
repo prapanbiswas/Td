@@ -8,13 +8,14 @@
   <meta name="keywords" content="base64 to image file instantly offline, base64 encode decode, url encode decode, html entity encoder, base64 image preview">
   <link rel="canonical" href="https://toolduck.xyz/tools/string-encoder/">
   <meta property="og:title" content="URL & Base64 Bitstream Engine — Encode/Decode Offline">
+  <meta property="og:description" content="Base64, URL encode/decode & more — free, 100% browser-based, no upload required.">
   <meta property="og:url" content="https://toolduck.xyz/tools/string-encoder/">
   <link rel="stylesheet" href="../../assets/css/global.css">
 </head>
 <body>
 <nav class="site-nav">
   <div class="nav-inner">
-    <a href="../../" class="nav-logo"><svg class="logo-duck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="32" height="32" aria-hidden="true"><ellipse cx="15" cy="26" rx="11" ry="8" fill="#FFD23F"/><circle cx="22" cy="15" r="7" fill="#FFD23F"/><path d="M28 14 L34 16 L28 18Z" fill="#FF9F0A"/><ellipse cx="9" cy="25" rx="5" ry="3.5" fill="#E8BC00" transform="rotate(-10 9 25)"/><rect x="16.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><rect x="22.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><line x1="21.5" y1="12.6" x2="22.5" y2="12.6" stroke="#00F5D4" stroke-width="1.1"/><circle cx="26" cy="12" r="1.1" fill="#0B0F19"/></svg><span class="logo-text">tool<span>duck</span>.xyz</span></a>
+    <a href="../../" class="nav-logo"><img src="../../assets/images/duck-logo.png" alt="ToolDuck logo" class="nav-logo-img" width="44" height="44"><span class="logo-text">tool<span>duck</span>.xyz</span></a>
     <ul class="nav-links">
       <li><a href="../../">Home</a></li>
       <li><a href="../../tools/jwt-inspector/">JWT</a></li>
@@ -23,7 +24,7 @@
       <li><a href="../../privacy-policy.html">Privacy</a></li>
     </ul>
     <div class="nav-actions">
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">☰</button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     </div>
   </div>
 </nav>
@@ -34,13 +35,13 @@
   <nav class="breadcrumb"><a href="../../">Home</a><span class="sep">›</span><span class="current">URL &amp; Base64 Encoder</span></nav>
   <div class="tool-header">
     <div class="tool-header-inner">
-      <div class="tool-page-icon">🔄</div>
+      <div class="tool-page-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l-4 5 4 5"/><path d="M23 9l4 5-4 5"/><path d="M18 5l-8 18"/></svg></div>
       <div class="tool-header-text">
         <h1>URL &amp; Base64 Bitstream Engine</h1>
         <p>Encode and decode Base64, URLs, HTML entities. Preview Base64 images instantly. All processing is local.</p>
       </div>
     </div>
-    <div class="tool-badges"><span class="badge badge-green">🔒 Offline</span><span class="badge badge-blue">🖼 Image Preview</span><span class="badge badge-purple">⚡ Instant</span></div>
+    <div class="tool-badges"><span class="badge badge-green">Offline</span><span class="badge badge-blue">Image Preview</span><span class="badge badge-purple">Instant</span></div>
   </div>
 
   <div class="tool-content-grid">
@@ -48,7 +49,7 @@
       <!-- Mode tabs -->
       <div class="glass-panel" style="margin-bottom:1rem;">
         <div class="panel-header">
-          <span class="panel-title">🔄 Encoding Type</span>
+          <span class="panel-title">Encoding Type</span>
         </div>
         <div class="panel-body" style="padding-bottom:.75rem;">
           <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem;">
@@ -59,8 +60,8 @@
             <button class="tab-btn" data-mode="unicode">Unicode Escape</button>
           </div>
           <div style="display:flex;gap:.5rem;align-items:center;margin-bottom:.75rem;">
-            <button class="btn btn-primary btn-sm" id="encode-btn">▶ Encode</button>
-            <button class="btn btn-secondary btn-sm" id="decode-btn">◀ Decode</button>
+            <button class="btn btn-primary btn-sm" id="encode-btn">Encode</button>
+            <button class="btn btn-secondary btn-sm" id="decode-btn">Decode</button>
             <button class="btn btn-secondary btn-sm" id="swap-btn">⇅ Swap</button>
             <div id="mode-info" style="font-size:.78rem;color:var(--text-muted);margin-left:auto;"></div>
           </div>
@@ -71,10 +72,10 @@
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;" class="encode-grid">
         <div class="glass-panel">
           <div class="panel-header">
-            <span class="panel-title">📥 Input</span>
+            <span class="panel-title">Input</span>
             <div style="display:flex;gap:.4rem;">
-              <label class="btn btn-secondary btn-sm" style="cursor:pointer;">📁 File<input type="file" id="file-input" style="display:none;" aria-label="Load from file"></label>
-              <button class="btn btn-danger btn-sm" id="clear-input">✕</button>
+              <label class="btn btn-secondary btn-sm" style="cursor:pointer;">File<input type="file" id="file-input" style="display:none;" aria-label="Load from file"></label>
+              <button class="btn btn-danger btn-sm" id="clear-input"></button>
             </div>
           </div>
           <div class="panel-body">
@@ -83,8 +84,8 @@
         </div>
         <div class="glass-panel">
           <div class="panel-header">
-            <span class="panel-title">📤 Output</span>
-            <button class="btn btn-secondary btn-sm" id="copy-output-btn">📋 Copy</button>
+            <span class="panel-title">Output</span>
+            <button class="btn btn-secondary btn-sm" id="copy-output-btn">Copy</button>
           </div>
           <div class="panel-body">
             <div class="output-wrapper">
@@ -97,20 +98,20 @@
 
       <!-- Base64 image preview -->
       <div class="glass-panel" id="img-preview-panel" style="display:none;">
-        <div class="panel-header"><span class="panel-title">🖼 Base64 Image Preview</span></div>
+        <div class="panel-header"><span class="panel-title">Base64 Image Preview</span></div>
         <div class="panel-body" style="text-align:center;">
           <img id="b64-preview" src="" alt="Base64 image preview" style="max-width:100%;max-height:300px;border-radius:var(--radius-md);">
           <div id="img-info" style="font-size:.78rem;color:var(--text-muted);margin-top:.5rem;"></div>
-          <button class="btn btn-primary btn-sm" id="download-img-btn" style="margin-top:.75rem;">⬇ Download Image</button>
+          <button class="btn btn-primary btn-sm" id="download-img-btn" style="margin-top:.75rem;">Download Image</button>
         </div>
       </div>
 
       <!-- Quick reference -->
       <div class="glass-panel" style="margin-top:1rem;">
-        <div class="panel-header"><span class="panel-title">⚡ Quick Encode File to Base64</span></div>
+        <div class="panel-header"><span class="panel-title">Quick Encode File to Base64</span></div>
         <div class="panel-body">
           <div class="drop-zone" id="drop-zone" style="padding:1.5rem;" role="button" tabindex="0" aria-label="Drop a file to encode as Base64">
-            <span class="drop-icon" style="font-size:1.8rem;" aria-hidden="true">📎</span>
+            <span class="drop-icon" style="font-size:1.8rem;" aria-hidden="true"></span>
             <h3 style="font-size:.95rem;">Drop any file here</h3>
             <p>Instantly converts to Base64 data URI — ready for embedding in HTML/CSS/JS</p>
           </div>
@@ -131,41 +132,9 @@
   <div class="info-divider"></div>
   <div class="info-grid">
     <div class="info-card">
-      <h3><span class="icon">📖</span> User Manual &amp; Operational Guide</h3>
+      <h3><span class="icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="1" width="14" height="16" rx="2"/><path d="M5 5h8M5 8h8M5 11h5"/></svg></span> User Manual &amp; Operational Guide</h3>
       <ol>
-        <li><strong>Select encoding type:</strong> Choose from Base64, URL Encode, HTML Entities, Hex/Binary, or Unicode Escape using the tabs.</li>
-        <li><strong>Enter or load input:</strong> Type or paste your input text, or click the File button to load a file's contents into the input field.</li>
-        <li><strong>Encode or Decode:</strong> Click "Encode" to transform input → encoded output, or "Decode" to reverse the operation. "Swap" exchanges input and output.</li>
-        <li><strong>Image preview:</strong> If you decode a Base64 string starting with <code>data:image/</code>, the image preview panel appears automatically with a download button.</li>
-        <li><strong>File to Base64:</strong> Drop any file into the Quick Encode zone to instantly get its full Base64 data URI — useful for embedding images, fonts, or small files directly in code.</li>
-      </ol>
-    </div>
-    <div class="info-card">
-      <h3><span class="icon">🏗️</span> Architecture Insight: Why This Tool Runs Locally</h3>
-      <p>All encoding and decoding operations use browser-native JavaScript APIs: <code>btoa()</code> and <code>atob()</code> for Base64 (with a TextEncoder polyfill for Unicode support), <code>encodeURIComponent()</code> / <code>decodeURIComponent()</code> for URL encoding, and DOM <code>DOMParser</code> for HTML entity handling. File-to-Base64 conversion uses the <code>FileReader</code> API's <code>readAsDataURL()</code> method, which runs entirely in your browser's memory. Your files and strings never leave your device.</p>
-    </div>
-    <div class="info-card" style="grid-column:1/-1;">
-      <h3><span class="icon">❓</span> Frequently Asked Questions</h3>
-      <div class="faq-list">
-        <details class="faq-item"><summary>How do I convert a Base64 string to an image file instantly offline?</summary><div class="faq-answer">Paste your Base64 string (with or without the <code>data:image/png;base64,</code> prefix) into the input field and click "Decode." If it's a valid Base64-encoded image, the Image Preview panel will appear automatically. Click "Download Image" to save it to your device. The entire conversion happens in browser memory — no upload, no server processing.</div></details>
-        <details class="faq-item"><summary>What's the difference between URL Encode and Base64 encoding?</summary><div class="faq-answer">URL encoding (percent-encoding) replaces special characters with <code>%XX</code> hex sequences, making strings safe for use in URLs and query parameters. Base64 encoding converts binary data (or arbitrary text) into a safe ASCII string using a 64-character alphabet, increasing data size by ~33% but enabling binary data to be transmitted in text contexts (emails, JSON, HTML). Use URL encoding for query strings; use Base64 for embedding binary data in text formats.</div></details>
-        <details class="faq-item"><summary>Can I encode a binary file (PDF, ZIP, font) to Base64?</summary><div class="faq-answer">Yes — drop the file into the Quick Encode drop zone. The FileReader API reads the binary file and produces a complete Base64 data URI (e.g., <code>data:application/pdf;base64,JVBERi0...</code>). This is useful for embedding small fonts in CSS (<code>@font-face src: url(data:...)</code>), embedding images in HTML emails, or including small binary assets in JavaScript bundle files.</div></details>
-        <details class="faq-item"><summary>Why does decoding a Base64 string produce garbled Unicode characters?</summary><div class="faq-answer">The native <code>atob()</code> function only handles binary strings encoded as Latin-1. If the original text contained Unicode characters (emoji, CJK characters, accented letters), they must have been encoded using a UTF-8-aware Base64 method. This tool automatically detects UTF-8 encoded Base64 and applies the correct <code>TextDecoder</code> decoding path. If you still see garbled output, try the "Hex" mode to inspect the raw bytes.</div></details>
-      </div>
-    </div>
-  </div>
-</section>
-</div>
-
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand"><a href="../../" class="nav-logo"><div class="logo-icon">D</div><span class="logo-text">Dev<span>Utils</span></span></a><p>Premium client-side developer tools.</p></div>
-    <nav class="footer-links"><a href="../../privacy-policy.html">Privacy</a><a href="../../terms.html">Terms</a><a href="../../contact.html">Contact</a></nav>
-  </div>
-  <div class="footer-bottom"><p>© 2025 ToolDuck.xyz</p></div>
-</footer>
-<div class="sticky-ad-footer"><span class="ad-slot-label">Advertisement</span><div class="footer-ad-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div></div>
-<div class="cookie-banner" id="cookie-banner"><p><strong>🍪 Cookie Notice</strong> — <a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
+        <li><a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
 <div id="toast-container" class="toast-container" aria-live="polite"></div>
 <script src="../../assets/js/global.js"></script>
 <script>

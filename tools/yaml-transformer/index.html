@@ -8,13 +8,14 @@
   <meta name="keywords" content="yaml frontmatter to json object converter, yaml to json, json to yaml, yaml converter, yaml validator, yaml parser online">
   <link rel="canonical" href="https://toolduck.xyz/tools/yaml-transformer/">
   <meta property="og:title" content="YAML ↔ JSON Isomorphic Bridge — Offline YAML Converter">
+  <meta property="og:description" content="Bidirectional YAML and JSON converter — free, 100% browser-based, no upload required.">
   <meta property="og:url" content="https://toolduck.xyz/tools/yaml-transformer/">
   <link rel="stylesheet" href="../../assets/css/global.css">
 </head>
 <body>
 <nav class="site-nav">
   <div class="nav-inner">
-    <a href="../../" class="nav-logo"><svg class="logo-duck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="32" height="32" aria-hidden="true"><ellipse cx="15" cy="26" rx="11" ry="8" fill="#FFD23F"/><circle cx="22" cy="15" r="7" fill="#FFD23F"/><path d="M28 14 L34 16 L28 18Z" fill="#FF9F0A"/><ellipse cx="9" cy="25" rx="5" ry="3.5" fill="#E8BC00" transform="rotate(-10 9 25)"/><rect x="16.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><rect x="22.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><line x1="21.5" y1="12.6" x2="22.5" y2="12.6" stroke="#00F5D4" stroke-width="1.1"/><circle cx="26" cy="12" r="1.1" fill="#0B0F19"/></svg><span class="logo-text">tool<span>duck</span>.xyz</span></a>
+    <a href="../../" class="nav-logo"><img src="../../assets/images/duck-logo.png" alt="ToolDuck logo" class="nav-logo-img" width="44" height="44"><span class="logo-text">tool<span>duck</span>.xyz</span></a>
     <ul class="nav-links">
       <li><a href="../../">Home</a></li>
       <li><a href="../../tools/json-visualizer/">JSON</a></li>
@@ -23,7 +24,7 @@
       <li><a href="../../privacy-policy.html">Privacy</a></li>
     </ul>
     <div class="nav-actions">
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">☰</button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     </div>
   </div>
 </nav>
@@ -34,13 +35,13 @@
   <nav class="breadcrumb"><a href="../../">Home</a><span class="sep">›</span><span class="current">YAML ↔ JSON Transformer</span></nav>
   <div class="tool-header">
     <div class="tool-header-inner">
-      <div class="tool-page-icon">🔃</div>
+      <div class="tool-page-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10L3 14l4 4"/><path d="M21 10l4 4-4 4"/><path d="M17 5l-6 18"/></svg></div>
       <div class="tool-header-text">
-        <h1>YAML ↔ JSON Isomorphic Bridge</h1>
+        <h1>YAML  JSON Isomorphic Bridge</h1>
         <p>Convert YAML to JSON and JSON to YAML instantly. Parse frontmatter, validate syntax, and explore structure. 100% offline.</p>
       </div>
     </div>
-    <div class="tool-badges"><span class="badge badge-green">🔒 Offline</span><span class="badge badge-blue">↔ Bidirectional</span><span class="badge badge-purple">⚡ Instant</span></div>
+    <div class="tool-badges"><span class="badge badge-green">Offline</span><span class="badge badge-blue">Bidirectional</span><span class="badge badge-purple">Instant</span></div>
   </div>
 
   <div class="tool-content-grid">
@@ -48,7 +49,7 @@
       <!-- Controls -->
       <div class="glass-panel" style="margin-bottom:1rem;">
         <div class="panel-header">
-          <span class="panel-title">⚙️ Conversion Mode</span>
+          <span class="panel-title">Conversion Mode</span>
           <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;">
             <button class="tab-btn active" id="mode-y2j" data-mode="y2j">YAML → JSON</button>
             <button class="tab-btn" id="mode-j2y" data-mode="j2y">JSON → YAML</button>
@@ -62,10 +63,10 @@
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;" class="yaml-grid">
         <div class="glass-panel">
           <div class="panel-header">
-            <span class="panel-title" id="input-label">📥 YAML Input</span>
+            <span class="panel-title" id="input-label">YAML Input</span>
             <div style="display:flex;gap:.4rem;">
-              <button class="btn btn-secondary btn-sm" id="sample-btn">📄 Sample</button>
-              <button class="btn btn-danger btn-sm" id="clear-btn">✕</button>
+              <button class="btn btn-secondary btn-sm" id="sample-btn">Sample</button>
+              <button class="btn btn-danger btn-sm" id="clear-btn"></button>
             </div>
           </div>
           <div class="panel-body">
@@ -89,8 +90,8 @@ settings:
         </div>
         <div class="glass-panel">
           <div class="panel-header">
-            <span class="panel-title" id="output-label">📤 JSON Output</span>
-            <button class="btn btn-secondary btn-sm" id="copy-output-btn">📋 Copy</button>
+            <span class="panel-title" id="output-label">JSON Output</span>
+            <button class="btn btn-secondary btn-sm" id="copy-output-btn">Copy</button>
           </div>
           <div class="panel-body">
             <div class="output-wrapper" style="height:100%;">
@@ -102,7 +103,7 @@ settings:
         </div>
       </div>
 
-      <div style="text-align:center;"><button class="btn btn-primary" id="convert-btn" style="min-width:160px;">🔃 Convert</button></div>
+      <div style="text-align:center;"><button class="btn btn-primary" id="convert-btn" style="min-width:160px;">Convert</button></div>
     </main>
 
     <aside class="ad-sidebar" aria-label="Advertisement">
@@ -118,40 +119,9 @@ settings:
   <div class="info-divider"></div>
   <div class="info-grid">
     <div class="info-card">
-      <h3><span class="icon">📖</span> User Manual &amp; Operational Guide</h3>
+      <h3><span class="icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="1" width="14" height="16" rx="2"/><path d="M5 5h8M5 8h8M5 11h5"/></svg></span> User Manual &amp; Operational Guide</h3>
       <ol>
-        <li><strong>Choose conversion direction:</strong> Select "YAML → JSON" to convert YAML to JSON, "JSON → YAML" to go the other way, or "Extract Frontmatter" to parse YAML frontmatter from Markdown files (<code>---</code> delimited).</li>
-        <li><strong>Paste your input:</strong> Enter YAML or JSON in the left panel, or click "Sample" to load a working example.</li>
-        <li><strong>Convert:</strong> Click "Convert" or the output updates automatically as you type. The result appears on the right.</li>
-        <li><strong>Copy output:</strong> Click "Copy" to copy the converted output to your clipboard.</li>
-      </ol>
-    </div>
-    <div class="info-card">
-      <h3><span class="icon">🏗️</span> Architecture Insight: Why This Tool Runs Locally</h3>
-      <p>This tool implements a JavaScript YAML parser that converts YAML to a JavaScript object graph, then serializes to JSON using <code>JSON.stringify()</code>. The YAML parser handles the most common YAML syntax: scalars (strings, numbers, booleans, null), block sequences, block mappings, inline arrays and objects, multiline strings, and quoted strings. The JSON-to-YAML direction uses a recursive serializer that produces indented YAML block format. Both conversions run synchronously in browser memory with no network I/O.</p>
-    </div>
-    <div class="info-card" style="grid-column:1/-1;">
-      <h3><span class="icon">❓</span> Frequently Asked Questions</h3>
-      <div class="faq-list">
-        <details class="faq-item"><summary>How do I convert YAML frontmatter to a JSON object instantly offline?</summary><div class="faq-answer">Select the "Extract Frontmatter" mode and paste your Markdown file content (including the <code>---</code> delimiters). The tool extracts the YAML block between the opening and closing <code>---</code> markers and converts it to a JSON object. This is useful for processing Jekyll, Hugo, Gatsby, or Astro static site content files.</div></details>
-        <details class="faq-item"><summary>What YAML features are supported?</summary><div class="faq-answer">The built-in parser supports standard YAML frontmatter syntax used in static site generators and configuration files: scalar strings (quoted and unquoted), integers, floats, booleans (true/false/yes/no), null values, block sequences (list items prefixed with <code>-</code>), and nested block mappings (key: value indented). Advanced YAML features like anchors, aliases, multi-document streams, and custom tags are not supported by the lightweight parser.</div></details>
-        <details class="faq-item"><summary>Can I use this to convert Kubernetes or Docker Compose YAML to JSON?</summary><div class="faq-answer">Yes, for standard Kubernetes and Docker Compose YAML files. Most production k8s manifests and compose files use standard YAML features (scalars, sequences, mappings) that are fully supported. Multi-document YAML files (multiple documents separated by <code>---</code>) are parsed as the first document only.</div></details>
-        <details class="faq-item"><summary>Why does my YAML convert to JSON with incorrect types?</summary><div class="faq-answer">YAML automatically infers scalar types. Values like <code>true</code>, <code>yes</code>, <code>on</code>, <code>false</code>, <code>no</code>, <code>off</code> are treated as booleans. Numeric strings like <code>1e3</code> are treated as numbers. To force a value to remain a string, quote it: <code>version: "1"</code> instead of <code>version: 1</code>. This is standard YAML 1.2 behavior.</div></details>
-      </div>
-    </div>
-  </div>
-</section>
-</div>
-
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand"><a href="../../" class="nav-logo"><div class="logo-icon">D</div><span class="logo-text">Dev<span>Utils</span></span></a><p>Premium client-side developer tools.</p></div>
-    <nav class="footer-links"><a href="../../privacy-policy.html">Privacy</a><a href="../../terms.html">Terms</a><a href="../../contact.html">Contact</a></nav>
-  </div>
-  <div class="footer-bottom"><p>© 2025 ToolDuck.xyz</p></div>
-</footer>
-<div class="sticky-ad-footer"><span class="ad-slot-label">Advertisement</span><div class="footer-ad-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div></div>
-<div class="cookie-banner" id="cookie-banner"><p><strong>🍪 Cookie Notice</strong> — <a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
+        <li><a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
 <div id="toast-container" class="toast-container" aria-live="polite"></div>
 <script src="../../assets/js/global.js"></script>
 <script>

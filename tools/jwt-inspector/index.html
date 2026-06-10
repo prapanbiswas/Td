@@ -8,6 +8,7 @@
   <meta name="keywords" content="decode jwt token safely offline debugger, jwt inspector, jwt decoder, jwt parser, jwt debugger online, json web token decoder">
   <link rel="canonical" href="https://toolduck.xyz/tools/jwt-inspector/">
   <meta property="og:title" content="Secure JWT Inspector — Decode JWT Tokens Offline">
+  <meta property="og:description" content="Decode and inspect JWT tokens offline — free, 100% browser-based, no upload required.">
   <meta property="og:url" content="https://toolduck.xyz/tools/jwt-inspector/">
   <link rel="stylesheet" href="../../assets/css/global.css">
   <style>
@@ -39,7 +40,7 @@
 <body>
 <nav class="site-nav">
   <div class="nav-inner">
-    <a href="../../" class="nav-logo"><svg class="logo-duck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="32" height="32" aria-hidden="true"><ellipse cx="15" cy="26" rx="11" ry="8" fill="#FFD23F"/><circle cx="22" cy="15" r="7" fill="#FFD23F"/><path d="M28 14 L34 16 L28 18Z" fill="#FF9F0A"/><ellipse cx="9" cy="25" rx="5" ry="3.5" fill="#E8BC00" transform="rotate(-10 9 25)"/><rect x="16.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><rect x="22.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><line x1="21.5" y1="12.6" x2="22.5" y2="12.6" stroke="#00F5D4" stroke-width="1.1"/><circle cx="26" cy="12" r="1.1" fill="#0B0F19"/></svg><span class="logo-text">tool<span>duck</span>.xyz</span></a>
+    <a href="../../" class="nav-logo"><img src="../../assets/images/duck-logo.png" alt="ToolDuck logo" class="nav-logo-img" width="44" height="44"><span class="logo-text">tool<span>duck</span>.xyz</span></a>
     <ul class="nav-links">
       <li><a href="../../">Home</a></li>
       <li><a href="../../tools/hash-generator/">Hash Gen</a></li>
@@ -48,7 +49,7 @@
       <li><a href="../../privacy-policy.html">Privacy</a></li>
     </ul>
     <div class="nav-actions">
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">☰</button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     </div>
   </div>
 </nav>
@@ -59,16 +60,16 @@
   <nav class="breadcrumb"><a href="../../">Home</a><span class="sep">›</span><span class="current">JWT Inspector</span></nav>
   <div class="tool-header">
     <div class="tool-header-inner">
-      <div class="tool-page-icon">🔑</div>
+      <div class="tool-page-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="5.5"/><path d="M17 18l7 7"/><circle cx="12" cy="13" r="2" fill="currentColor" stroke="none"/></svg></div>
       <div class="tool-header-text">
         <h1>Client-Side Secure JWT Inspector</h1>
         <p>Decode JWT tokens safely — header, payload, claims, and expiry status. Your token never leaves your browser.</p>
       </div>
     </div>
     <div class="tool-badges">
-      <span class="badge badge-green">🔒 Zero Upload</span>
-      <span class="badge badge-blue">⏱ Expiry Check</span>
-      <span class="badge badge-purple">🔐 All Algorithms</span>
+      <span class="badge badge-green">Zero Upload</span>
+      <span class="badge badge-blue">Expiry Check</span>
+      <span class="badge badge-purple">All Algorithms</span>
     </div>
   </div>
 
@@ -76,10 +77,10 @@
     <main>
       <div class="glass-panel" style="margin-bottom:1rem;">
         <div class="panel-header">
-          <span class="panel-title">🔑 JWT Token Input</span>
+          <span class="panel-title">JWT Token Input</span>
           <div style="display:flex;gap:.5rem;">
-            <button class="btn btn-secondary btn-sm" id="sample-btn">📄 Load Sample</button>
-            <button class="btn btn-danger btn-sm" id="clear-btn">✕ Clear</button>
+            <button class="btn btn-secondary btn-sm" id="sample-btn">Load Sample</button>
+            <button class="btn btn-danger btn-sm" id="clear-btn">Clear</button>
           </div>
         </div>
         <div class="panel-body">
@@ -120,12 +121,12 @@
         <div class="jwt-part jwt-sig-part">
           <div class="jwt-part-label">▌ Signature</div>
           <div id="sig-encoded" class="jwt-encoded"></div>
-          <div style="font-size:.8rem;color:#ffb86c;">⚠️ Signature verification requires the secret key, which you should never share. This tool only decodes the token structure.</div>
+          <div style="font-size:.8rem;color:#ffb86c;">️ Signature verification requires the secret key, which you should never share. This tool only decodes the token structure.</div>
         </div>
 
         <div style="display:flex;gap:.5rem;margin-top:.75rem;">
-          <button class="btn btn-secondary btn-sm" id="copy-payload-btn">📋 Copy Payload JSON</button>
-          <button class="btn btn-secondary btn-sm" id="copy-header-btn">📋 Copy Header JSON</button>
+          <button class="btn btn-secondary btn-sm" id="copy-payload-btn">Copy Payload JSON</button>
+          <button class="btn btn-secondary btn-sm" id="copy-header-btn">Copy Header JSON</button>
         </div>
       </div>
     </main>
@@ -143,42 +144,9 @@
   <div class="info-divider"></div>
   <div class="info-grid">
     <div class="info-card">
-      <h3><span class="icon">📖</span> User Manual &amp; Operational Guide</h3>
+      <h3><span class="icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="1" width="14" height="16" rx="2"/><path d="M5 5h8M5 8h8M5 11h5"/></svg></span> User Manual &amp; Operational Guide</h3>
       <ol>
-        <li><strong>Paste your JWT:</strong> Copy the full token string (including all three dot-separated sections) from your application logs, browser devtools, or API response headers and paste it into the input.</li>
-        <li><strong>Instant decode:</strong> The token is parsed and decoded immediately. The color-coded display highlights the header (pink), payload (green), and signature (orange) sections.</li>
-        <li><strong>Review claims:</strong> The payload section shows all decoded claims with human-readable timestamps for <code>exp</code>, <code>iat</code>, and <code>nbf</code> fields.</li>
-        <li><strong>Check expiry:</strong> The status bar shows whether the token is currently valid, expired, or expiring soon (within 5 minutes).</li>
-        <li><strong>Copy output:</strong> Use the copy buttons to extract the decoded header or payload JSON for further processing.</li>
-      </ol>
-    </div>
-    <div class="info-card">
-      <h3><span class="icon">🏗️</span> Architecture Insight: Why This Tool Runs Locally</h3>
-      <p>JWT tokens frequently contain sensitive data: user IDs, roles, email addresses, session identifiers, and authorization scopes. Pasting a JWT token into an online decoder that makes a server request exposes this sensitive payload to a third party — a serious security risk in production environments.</p>
-      <p style="margin-top:.75rem;">This tool decodes JWT tokens using only JavaScript's built-in <code>atob()</code> function to Base64url-decode each section, and <code>JSON.parse()</code> to parse the JSON payload. No network request is ever made. The tool performs purely mathematical string operations in your browser's memory. Your token is never stored, logged, or transmitted anywhere.</p>
-    </div>
-    <div class="info-card" style="grid-column:1/-1;">
-      <h3><span class="icon">❓</span> Frequently Asked Questions</h3>
-      <div class="faq-list">
-        <details class="faq-item"><summary>Is it safe to decode a JWT token containing my auth credentials in a browser-based tool?</summary><div class="faq-answer">Yes — when using this specific tool, which is designed as a client-side-only debugger. Unlike online tools that make server requests, this decoder runs entirely in your browser's JavaScript engine. The token text you paste stays in browser RAM only. No network requests are made during decoding. You can verify this by opening browser DevTools → Network tab and confirming zero requests are made when you paste a token.</div></details>
-        <details class="faq-item"><summary>Can this tool verify the JWT signature?</summary><div class="faq-answer">No, and by design. Verifying a JWT signature requires the signing secret key (for HMAC algorithms like HS256) or the public key (for RSA/ECDSA algorithms). You should never paste your signing secret into any web tool. This tool only decodes the token structure for inspection purposes. Signature verification should be done server-side using your application's JWT library.</div></details>
-        <details class="faq-item"><summary>What JWT algorithms are supported for decoding?</summary><div class="faq-answer">All JWT algorithms can be decoded by this tool, since the header and payload sections are always Base64url-encoded JSON regardless of the signing algorithm. This includes HS256, HS384, HS512, RS256, RS384, RS512, ES256, ES384, ES512, PS256, and more. The algorithm is displayed from the <code>alg</code> claim in the decoded header.</div></details>
-        <details class="faq-item"><summary>Why does the "exp" claim show a timestamp far in the future or past?</summary><div class="faq-answer">JWT expiry (<code>exp</code>), issued-at (<code>iat</code>), and not-before (<code>nbf</code>) claims are stored as Unix timestamps (seconds since January 1, 1970 UTC). This tool converts them automatically to human-readable local datetime strings. If the timestamp appears incorrect, the issuing system may have set an unusual expiry duration, or the claim may be in milliseconds rather than seconds (a non-standard but common implementation).</div></details>
-      </div>
-    </div>
-  </div>
-</section>
-</div>
-
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand"><a href="../../" class="nav-logo"><div class="logo-icon">D</div><span class="logo-text">Dev<span>Utils</span></span></a><p>Premium client-side developer tools. Zero upload.</p></div>
-    <nav class="footer-links"><a href="../../privacy-policy.html">Privacy</a><a href="../../terms.html">Terms</a><a href="../../contact.html">Contact</a></nav>
-  </div>
-  <div class="footer-bottom"><p>© 2025 ToolDuck.xyz</p></div>
-</footer>
-<div class="sticky-ad-footer"><span class="ad-slot-label">Advertisement</span><div class="footer-ad-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div></div>
-<div class="cookie-banner" id="cookie-banner"><p><strong>🍪 Cookie Notice</strong> — <a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
+        <li><a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
 <div id="toast-container" class="toast-container" aria-live="polite"></div>
 <script src="../../assets/js/global.js"></script>
 <script>

@@ -8,6 +8,7 @@
   <meta name="keywords" content="premium apple style glassmorphism css generator, glassmorphism css, glass ui generator, backdrop filter css, frosted glass css effect">
   <link rel="canonical" href="https://toolduck.xyz/tools/glass-studio/">
   <meta property="og:title" content="Glassmorphic UI CSS Lab — Apple-Style Glass CSS Generator">
+  <meta property="og:description" content="Generate glass UI CSS effects — free, 100% browser-based, no upload required.">
   <meta property="og:url" content="https://toolduck.xyz/tools/glass-studio/">
   <link rel="stylesheet" href="../../assets/css/global.css">
   <style>
@@ -53,7 +54,7 @@
 <body>
 <nav class="site-nav">
   <div class="nav-inner">
-    <a href="../../" class="nav-logo"><svg class="logo-duck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="32" height="32" aria-hidden="true"><ellipse cx="15" cy="26" rx="11" ry="8" fill="#FFD23F"/><circle cx="22" cy="15" r="7" fill="#FFD23F"/><path d="M28 14 L34 16 L28 18Z" fill="#FF9F0A"/><ellipse cx="9" cy="25" rx="5" ry="3.5" fill="#E8BC00" transform="rotate(-10 9 25)"/><rect x="16.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><rect x="22.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><line x1="21.5" y1="12.6" x2="22.5" y2="12.6" stroke="#00F5D4" stroke-width="1.1"/><circle cx="26" cy="12" r="1.1" fill="#0B0F19"/></svg><span class="logo-text">tool<span>duck</span>.xyz</span></a>
+    <a href="../../" class="nav-logo"><img src="../../assets/images/duck-logo.png" alt="ToolDuck logo" class="nav-logo-img" width="44" height="44"><span class="logo-text">tool<span>duck</span>.xyz</span></a>
     <ul class="nav-links">
       <li><a href="../../">Home</a></li>
       <li><a href="../../tools/tailwind-master/">Tailwind</a></li>
@@ -62,7 +63,7 @@
       <li><a href="../../privacy-policy.html">Privacy</a></li>
     </ul>
     <div class="nav-actions">
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">☰</button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     </div>
   </div>
 </nav>
@@ -73,13 +74,13 @@
   <nav class="breadcrumb"><a href="../../">Home</a><span class="sep">›</span><span class="current">Glassmorphic CSS Lab</span></nav>
   <div class="tool-header">
     <div class="tool-header-inner">
-      <div class="tool-page-icon">💎</div>
+      <div class="tool-page-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="22" height="18" rx="3"/><path d="M3 10h22" opacity=".5"/><rect x="6" y="14" width="9" height="7" rx="2" stroke-dasharray="2 1.5"/><circle cx="21" cy="17.5" r="3" stroke-dasharray="2 1.5"/></svg></div>
       <div class="tool-header-text">
         <h1>Glassmorphic UI CSS Lab</h1>
         <p>Design premium Apple-style glass UI components with real-time preview and export production-ready CSS.</p>
       </div>
     </div>
-    <div class="tool-badges"><span class="badge badge-green">🔒 Offline</span><span class="badge badge-blue">👁 Live Preview</span><span class="badge badge-purple">📋 Copy CSS</span></div>
+    <div class="tool-badges"><span class="badge badge-green">Offline</span><span class="badge badge-blue">Live Preview</span><span class="badge badge-purple">Copy CSS</span></div>
   </div>
 
   <div class="tool-content-grid">
@@ -87,7 +88,7 @@
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;" class="glass-grid">
         <!-- Controls -->
         <div class="glass-panel">
-          <div class="panel-header"><span class="panel-title">🎛️ Glass Controls</span></div>
+          <div class="panel-header"><span class="panel-title">Glass Controls</span></div>
           <div class="panel-body">
             <div class="slider-row">
               <label for="blur-amt">Blur Radius</label>
@@ -145,7 +146,7 @@
 
         <!-- Preview -->
         <div class="glass-panel">
-          <div class="panel-header"><span class="panel-title">👁 Live Preview</span></div>
+          <div class="panel-header"><span class="panel-title">Live Preview</span></div>
           <div class="panel-body" style="padding:.75rem;">
             <div class="glass-preview-bg" id="preview-bg">
               <div id="glass-preview-card">
@@ -163,10 +164,10 @@
       <!-- CSS Output -->
       <div class="glass-panel">
         <div class="panel-header">
-          <span class="panel-title">📋 Generated CSS</span>
+          <span class="panel-title">Generated CSS</span>
           <div style="display:flex;gap:.5rem;">
-            <button class="btn btn-primary btn-sm" id="copy-css-btn">📋 Copy CSS</button>
-            <button class="btn btn-secondary btn-sm" id="copy-vars-btn">📋 Copy as CSS Variables</button>
+            <button class="btn btn-primary btn-sm" id="copy-css-btn">Copy CSS</button>
+            <button class="btn btn-secondary btn-sm" id="copy-vars-btn">Copy as CSS Variables</button>
           </div>
         </div>
         <div class="panel-body">
@@ -190,40 +191,9 @@
   <div class="info-divider"></div>
   <div class="info-grid">
     <div class="info-card">
-      <h3><span class="icon">📖</span> User Manual &amp; Operational Guide</h3>
+      <h3><span class="icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="1" width="14" height="16" rx="2"/><path d="M5 5h8M5 8h8M5 11h5"/></svg></span> User Manual &amp; Operational Guide</h3>
       <ol>
-        <li><strong>Adjust Glass Properties:</strong> Use the sliders to tune Blur Radius (controls frosted depth), Background Opacity (glass fill transparency), Border Opacity and Width (rim definition), Border Radius (corner roundness), and Shadow settings.</li>
-        <li><strong>Choose Glass Color:</strong> The color picker sets the RGB base of the glass fill. White creates a classic light glass; dark colors create a "dark glass" effect popular in macOS and iOS.</li>
-        <li><strong>Select Background:</strong> Switch the preview background to test your glass against different surfaces — gradient, dark, light, or abstract.</li>
-        <li><strong>Copy the CSS:</strong> Click "Copy CSS" for a ready-to-paste CSS rule, or "Copy as CSS Variables" for a design-token-friendly variable set.</li>
-      </ol>
-    </div>
-    <div class="info-card">
-      <h3><span class="icon">🏗️</span> Architecture Insight: Why This Tool Runs Locally</h3>
-      <p>This glassmorphism CSS generator computes all style values using pure JavaScript math in your browser. As you move sliders, JavaScript reads the input values, interpolates rgba() color strings, and writes the resulting CSS directly to the preview element's <code>style</code> attribute using the DOM API. The CSS output is assembled as a formatted string using template literals. No server, no API, no compilation — just instant DOM manipulation at native browser speed.</p>
-    </div>
-    <div class="info-card" style="grid-column:1/-1;">
-      <h3><span class="icon">❓</span> Frequently Asked Questions</h3>
-      <div class="faq-list">
-        <details class="faq-item"><summary>What is the premium Apple-style glassmorphism CSS technique?</summary><div class="faq-answer">Glassmorphism is a design trend popularized by Apple's macOS Big Sur and iOS 15+ interfaces. It creates a frosted glass effect by combining <code>backdrop-filter: blur()</code> to blur the background behind an element, a semi-transparent rgba() background fill, a subtle border with partial opacity, and a soft box shadow. The result is a layered, depth-creating visual effect.</div></details>
-        <details class="faq-item"><summary>Does backdrop-filter work in all browsers?</summary><div class="faq-answer"><code>backdrop-filter</code> is supported in Chrome, Edge, Safari, and Opera. Firefox requires enabling <code>layout.css.backdrop-filter.enabled</code> in about:config (or is enabled by default in recent versions). For full compatibility, include a fallback: <code>@supports (backdrop-filter: blur(1px)) { ... }</code>. The generated CSS includes the <code>-webkit-backdrop-filter</code> prefix for Safari compatibility.</div></details>
-        <details class="faq-item"><summary>How do I achieve the best glassmorphism effect on a dark background?</summary><div class="faq-answer">For dark glass, set the glass color to a dark grey (e.g., #1a1a2e), set Background Opacity to 60–80%, set Blur to 12–20px, and use a white Border Opacity of 8–15%. Reduce shadow opacity for subtlety. The key principle is that glass only looks convincing when there is visually distinct content behind it to blur — ensure your background has sufficient variation.</div></details>
-        <details class="faq-item"><summary>Can I use the generated CSS in React, Vue, Tailwind, or other frameworks?</summary><div class="faq-answer">Yes — the generated CSS is standard CSS with no framework-specific dependencies. Copy the CSS rule and paste it into any .css, .scss, .module.css, or styled-components template string. For Tailwind users, the CSS Variables output can be added to your <code>tailwind.config.js</code> theme extensions, and the raw values can be used as arbitrary Tailwind utility values (e.g., <code>backdrop-blur-[20px]</code>).</div></details>
-      </div>
-    </div>
-  </div>
-</section>
-</div>
-
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand"><a href="../../" class="nav-logo"><div class="logo-icon">D</div><span class="logo-text">Dev<span>Utils</span></span></a><p>Premium client-side developer tools.</p></div>
-    <nav class="footer-links"><a href="../../privacy-policy.html">Privacy</a><a href="../../terms.html">Terms</a><a href="../../contact.html">Contact</a></nav>
-  </div>
-  <div class="footer-bottom"><p>© 2025 ToolDuck.xyz</p></div>
-</footer>
-<div class="sticky-ad-footer"><span class="ad-slot-label">Advertisement</span><div class="footer-ad-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div></div>
-<div class="cookie-banner" id="cookie-banner"><p><strong>🍪 Cookie Notice</strong> — <a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
+        <li><a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
 <div id="toast-container" class="toast-container" aria-live="polite"></div>
 <script src="../../assets/js/global.js"></script>
 <script>

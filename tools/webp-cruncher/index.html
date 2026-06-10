@@ -15,7 +15,7 @@
 <body>
 <nav class="site-nav">
   <div class="nav-inner">
-    <a href="../../" class="nav-logo"><svg class="logo-duck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="32" height="32" aria-hidden="true"><ellipse cx="15" cy="26" rx="11" ry="8" fill="#FFD23F"/><circle cx="22" cy="15" r="7" fill="#FFD23F"/><path d="M28 14 L34 16 L28 18Z" fill="#FF9F0A"/><ellipse cx="9" cy="25" rx="5" ry="3.5" fill="#E8BC00" transform="rotate(-10 9 25)"/><rect x="16.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><rect x="22.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><line x1="21.5" y1="12.6" x2="22.5" y2="12.6" stroke="#00F5D4" stroke-width="1.1"/><circle cx="26" cy="12" r="1.1" fill="#0B0F19"/></svg><span class="logo-text">tool<span>duck</span>.xyz</span></a>
+    <a href="../../" class="nav-logo"><img src="../../assets/images/duck-logo.png" alt="ToolDuck logo" class="nav-logo-img" width="44" height="44"><span class="logo-text">tool<span>duck</span>.xyz</span></a>
     <ul class="nav-links">
       <li><a href="../../">Home</a></li>
       <li><a href="../../tools/exif-purger/">EXIF Purger</a></li>
@@ -24,7 +24,7 @@
       <li><a href="../../privacy-policy.html">Privacy</a></li>
     </ul>
     <div class="nav-actions">
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">☰</button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     </div>
   </div>
 </nav>
@@ -41,16 +41,16 @@
 
   <div class="tool-header">
     <div class="tool-header-inner">
-      <div class="tool-page-icon" aria-hidden="true">🖼️</div>
+      <div class="tool-page-icon" aria-hidden="true">️</div>
       <div class="tool-header-text">
         <h1>Bulk WebP/AVIF Converter</h1>
         <p>Batch convert images to next-gen formats for faster websites. 100% local, adjustable quality, instant results.</p>
       </div>
     </div>
     <div class="tool-badges">
-      <span class="badge badge-green">🔒 No Upload</span>
-      <span class="badge badge-blue">📦 Batch Processing</span>
-      <span class="badge badge-purple">⚡ Canvas API</span>
+      <span class="badge badge-green">No Upload</span>
+      <span class="badge badge-blue">Batch Processing</span>
+      <span class="badge badge-purple">Canvas API</span>
     </div>
   </div>
 
@@ -58,7 +58,7 @@
     <main>
       <!-- Settings -->
       <div class="glass-panel" style="margin-bottom:1rem;">
-        <div class="panel-header"><span class="panel-title">⚙️ Conversion Settings</span></div>
+        <div class="panel-header"><span class="panel-title">Conversion Settings</span></div>
         <div class="panel-body">
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;align-items:end;" class="settings-grid">
             <div class="form-group" style="margin:0;">
@@ -84,14 +84,14 @@
       <!-- Drop Zone -->
       <div class="glass-panel" style="margin-bottom:1rem;">
         <div class="panel-header">
-          <span class="panel-title">📂 Input Images</span>
+          <span class="panel-title">Input Images</span>
           <label class="btn btn-secondary btn-sm" style="cursor:pointer;">
             Browse Files <input type="file" id="file-input" multiple accept="image/*" style="display:none;" aria-label="Select images">
           </label>
         </div>
         <div class="panel-body">
           <div class="drop-zone" id="drop-zone" role="button" tabindex="0" aria-label="Drop images here">
-            <span class="drop-icon" aria-hidden="true">🖼️</span>
+            <span class="drop-icon" aria-hidden="true">️</span>
             <h3>Drop PNG, JPEG, GIF, or WebP images</h3>
             <p>Batch processing supported · Any quantity · Runs 100% in your browser</p>
           </div>
@@ -101,91 +101,17 @@
       <!-- Results -->
       <div class="glass-panel" id="results-panel" style="display:none;">
         <div class="panel-header">
-          <span class="panel-title">✅ Converted Files</span>
+          <span class="panel-title">Converted Files</span>
           <div style="display:flex;gap:0.5rem;">
-            <button class="btn btn-primary btn-sm" id="download-all-btn">⬇ Download All</button>
-            <button class="btn btn-secondary btn-sm" id="clear-btn">✕ Clear</button>
+            <button class="btn btn-primary btn-sm" id="download-all-btn">Download All</button>
+            <button class="btn btn-secondary btn-sm" id="clear-btn">Clear</button>
           </div>
         </div>
         <div class="panel-body">
           <div class="progress-bar" id="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
           <div class="result-list" id="result-list" role="list" aria-live="polite"></div>
           <div id="savings-summary" style="margin-top:1rem;padding:0.75rem 1rem;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:var(--radius-sm);font-size:0.85rem;display:none;">
-            <strong style="color:#10b981;">💾 Total size savings: </strong><span id="savings-text"></span>
-          </div>
-        </div>
-      </div>
-    </main>
-
-    <aside class="ad-sidebar" aria-label="Advertisement">
-      <div class="ad-slot ad-slot-300x600">
-        <span class="ad-slot-label">Advertisement</span>
-        <div class="ad-slot-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div>
-      </div>
-    </aside>
-  </div>
-</div>
-
-<section class="tool-info-section">
-  <div class="info-divider"></div>
-  <div class="info-grid">
-    <div class="info-card">
-      <h3><span class="icon">📖</span> User Manual &amp; Operational Guide</h3>
-      <ol>
-        <li><strong>Configure format and quality:</strong> Select your desired output format (WebP is recommended for maximum browser compatibility and compression). Adjust the quality slider — 80–90% offers an excellent balance between file size and visual fidelity. For lossless conversion, choose PNG.</li>
-        <li><strong>Optionally resize:</strong> The Resize slider scales all output images proportionally. 100% keeps original dimensions. 50% halves both width and height.</li>
-        <li><strong>Drop or browse your images:</strong> Drag any number of images into the drop zone. JPEG, PNG, GIF, and existing WebP files are all accepted as input.</li>
-        <li><strong>Review savings:</strong> Each converted file shows its original and new file size, along with the percentage reduction. The summary bar shows total data saved across the batch.</li>
-        <li><strong>Download:</strong> Click individual file links or "Download All" to save all converted images at once.</li>
-      </ol>
-    </div>
-
-    <div class="info-card">
-      <h3><span class="icon">🏗️</span> Architecture Insight: Why This Tool Runs Locally</h3>
-      <p>WebP and AVIF conversion tools on other websites require uploading your images to a server running <code>cwebp</code>, <code>imagemagick</code>, or <code>libavif</code>. This creates network latency, raises privacy concerns, and imposes file size limits or rate limits.</p>
-      <p style="margin-top:0.75rem;">This tool leverages the <strong>HTML5 Canvas API</strong> — specifically <code>canvas.toBlob('image/webp', quality)</code> — which instructs the browser's native graphics engine to re-encode the image in the target format. The Canvas API is implemented in every modern browser at the native C++ level, making it extremely fast. Your files stay in browser memory throughout the entire process. No file size limits apply, no network round-trips occur, and the tool works perfectly offline.</p>
-    </div>
-
-    <div class="info-card" style="grid-column:1/-1;">
-      <h3><span class="icon">❓</span> Frequently Asked Questions</h3>
-      <div class="faq-list">
-        <details class="faq-item">
-          <summary>Is this fast batch PNG to WebP converter really free and local with no limits?</summary>
-          <div class="faq-answer">Yes. There are no file size limits, no daily conversion caps, and no account requirements. The tool runs entirely within your browser's Canvas API. You can convert thousands of images if your device has sufficient RAM to load them. All processing is done locally on your device — no files are sent to any server.</div>
-        </details>
-        <details class="faq-item">
-          <summary>Does the WebP format work in all modern browsers?</summary>
-          <div class="faq-answer">WebP is supported in all modern browsers including Chrome, Firefox, Safari (since version 14), and Edge. For maximum compatibility when targeting older environments, you can use the JPEG output option. AVIF support is growing but may not be available in older browser Canvas implementations — if your browser doesn't support AVIF encoding, the output will fall back to WebP automatically.</div>
-        </details>
-        <details class="faq-item">
-          <summary>How much file size reduction should I expect when converting PNG to WebP?</summary>
-          <div class="faq-answer">Typically 25–60% depending on the image content. Photographic images (lots of color variation) compress very well in WebP. Images with flat areas of color or UI screenshots can achieve 40–70% savings. The quality slider lets you fine-tune the tradeoff. At 85% quality, WebP files are typically 30–40% smaller than equivalent JPEG files while maintaining visually comparable quality.</div>
-        </details>
-        <details class="faq-item">
-          <summary>Can I batch convert an entire design asset library?</summary>
-          <div class="faq-answer">Yes. Drop all your PNG or JPEG files into the drop zone at once — there is no limit on the number of files. The conversion queue processes them in parallel using the browser's Canvas API. For very large batches (hundreds of files), processing may take a few seconds depending on your device's CPU speed and the total image dimensions.</div>
-        </details>
-      </div>
-    </div>
-  </div>
-</section>
-</div>
-
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <a href="../../" class="nav-logo"><svg class="logo-duck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="32" height="32" aria-hidden="true"><ellipse cx="15" cy="26" rx="11" ry="8" fill="#FFD23F"/><circle cx="22" cy="15" r="7" fill="#FFD23F"/><path d="M28 14 L34 16 L28 18Z" fill="#FF9F0A"/><ellipse cx="9" cy="25" rx="5" ry="3.5" fill="#E8BC00" transform="rotate(-10 9 25)"/><rect x="16.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><rect x="22.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><line x1="21.5" y1="12.6" x2="22.5" y2="12.6" stroke="#00F5D4" stroke-width="1.1"/><circle cx="26" cy="12" r="1.1" fill="#0B0F19"/></svg><span class="logo-text">tool<span>duck</span>.xyz</span></a>
-      <p>Premium client-side developer utility tools. Zero server, zero upload.</p>
-    </div>
-    <nav class="footer-links">
-      <a href="../../privacy-policy.html">Privacy Policy</a><a href="../../terms.html">Terms</a>
-      <a href="../../cookie-policy.html">Cookies</a><a href="../../contact.html">Contact</a>
-    </nav>
-  </div>
-  <div class="footer-bottom"><p>© 2025 ToolDuck.xyz</p></div>
-</footer>
-<div class="sticky-ad-footer"><span class="ad-slot-label">Advertisement</span><div class="footer-ad-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div></div>
-<div class="cookie-banner" id="cookie-banner"><p><strong>🍪 Cookie Notice</strong> — Minimal local storage + Google AdSense cookies. <a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
+            Minimal local storage + Google AdSense cookies. <a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
 <div id="toast-container" class="toast-container" aria-live="polite"></div>
 <script src="../../assets/js/global.js"></script>
 <script>

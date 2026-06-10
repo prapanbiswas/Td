@@ -17,7 +17,7 @@
 <body>
 <nav class="site-nav">
   <div class="nav-inner">
-    <a href="../../" class="nav-logo"><svg class="logo-duck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="32" height="32" aria-hidden="true"><ellipse cx="15" cy="26" rx="11" ry="8" fill="#FFD23F"/><circle cx="22" cy="15" r="7" fill="#FFD23F"/><path d="M28 14 L34 16 L28 18Z" fill="#FF9F0A"/><ellipse cx="9" cy="25" rx="5" ry="3.5" fill="#E8BC00" transform="rotate(-10 9 25)"/><rect x="16.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><rect x="22.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><line x1="21.5" y1="12.6" x2="22.5" y2="12.6" stroke="#00F5D4" stroke-width="1.1"/><circle cx="26" cy="12" r="1.1" fill="#0B0F19"/></svg><span class="logo-text">tool<span>duck</span>.xyz</span></a>
+    <a href="../../" class="nav-logo"><img src="../../assets/images/duck-logo.png" alt="ToolDuck logo" class="nav-logo-img" width="44" height="44"><span class="logo-text">tool<span>duck</span>.xyz</span></a>
     <ul class="nav-links">
       <li><a href="../../">Home</a></li>
       <li><a href="../../tools/hash-generator/">Hash Gen</a></li>
@@ -26,7 +26,7 @@
       <li><a href="../../privacy-policy.html">Privacy</a></li>
     </ul>
     <div class="nav-actions">
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">☰</button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     </div>
   </div>
 </nav>
@@ -46,16 +46,16 @@
 
   <div class="tool-header">
     <div class="tool-header-inner">
-      <div class="tool-page-icon" aria-hidden="true">📷</div>
+      <div class="tool-page-icon" aria-hidden="true"></div>
       <div class="tool-header-text">
         <h1>Private Local EXIF Purger</h1>
         <p>Strip all metadata from photos — GPS, camera model, timestamps, author info. Fully offline, zero upload.</p>
       </div>
     </div>
     <div class="tool-badges">
-      <span class="badge badge-green">🔒 100% Offline</span>
-      <span class="badge badge-blue">⚡ Instant Processing</span>
-      <span class="badge badge-purple">🖼 JPEG + PNG</span>
+      <span class="badge badge-green">100% Offline</span>
+      <span class="badge badge-blue">Instant Processing</span>
+      <span class="badge badge-purple">JPEG + PNG</span>
     </div>
   </div>
 
@@ -65,16 +65,16 @@
       <!-- Drop Zone -->
       <div class="glass-panel" style="margin-bottom:1rem;">
         <div class="panel-header">
-          <span class="panel-title">📂 Drop Images Here</span>
+          <span class="panel-title">Drop Images Here</span>
           <label class="btn btn-secondary btn-sm" style="cursor:pointer;">
             Browse Files <input type="file" id="file-input" multiple accept="image/jpeg,image/png,image/jpg" style="display:none;" aria-label="Select image files">
           </label>
         </div>
         <div class="panel-body">
           <div class="drop-zone" id="drop-zone" role="button" tabindex="0" aria-label="Drop images here or click to browse">
-            <span class="drop-icon" aria-hidden="true">🗂️</span>
+            <span class="drop-icon" aria-hidden="true">️</span>
             <h3>Drag &amp; drop JPEG or PNG images</h3>
-            <p>Or <span class="browse-link" id="browse-trigger">click to browse files</span> · Batch supported · Any file size</p>
+            <p>Or <span class="browse-link" id="browse-trigger">click to browse files</span>· Batch supported · Any file size</p>
           </div>
           <div id="file-list" style="margin-top:1rem;display:none;">
             <div class="progress-bar" id="progress-bar" style="display:none;">
@@ -82,8 +82,8 @@
             </div>
             <div class="result-list" id="result-list" role="list" aria-live="polite" aria-label="Processing results"></div>
             <div style="display:flex;gap:0.5rem;margin-top:1rem;flex-wrap:wrap;" id="action-buttons">
-              <button class="btn btn-primary" id="download-all-btn" style="display:none;">⬇ Download All Cleaned Images</button>
-              <button class="btn btn-secondary btn-sm" id="clear-btn">✕ Clear</button>
+              <button class="btn btn-primary" id="download-all-btn" style="display:none;">Download All Cleaned Images</button>
+              <button class="btn btn-secondary btn-sm" id="clear-btn">Clear</button>
             </div>
           </div>
         </div>
@@ -91,7 +91,7 @@
 
       <!-- Stats Panel -->
       <div class="glass-panel" id="stats-panel" style="display:none;">
-        <div class="panel-header"><span class="panel-title">📊 Processing Statistics</span></div>
+        <div class="panel-header"><span class="panel-title">Processing Statistics</span></div>
         <div class="panel-body">
           <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;text-align:center;">
             <div><div id="stat-files" style="font-size:1.8rem;font-weight:800;color:var(--accent-primary);">0</div><div class="text-sm text-muted">Files Processed</div></div>
@@ -120,73 +120,9 @@
   <div class="info-divider"></div>
   <div class="info-grid">
     <div class="info-card">
-      <h3 id="info-heading"><span class="icon" aria-hidden="true">📖</span> User Manual &amp; Operational Guide</h3>
+      <h3 id="info-heading"><span class="icon" aria-hidden="true"></span> User Manual &amp; Operational Guide</h3>
       <ol>
-        <li><strong>Drop your files:</strong> Drag one or multiple JPEG or PNG images into the drop zone above, or click "Browse Files" to open a file picker. Batch processing is fully supported.</li>
-        <li><strong>Automatic processing:</strong> Each file is immediately decoded and redrawn onto an HTML5 Canvas element. This redraw operation creates a brand-new pixel buffer that contains only the visual image data — all EXIF metadata is permanently discarded in this step.</li>
-        <li><strong>Review results:</strong> The results list will show each filename, its original size, the cleaned size, and the amount of metadata data removed.</li>
-        <li><strong>Download:</strong> Click the individual download link next to each file, or use "Download All Cleaned Images" to get all processed files at once. Files are saved with the original filename plus a <code>_clean</code> suffix.</li>
-        <li><strong>Verify:</strong> Open any processed image in a metadata viewer or run <code>exiftool filename.jpg</code> — you will see only safe, non-identifying fields remain.</li>
-      </ol>
-    </div>
-
-    <div class="info-card">
-      <h3><span class="icon" aria-hidden="true">🏗️</span> Architecture Insight: Why This Tool Runs Locally</h3>
-      <p>EXIF metadata is embedded in the binary header of JPEG and PNG files as a structured data block. Traditional "EXIF remover" websites work by uploading your full image file to a remote server, processing it there, and sending it back — exposing your private photos and their GPS coordinates to third-party infrastructure.</p>
-      <p style="margin-top:0.75rem;">This tool works entirely differently. When you drop an image, the browser's <strong>File API</strong> reads the raw binary data into memory on your device. The <strong>Canvas API</strong> then decodes the image pixels and redraws them onto a clean <code>&lt;canvas&gt;</code> element. Because the Canvas API only understands raw pixel data (not JPEG metadata headers), the output from <code>canvas.toBlob('image/jpeg')</code> contains only the visual content — with zero EXIF, GPS, author, copyright, or camera model data. The entire operation runs in the browser's sandboxed JavaScript engine, using your device's CPU. No network request is ever made. Disconnecting from the internet before using this tool provides the same result.</p>
-    </div>
-
-    <div class="info-card" style="grid-column: 1 / -1;">
-      <h3><span class="icon" aria-hidden="true">❓</span> Frequently Asked Questions</h3>
-      <div class="faq-list">
-        <details class="faq-item">
-          <summary>Does this secure offline photo metadata remover work without an internet connection?</summary>
-          <div class="faq-answer">Yes, completely. The EXIF Purger tool uses only the browser's built-in Canvas API and File API. Once the page has loaded, you can disconnect from the internet entirely and the tool will continue to work identically. No network requests are made during file processing. This makes it ideal for use on sensitive documents in air-gapped or restricted network environments.</div>
-        </details>
-        <details class="faq-item">
-          <summary>Which metadata fields are removed from JPEG photos?</summary>
-          <div class="faq-answer">The Canvas redraw method removes <em>all</em> EXIF data, including: GPS coordinates (latitude, longitude, altitude), device make and model, lens information, focal length and aperture, capture date and time, software version, author and copyright strings, camera serial numbers, and any custom application-specific metadata blocks. The output is a clean JPEG containing only the raw pixel data.</div>
-        </details>
-        <details class="faq-item">
-          <summary>Does removing EXIF data reduce the image quality?</summary>
-          <div class="faq-answer">A minimal re-encoding step occurs when the Canvas draws and exports the image (JPEG uses lossy compression). The quality is set to 0.92 (92%), which is considered visually lossless for practical purposes and is indistinguishable from the original to the human eye. PNG images are re-encoded losslessly (Canvas PNG export is always lossless), so PNG output has no quality loss at all.</div>
-        </details>
-        <details class="faq-item">
-          <summary>Can I use the free EXIF purger tool for commercial workflows?</summary>
-          <div class="faq-answer">Yes. ToolDuck.xyz is free to use for both personal and commercial purposes as described in our <a href="../../terms.html">Terms of Service</a>. You can safely use this tool to strip metadata from product photos, press images, client deliverables, or any commercial use case without any usage fees or attribution requirements.</div>
-        </details>
-        <details class="faq-item">
-          <summary>Is this tool safe for removing GPS data from photos before sharing on social media?</summary>
-          <div class="faq-answer">Yes, this is one of the primary use cases. Before sharing photos publicly on social media, news platforms, or any public channel, processing them through the EXIF Purger ensures that GPS coordinates embedded by your smartphone camera are permanently removed. Because processing is offline, your unprocessed photos with GPS data are never exposed to any server or third-party service.</div>
-        </details>
-      </div>
-    </div>
-  </div>
-</section>
-</div>
-
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <a href="../../" class="nav-logo"><svg class="logo-duck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="32" height="32" aria-hidden="true"><ellipse cx="15" cy="26" rx="11" ry="8" fill="#FFD23F"/><circle cx="22" cy="15" r="7" fill="#FFD23F"/><path d="M28 14 L34 16 L28 18Z" fill="#FF9F0A"/><ellipse cx="9" cy="25" rx="5" ry="3.5" fill="#E8BC00" transform="rotate(-10 9 25)"/><rect x="16.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><rect x="22.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><line x1="21.5" y1="12.6" x2="22.5" y2="12.6" stroke="#00F5D4" stroke-width="1.1"/><circle cx="26" cy="12" r="1.1" fill="#0B0F19"/></svg><span class="logo-text">tool<span>duck</span>.xyz</span></a>
-      <p>Premium client-side developer utility tools. Zero server, zero upload, zero compromise on privacy.</p>
-    </div>
-    <nav class="footer-links">
-      <a href="../../privacy-policy.html">Privacy Policy</a><a href="../../terms.html">Terms</a>
-      <a href="../../cookie-policy.html">Cookies</a><a href="../../contact.html">Contact</a>
-      <a href="../../">All Tools</a>
-    </nav>
-  </div>
-  <div class="footer-bottom"><p>© 2025 ToolDuck.xyz — All processing is local, your images never leave your device.</p></div>
-</footer>
-
-<div class="sticky-ad-footer" aria-label="Advertisement">
-  <span class="ad-slot-label">Advertisement</span>
-  <div class="footer-ad-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div>
-</div>
-
-<div class="cookie-banner" id="cookie-banner" role="dialog" aria-modal="false">
-  <p><strong>🍪 Cookie Notice</strong> — We use minimal local storage for preferences. Google AdSense may use cookies for personalized ads. <a href="../../cookie-policy.html">Learn more</a></p>
+        <li>We use minimal local storage for preferences. Google AdSense may use cookies for personalized ads. <a href="../../cookie-policy.html">Learn more</a></p>
   <div class="cookie-actions">
     <button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button>
     <button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button>

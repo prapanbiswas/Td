@@ -8,6 +8,7 @@
   <meta name="keywords" content="visual regular expression graph compiler live, regex tester, regex visualizer, railroad diagram regex, regex debugger online">
   <link rel="canonical" href="https://toolduck.xyz/tools/regex-simulator/">
   <meta property="og:title" content="RegEx Railroad Diagram — Visual Regex Compiler & Tester">
+  <meta property="og:description" content="Live regex pattern tester — free, 100% browser-based, no upload required.">
   <meta property="og:url" content="https://toolduck.xyz/tools/regex-simulator/">
   <link rel="stylesheet" href="../../assets/css/global.css">
   <style>
@@ -34,7 +35,7 @@
 <body>
 <nav class="site-nav">
   <div class="nav-inner">
-    <a href="../../" class="nav-logo"><svg class="logo-duck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="32" height="32" aria-hidden="true"><ellipse cx="15" cy="26" rx="11" ry="8" fill="#FFD23F"/><circle cx="22" cy="15" r="7" fill="#FFD23F"/><path d="M28 14 L34 16 L28 18Z" fill="#FF9F0A"/><ellipse cx="9" cy="25" rx="5" ry="3.5" fill="#E8BC00" transform="rotate(-10 9 25)"/><rect x="16.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><rect x="22.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><line x1="21.5" y1="12.6" x2="22.5" y2="12.6" stroke="#00F5D4" stroke-width="1.1"/><circle cx="26" cy="12" r="1.1" fill="#0B0F19"/></svg><span class="logo-text">tool<span>duck</span>.xyz</span></a>
+    <a href="../../" class="nav-logo"><img src="../../assets/images/duck-logo.png" alt="ToolDuck logo" class="nav-logo-img" width="44" height="44"><span class="logo-text">tool<span>duck</span>.xyz</span></a>
     <ul class="nav-links">
       <li><a href="../../">Home</a></li>
       <li><a href="../../tools/diff-checker/">Diff</a></li>
@@ -43,7 +44,7 @@
       <li><a href="../../privacy-policy.html">Privacy</a></li>
     </ul>
     <div class="nav-actions">
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">☰</button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     </div>
   </div>
 </nav>
@@ -54,20 +55,20 @@
   <nav class="breadcrumb"><a href="../../">Home</a><span class="sep">›</span><span class="current">RegEx Simulator</span></nav>
   <div class="tool-header">
     <div class="tool-header-inner">
-      <div class="tool-page-icon">🔮</div>
+      <div class="tool-page-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h4M4 13h7M4 19h9"/><rect x="14" y="5" width="11" height="18" rx="2"/><path d="M18 11l2.5-2.5 2.5 2.5M21 8.5v6"/></svg></div>
       <div class="tool-header-text">
         <h1>RegEx Railroad Diagram Vector</h1>
         <p>Live regex match highlighting, capture group display, and visual railroad diagram. Test patterns instantly, 100% offline.</p>
       </div>
     </div>
-    <div class="tool-badges"><span class="badge badge-green">🔒 Offline</span><span class="badge badge-blue">🌈 Live Highlight</span><span class="badge badge-purple">🔲 Railroad Diagram</span></div>
+    <div class="tool-badges"><span class="badge badge-green">Offline</span><span class="badge badge-blue">Live Highlight</span><span class="badge badge-purple">Railroad Diagram</span></div>
   </div>
 
   <div class="tool-content-grid">
     <main>
       <!-- Pattern input -->
       <div class="glass-panel" style="margin-bottom:1rem;">
-        <div class="panel-header"><span class="panel-title">🔍 Pattern &amp; Flags</span></div>
+        <div class="panel-header"><span class="panel-title">Pattern &amp; Flags</span></div>
         <div class="panel-body">
           <div style="display:flex;gap:.75rem;align-items:center;flex-wrap:wrap;margin-bottom:.75rem;">
             <div style="display:flex;align-items:center;gap:.4rem;flex:1;min-width:200px;">
@@ -101,7 +102,7 @@
 
       <!-- Test string -->
       <div class="glass-panel" style="margin-bottom:1rem;">
-        <div class="panel-header"><span class="panel-title">📝 Test String</span></div>
+        <div class="panel-header"><span class="panel-title">Test String</span></div>
         <div class="panel-body">
           <textarea id="test-input" class="form-control" rows="4" placeholder="Enter test string here…">Hello user@example.com, contact support@toolduck.xyz or info@github.com for help.</textarea>
           <div style="margin-top:.75rem;">
@@ -114,7 +115,7 @@
       <!-- Match results -->
       <div class="glass-panel" id="matches-panel">
         <div class="panel-header">
-          <span class="panel-title">✅ Matches</span>
+          <span class="panel-title">Matches</span>
           <span id="match-count" style="font-size:.82rem;color:var(--text-muted);"></span>
         </div>
         <div class="panel-body">
@@ -136,40 +137,9 @@
   <div class="info-divider"></div>
   <div class="info-grid">
     <div class="info-card">
-      <h3><span class="icon">📖</span> User Manual &amp; Operational Guide</h3>
+      <h3><span class="icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="1" width="14" height="16" rx="2"/><path d="M5 5h8M5 8h8M5 11h5"/></svg></span> User Manual &amp; Operational Guide</h3>
       <ol>
-        <li><strong>Enter your pattern:</strong> Type a JavaScript-compatible regex pattern in the input field (without surrounding slashes). Use the Quick Insert buttons for common patterns.</li>
-        <li><strong>Toggle flags:</strong> The <code>g</code> (global), <code>i</code> (case-insensitive), <code>m</code> (multiline), and <code>s</code> (dotall) flag buttons are active when highlighted purple. Toggle them as needed.</li>
-        <li><strong>Enter test text:</strong> Paste or type your test string in the "Test String" area. The highlighted result shows matched text in amber.</li>
-        <li><strong>Review matches:</strong> The Matches panel lists every match with its index position, matched value, and any capture group contents color-coded by group number.</li>
-      </ol>
-    </div>
-    <div class="info-card">
-      <h3><span class="icon">🏗️</span> Architecture Insight: Why This Tool Runs Locally</h3>
-      <p>This tool uses JavaScript's native <code>RegExp</code> constructor and <code>String.prototype.matchAll()</code> to execute your regex pattern against the test string entirely in your browser's JavaScript engine. Match positions are used to split the test string into text and highlight spans, which are injected into the DOM as a series of <code>&lt;span&gt;</code> elements. No regex is sent to a server. No test string leaves your device. The entire evaluation pipeline runs at native browser speed.</p>
-    </div>
-    <div class="info-card" style="grid-column:1/-1;">
-      <h3><span class="icon">❓</span> Frequently Asked Questions</h3>
-      <div class="faq-list">
-        <details class="faq-item"><summary>What regex flavor does this visual regular expression compiler use?</summary><div class="faq-answer">This tool uses JavaScript's built-in ECMAScript RegExp engine, which is implemented in every modern browser's V8, SpiderMonkey, or JavaScriptCore engine. It supports standard features including character classes (<code>[a-z]</code>), anchors (<code>^</code>, <code>$</code>), quantifiers (<code>*</code>, <code>+</code>, <code>?</code>, <code>{n,m}</code>), groups (<code>()</code>, <code>(?:)</code>, <code>(?&lt;name&gt;)</code>), lookaheads, and Unicode escapes. PCRE-specific features like <code>(?&lt;=)</code> lookbehinds are supported in modern browsers but not in older engines.</div></details>
-        <details class="faq-item"><summary>How do I test a regex that spans multiple lines?</summary><div class="faq-answer">Enable the <code>m</code> (multiline) flag to make <code>^</code> and <code>$</code> match the start and end of each line rather than the entire string. Enable the <code>s</code> (dotall) flag to make the dot <code>.</code> match newline characters as well. Both flags can be active simultaneously. Your test string can include newlines — press Shift+Enter in the textarea to insert a newline.</div></details>
-        <details class="faq-item"><summary>Can I use named capture groups in the regex pattern?</summary><div class="faq-answer">Yes. JavaScript's regex engine supports named capture groups using the syntax <code>(?&lt;name&gt;...)</code>. Named groups appear in the match results alongside numbered groups. For example, the pattern <code>(?&lt;year&gt;\d{4})-(?&lt;month&gt;\d{2})-(?&lt;day&gt;\d{2})</code> extracts date components with clear semantic names.</div></details>
-        <details class="faq-item"><summary>Why does my regex work in Python or PHP but not in this live graph compiler?</summary><div class="faq-answer">Different regex engines have different syntax rules. Python uses PCRE-compatible syntax, PHP uses PCRE, while JavaScript has its own ECMAScript syntax. Common differences: Python uses <code>\A</code> and <code>\Z</code> for string anchors (use <code>^</code> and <code>$</code> in JS), Python supports recursive patterns (not in JS), and some POSIX character classes differ. The Quick Insert buttons provide JS-compatible equivalents for common patterns.</div></details>
-      </div>
-    </div>
-  </div>
-</section>
-</div>
-
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand"><a href="../../" class="nav-logo"><div class="logo-icon">D</div><span class="logo-text">Dev<span>Utils</span></span></a><p>Premium client-side developer tools.</p></div>
-    <nav class="footer-links"><a href="../../privacy-policy.html">Privacy</a><a href="../../terms.html">Terms</a><a href="../../contact.html">Contact</a></nav>
-  </div>
-  <div class="footer-bottom"><p>© 2025 ToolDuck.xyz</p></div>
-</footer>
-<div class="sticky-ad-footer"><span class="ad-slot-label">Advertisement</span><div class="footer-ad-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div></div>
-<div class="cookie-banner" id="cookie-banner"><p><strong>🍪 Cookie Notice</strong> — <a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
+        <li><a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
 <div id="toast-container" class="toast-container" aria-live="polite"></div>
 <script src="../../assets/js/global.js"></script>
 <script>

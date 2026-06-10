@@ -8,6 +8,7 @@
   <meta name="keywords" content="click to create markdown table tool grid, markdown table generator, markdown table builder, table to markdown, markdown grid creator">
   <link rel="canonical" href="https://toolduck.xyz/tools/table-builder/">
   <meta property="og:title" content="Drag-and-Drop Markdown Grid — Visual Table Builder">
+  <meta property="og:description" content="Build markdown tables visually — free, 100% browser-based, no upload required.">
   <meta property="og:url" content="https://toolduck.xyz/tools/table-builder/">
   <link rel="stylesheet" href="../../assets/css/global.css">
   <style>
@@ -26,7 +27,7 @@
 <body>
 <nav class="site-nav">
   <div class="nav-inner">
-    <a href="../../" class="nav-logo"><svg class="logo-duck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="32" height="32" aria-hidden="true"><ellipse cx="15" cy="26" rx="11" ry="8" fill="#FFD23F"/><circle cx="22" cy="15" r="7" fill="#FFD23F"/><path d="M28 14 L34 16 L28 18Z" fill="#FF9F0A"/><ellipse cx="9" cy="25" rx="5" ry="3.5" fill="#E8BC00" transform="rotate(-10 9 25)"/><rect x="16.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><rect x="22.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><line x1="21.5" y1="12.6" x2="22.5" y2="12.6" stroke="#00F5D4" stroke-width="1.1"/><circle cx="26" cy="12" r="1.1" fill="#0B0F19"/></svg><span class="logo-text">tool<span>duck</span>.xyz</span></a>
+    <a href="../../" class="nav-logo"><img src="../../assets/images/duck-logo.png" alt="ToolDuck logo" class="nav-logo-img" width="44" height="44"><span class="logo-text">tool<span>duck</span>.xyz</span></a>
     <ul class="nav-links">
       <li><a href="../../">Home</a></li>
       <li><a href="../../tools/diff-checker/">Diff</a></li>
@@ -35,7 +36,7 @@
       <li><a href="../../privacy-policy.html">Privacy</a></li>
     </ul>
     <div class="nav-actions">
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">☰</button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     </div>
   </div>
 </nav>
@@ -46,13 +47,13 @@
   <nav class="breadcrumb"><a href="../../">Home</a><span class="sep">›</span><span class="current">Markdown Table Builder</span></nav>
   <div class="tool-header">
     <div class="tool-header-inner">
-      <div class="tool-page-icon">📊</div>
+      <div class="tool-page-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="22" height="20" rx="2.5"/><path d="M3 10h22M10 10v14M3 16h22"/></svg></div>
       <div class="tool-header-text">
         <h1>Drag-and-Drop Markdown Grid</h1>
         <p>Build Markdown tables visually. Click cells to edit, add/remove rows and columns, choose alignment, and copy perfect Markdown output.</p>
       </div>
     </div>
-    <div class="tool-badges"><span class="badge badge-green">🔒 Offline</span><span class="badge badge-blue">📝 Markdown</span><span class="badge badge-purple">⚡ Live Preview</span></div>
+    <div class="tool-badges"><span class="badge badge-green">Offline</span><span class="badge badge-blue">Markdown</span><span class="badge badge-purple">Live Preview</span></div>
   </div>
 
   <div class="tool-content-grid">
@@ -60,11 +61,11 @@
       <!-- Controls -->
       <div class="glass-panel" style="margin-bottom:1rem;">
         <div class="panel-header">
-          <span class="panel-title">⚙️ Table Controls</span>
+          <span class="panel-title">Table Controls</span>
           <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
             <button class="btn btn-secondary btn-sm" id="add-row-btn">+ Row</button>
             <button class="btn btn-secondary btn-sm" id="add-col-btn">+ Column</button>
-            <button class="btn btn-secondary btn-sm" id="import-btn">📥 Import CSV</button>
+            <button class="btn btn-secondary btn-sm" id="import-btn">Import CSV</button>
             <button class="btn btn-danger btn-sm" id="reset-btn">↺ Reset</button>
           </div>
         </div>
@@ -76,8 +77,8 @@
       <!-- Output -->
       <div class="glass-panel">
         <div class="panel-header">
-          <span class="panel-title">📋 Markdown Output</span>
-          <button class="btn btn-primary btn-sm" id="copy-md-btn">📋 Copy Markdown</button>
+          <span class="panel-title">Markdown Output</span>
+          <button class="btn btn-primary btn-sm" id="copy-md-btn">Copy Markdown</button>
         </div>
         <div class="panel-body">
           <div class="output-wrapper">
@@ -100,41 +101,9 @@
   <div class="info-divider"></div>
   <div class="info-grid">
     <div class="info-card">
-      <h3><span class="icon">📖</span> User Manual &amp; Operational Guide</h3>
+      <h3><span class="icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="1" width="14" height="16" rx="2"/><path d="M5 5h8M5 8h8M5 11h5"/></svg></span> User Manual &amp; Operational Guide</h3>
       <ol>
-        <li><strong>Edit cells:</strong> Click any cell to type content. The first row is treated as the header row (bold in output).</li>
-        <li><strong>Add rows/columns:</strong> Use "+ Row" and "+ Column" buttons to expand the table. Remove columns using the × button at the top of each column.</li>
-        <li><strong>Set alignment:</strong> Below each column header, choose Left (default), Center, or Right alignment. This controls the Markdown alignment syntax in the separator row.</li>
-        <li><strong>Import CSV:</strong> Click "Import CSV" and paste comma-separated data to populate the table from existing data.</li>
-        <li><strong>Copy output:</strong> The Markdown table updates as you type. Click "Copy Markdown" to get the formatted table syntax ready to paste into README files, documentation, or GitHub comments.</li>
-      </ol>
-    </div>
-    <div class="info-card">
-      <h3><span class="icon">🏗️</span> Architecture Insight: Why This Tool Runs Locally</h3>
-      <p>The Markdown Table Builder is built entirely from HTML <code>&lt;table&gt;</code> and <code>&lt;input&gt;</code> elements driven by JavaScript. The table state is maintained as a 2D JavaScript array in memory. On every cell change event, the rendering function walks the array and assembles the Markdown syntax string using template literals — computing column widths for proper padding alignment. No server is involved; the entire state machine runs in browser memory.</p>
-    </div>
-    <div class="info-card" style="grid-column:1/-1;">
-      <h3><span class="icon">❓</span> Frequently Asked Questions</h3>
-      <div class="faq-list">
-        <details class="faq-item"><summary>What Markdown table syntax does this click-to-create tool generate?</summary><div class="faq-answer">The tool generates GitHub Flavored Markdown (GFM) table syntax, which is compatible with GitHub READMEs, GitLab, Bitbucket, Notion, Obsidian, and most modern Markdown renderers. The format uses pipe <code>|</code> characters for cell separators and a separator row with dashes <code>---</code> (plus colons for alignment: <code>:---</code> for left, <code>:---:</code> for center, <code>---:</code> for right).</div></details>
-        <details class="faq-item"><summary>Can I import data from a spreadsheet to build the Markdown table?</summary><div class="faq-answer">Yes — use the "Import CSV" button. Copy cells from Excel, Google Sheets, or Numbers (Cmd+C), then paste the tab-separated or comma-separated data into the import dialog. The tool will auto-detect the delimiter and populate the table grid. You can then make further edits before copying the Markdown output.</div></details>
-        <details class="faq-item"><summary>Is there a limit to the number of rows or columns I can create?</summary><div class="faq-answer">There is no hard limit. You can build tables with as many rows and columns as your browser can handle. Practically speaking, Markdown tables with more than 15–20 columns become very wide and may be difficult to read in plain text format. The tool renders column widths padded to align pipes, making even large tables readable in raw Markdown.</div></details>
-        <details class="faq-item"><summary>How do I include special characters like pipes or backticks in table cells?</summary><div class="faq-answer">The Markdown table format uses pipes as cell delimiters, so a literal pipe character inside a cell must be escaped as <code>\|</code>. The table builder automatically escapes pipe characters entered in cells. For code formatting within a cell, you can include backtick-wrapped text (e.g., <code>`code`</code>) and it will render as inline code in the Markdown output.</div></details>
-      </div>
-    </div>
-  </div>
-</section>
-</div>
-
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand"><a href="../../" class="nav-logo"><div class="logo-icon">D</div><span class="logo-text">Dev<span>Utils</span></span></a><p>Premium client-side developer tools.</p></div>
-    <nav class="footer-links"><a href="../../privacy-policy.html">Privacy</a><a href="../../terms.html">Terms</a><a href="../../contact.html">Contact</a></nav>
-  </div>
-  <div class="footer-bottom"><p>© 2025 ToolDuck.xyz</p></div>
-</footer>
-<div class="sticky-ad-footer"><span class="ad-slot-label">Advertisement</span><div class="footer-ad-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div></div>
-<div class="cookie-banner" id="cookie-banner"><p><strong>🍪 Cookie Notice</strong> — <a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
+        <li><a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
 <div id="toast-container" class="toast-container" aria-live="polite"></div>
 <script src="../../assets/js/global.js"></script>
 <script>

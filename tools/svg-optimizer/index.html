@@ -24,7 +24,7 @@
 <body>
 <nav class="site-nav">
   <div class="nav-inner">
-    <a href="../../" class="nav-logo"><svg class="logo-duck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="32" height="32" aria-hidden="true"><ellipse cx="15" cy="26" rx="11" ry="8" fill="#FFD23F"/><circle cx="22" cy="15" r="7" fill="#FFD23F"/><path d="M28 14 L34 16 L28 18Z" fill="#FF9F0A"/><ellipse cx="9" cy="25" rx="5" ry="3.5" fill="#E8BC00" transform="rotate(-10 9 25)"/><rect x="16.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><rect x="22.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><line x1="21.5" y1="12.6" x2="22.5" y2="12.6" stroke="#00F5D4" stroke-width="1.1"/><circle cx="26" cy="12" r="1.1" fill="#0B0F19"/></svg><span class="logo-text">tool<span>duck</span>.xyz</span></a>
+    <a href="../../" class="nav-logo"><img src="../../assets/images/duck-logo.png" alt="ToolDuck logo" class="nav-logo-img" width="44" height="44"><span class="logo-text">tool<span>duck</span>.xyz</span></a>
     <ul class="nav-links">
       <li><a href="../../">Home</a></li>
       <li><a href="../svg-renderer/">SVG→PNG</a></li>
@@ -32,7 +32,7 @@
       <li><a href="../../privacy-policy.html">Privacy</a></li>
     </ul>
     <div class="nav-actions">
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">☰</button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     </div>
   </div>
 </nav>
@@ -54,14 +54,14 @@
     <main>
       <div class="tool-header">
         <div class="tool-header-inner">
-          <div class="tool-page-icon">✨</div>
+          <div class="tool-page-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="14,3 17,10.5 25,11.5 19.5,17 21.5,25 14,21 6.5,25 8.5,17 3,11.5 11,10.5"/></svg></div>
           <div class="tool-header-text">
             <h1>SVG Optimizer</h1>
             <p>Minify and clean SVG markup in your browser — remove bloat, shrink file size, copy instantly.</p>
           </div>
         </div>
         <div class="tool-badges">
-          <span class="badge badge-green">✓ 100% Offline</span>
+          <span class="badge badge-green">100% Offline</span>
           <span class="badge badge-blue">Instant</span>
           <span class="badge badge-purple">Copy Output</span>
         </div>
@@ -70,7 +70,7 @@
       <div class="glass-panel">
         <div class="panel-header">
           <span class="panel-title">SVG Code</span>
-          <button class="btn btn-primary btn-sm" id="optimize-btn">✨ Optimize</button>
+          <button class="btn btn-primary btn-sm" id="optimize-btn">Optimize</button>
         </div>
         <div class="panel-body">
           <div class="options-grid">
@@ -118,7 +118,7 @@
   <div class="info-divider"></div>
   <div class="info-grid">
     <div class="info-card">
-      <h3><span class="icon">📖</span> User Manual</h3>
+      <h3><span class="icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="1" width="14" height="16" rx="2"/><path d="M5 5h8M5 8h8M5 11h5"/></svg></span> User Manual</h3>
       <ol>
         <li>Paste your SVG code into the left panel.</li>
         <li>Tick the optimizations you want applied.</li>
@@ -127,11 +127,11 @@
       </ol>
     </div>
     <div class="info-card">
-      <h3><span class="icon">⚙️</span> Architecture Insight</h3>
+      <h3><span class="icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="9" r="3"/><path d="M9 1v3M9 14v3M1 9h3M14 9h3M3.2 3.2l2.1 2.1M12.7 12.7l2.1 2.1M3.2 14.8l2.1-2.1M12.7 5.3l2.1-2.1"/></svg></span> Architecture Insight</h3>
       <p>The optimizer uses regex and DOM parsing entirely in JavaScript. It strips XML comments, collapses redundant whitespace between tags, removes Adobe/Inkscape editor namespaces, and deletes non-rendering elements like <code>&lt;metadata&gt;</code>, <code>&lt;title&gt;</code>, and <code>&lt;desc&gt;</code>. No libraries or WASM are used.</p>
     </div>
     <div class="info-card">
-      <h3><span class="icon">❓</span> FAQ</h3>
+      <h3><span class="icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="9" r="8"/><path d="M6.8 6.8a2.5 2.5 0 0 1 4.9.8c0 2-2.7 2.4-2.7 4"/><circle cx="9" cy="13.5" r=".5" fill="currentColor" stroke="none"/></svg></span> FAQ</h3>
       <div class="faq-list">
         <details class="faq-item"><summary>Will this break my SVG's appearance?</summary><div class="faq-answer">The default options only remove non-visual content (comments, metadata, editor data). The shapes, paths, and styles are never modified.</div></details>
         <details class="faq-item"><summary>How much smaller will my SVG be?</summary><div class="faq-answer">SVGs exported from Illustrator or Inkscape often contain 30–60% bloat from editor metadata and whitespace. Expect 20–50% size reduction.</div></details>
@@ -141,15 +141,99 @@
   </div>
 </section>
 
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <a href="../../" class="nav-logo"><svg class="logo-duck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="28" height="28" aria-hidden="true"><ellipse cx="15" cy="26" rx="11" ry="8" fill="#FFD23F"/><circle cx="22" cy="15" r="7" fill="#FFD23F"/><path d="M28 14 L34 16 L28 18Z" fill="#FF9F0A"/><ellipse cx="9" cy="25" rx="5" ry="3.5" fill="#E8BC00" transform="rotate(-10 9 25)"/><rect x="16.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><rect x="22.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><line x1="21.5" y1="12.6" x2="22.5" y2="12.6" stroke="#00F5D4" stroke-width="1.1"/><circle cx="26" cy="12" r="1.1" fill="#0B0F19"/></svg><span class="logo-text">tool<span>duck</span>.xyz</span></a>
-      <p>Free, privacy-first developer tools — all running 100% in your browser.</p>
+
+<section class="related-tools-section">
+  <div class="related-tools-inner">
+    <h2 class="related-title">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 1L1.5 5v4.5c0 4.1 3 7.7 7.5 8.5 4.5-.8 7.5-4.4 7.5-8.5V5L9 1z"/></svg>
+      More Free Tools You Might Like
+    </h2>
+    <div class="related-tools-grid">
+      <a href="../../tools/svg-renderer/" class="related-tool-card">
+        <div class="related-tool-icon"><svg width="20" height="20" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17.5L14.5 6l2.5 2.5L5.5 20H3v-2.5z"/><path d="M12.5 8l2 2"/><path d="M16 3l3 3-1.5 1.5-3-3L16 3z"/></svg></div>
+        <div class="related-tool-meta">
+          <div class="related-tool-name">SVG to PNG Studio</div>
+          <div class="related-tool-desc">Export SVG to PNG at any resolution</div>
+        </div>
+        <span class="related-tool-badge">Image</span>
+        <span class="related-arrow">&rarr;</span>
+      </a>
+      <a href="../../tools/image-compressor/" class="related-tool-card">
+        <div class="related-tool-icon"><svg width="20" height="20" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="18" height="12" rx="2"/><path d="M8 11h6M11 8l-3 3 3 3"/></svg></div>
+        <div class="related-tool-meta">
+          <div class="related-tool-name">Image Compressor</div>
+          <div class="related-tool-desc">Compress JPEG, PNG & WebP locally</div>
+        </div>
+        <span class="related-tool-badge">Image</span>
+        <span class="related-arrow">&rarr;</span>
+      </a>
+      <a href="../../tools/glass-studio/" class="related-tool-card">
+        <div class="related-tool-icon"><svg width="20" height="20" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="18" height="14" rx="2.5"/><path d="M2 8h18" opacity=".5"/><rect x="5" y="11" width="7" height="5" rx="1.5" stroke-dasharray="2 1"/><circle cx="16" cy="13.5" r="2" stroke-dasharray="2 1"/></svg></div>
+        <div class="related-tool-meta">
+          <div class="related-tool-name">Glassmorphism CSS Lab</div>
+          <div class="related-tool-desc">Generate glass UI CSS effects</div>
+        </div>
+        <span class="related-tool-badge">CSS</span>
+        <span class="related-arrow">&rarr;</span>
+      </a>
     </div>
-    <nav class="footer-links"><a href="../../privacy-policy.html">Privacy</a><a href="../../terms.html">Terms</a><a href="../../cookie-policy.html">Cookies</a><a href="../../contact.html">Contact</a></nav>
   </div>
-  <div class="footer-bottom"><p>© 2025 ToolDuck.xyz</p></div>
+</section>
+<footer class="site-footer">
+  <div class="footer-main">
+    <div class="footer-col footer-col-brand">
+      <a href="../../" class="footer-logo-row" aria-label="ToolDuck Home">
+        <img src="../../assets/images/duck-logo.png" alt="ToolDuck logo" class="footer-logo-img" width="42" height="42">
+        <span class="footer-logo-text">tool<span>duck</span>.xyz</span>
+      </a>
+      <p class="footer-desc">19 free developer tools that run entirely in your browser. No server uploads, no tracking, no accounts. Your data stays on your machine.</p>
+      <a href="../../privacy-policy.html" class="footer-privacy-badge">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 1L2 3v3c0 3 1.8 5.5 4 6 2.2-.5 4-3 4-6V3L6 1z"/></svg>
+        100% Privacy-First
+      </a>
+    </div>
+    <div class="footer-col">
+      <h4>Popular Tools</h4>
+      <ul>
+        <li><a href="../../tools/hash-generator/">SHA Hash Generator</a></li>
+        <li><a href="../../tools/jwt-inspector/">JWT Inspector</a></li>
+        <li><a href="../../tools/image-compressor/">Image Compressor</a></li>
+        <li><a href="../../tools/diff-checker/">Diff Checker</a></li>
+        <li><a href="../../tools/regex-simulator/">RegEx Simulator</a></li>
+        <li><a href="../../tools/json-visualizer/">JSON Visualizer</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>More Tools</h4>
+      <ul>
+        <li><a href="../../tools/yaml-transformer/">YAML ↔ JSON</a></li>
+        <li><a href="../../tools/string-encoder/">String Encoder</a></li>
+        <li><a href="../../tools/glass-studio/">Glassmorphism Lab</a></li>
+        <li><a href="../../tools/tailwind-master/">Tailwind Palette</a></li>
+        <li><a href="../../tools/table-builder/">Table Builder</a></li>
+        <li><a href="../../tools/log-filter/">Log Filter</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="../../privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="../../terms.html">Terms of Service</a></li>
+        <li><a href="../../cookie-policy.html">Cookie Policy</a></li>
+        <li><a href="../../contact.html">Contact Us</a></li>
+        <li><a href="../../sitemap.xml">Sitemap</a></li>
+        <li><a href="../../">All 19 Tools</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom-bar">
+    <p>&copy; 2025 ToolDuck.xyz &mdash; All tools run 100% in your browser.</p>
+    <div class="footer-bottom-links">
+      <a href="../../privacy-policy.html">Privacy</a>
+      <a href="../../terms.html">Terms</a>
+      <a href="../../sitemap.xml">Sitemap</a>
+    </div>
+  </div>
 </footer>
 </div>
 

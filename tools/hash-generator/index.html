@@ -8,6 +8,7 @@
   <meta name="keywords" content="browser crypto hash generator online, sha256 generator, sha512 hash, hash generator online, md5 hash, file checksum, cryptographic hash">
   <link rel="canonical" href="https://toolduck.xyz/tools/hash-generator/">
   <meta property="og:title" content="SHA-256/512 Hash Generator — Browser Crypto Hash Tool">
+  <meta property="og:description" content="SHA-256, SHA-512 & HMAC hashing — free, 100% browser-based, no upload required.">
   <meta property="og:url" content="https://toolduck.xyz/tools/hash-generator/">
   <link rel="stylesheet" href="../../assets/css/global.css">
   <style>
@@ -25,7 +26,7 @@
 <body>
 <nav class="site-nav">
   <div class="nav-inner">
-    <a href="../../" class="nav-logo"><svg class="logo-duck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="32" height="32" aria-hidden="true"><ellipse cx="15" cy="26" rx="11" ry="8" fill="#FFD23F"/><circle cx="22" cy="15" r="7" fill="#FFD23F"/><path d="M28 14 L34 16 L28 18Z" fill="#FF9F0A"/><ellipse cx="9" cy="25" rx="5" ry="3.5" fill="#E8BC00" transform="rotate(-10 9 25)"/><rect x="16.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><rect x="22.5" y="11" width="5" height="3.2" rx="1" fill="rgba(0,245,212,0.2)" stroke="#00F5D4" stroke-width="1.1"/><line x1="21.5" y1="12.6" x2="22.5" y2="12.6" stroke="#00F5D4" stroke-width="1.1"/><circle cx="26" cy="12" r="1.1" fill="#0B0F19"/></svg><span class="logo-text">tool<span>duck</span>.xyz</span></a>
+    <a href="../../" class="nav-logo"><img src="../../assets/images/duck-logo.png" alt="ToolDuck logo" class="nav-logo-img" width="44" height="44"><span class="logo-text">tool<span>duck</span>.xyz</span></a>
     <ul class="nav-links">
       <li><a href="../../">Home</a></li>
       <li><a href="../../tools/jwt-inspector/">JWT</a></li>
@@ -34,7 +35,7 @@
       <li><a href="../../privacy-policy.html">Privacy</a></li>
     </ul>
     <div class="nav-actions">
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">☰</button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     </div>
   </div>
 </nav>
@@ -45,13 +46,13 @@
   <nav class="breadcrumb"><a href="../../">Home</a><span class="sep">›</span><span class="current">Hash Generator</span></nav>
   <div class="tool-header">
     <div class="tool-header-inner">
-      <div class="tool-page-icon">🔐</div>
+      <div class="tool-page-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 10h16M6 18h16M11 5l-2.5 18M19.5 5l-2.5 18"/></svg></div>
       <div class="tool-header-text">
         <h1>SHA-256/512 Cryptographic Hash Generator</h1>
         <p>Generate SHA-256, SHA-512, SHA-384, and SHA-1 hashes from text or files. Verify checksums. Powered by the Web Crypto API.</p>
       </div>
     </div>
-    <div class="tool-badges"><span class="badge badge-green">🔒 Offline</span><span class="badge badge-blue">🔐 Web Crypto API</span><span class="badge badge-purple">📄 File Hashing</span></div>
+    <div class="tool-badges"><span class="badge badge-green">Offline</span><span class="badge badge-blue">Web Crypto API</span><span class="badge badge-purple">File Hashing</span></div>
   </div>
 
   <div class="tool-content-grid">
@@ -59,16 +60,16 @@
       <!-- Text input -->
       <div class="glass-panel" style="margin-bottom:1rem;">
         <div class="panel-header">
-          <span class="panel-title">📝 Input Text</span>
+          <span class="panel-title">Input Text</span>
           <div style="display:flex;gap:.5rem;">
-            <label class="btn btn-secondary btn-sm" style="cursor:pointer;">📁 Hash File<input type="file" id="file-input" style="display:none;" aria-label="Hash a file"></label>
-            <button class="btn btn-danger btn-sm" id="clear-btn">✕ Clear</button>
+            <label class="btn btn-secondary btn-sm" style="cursor:pointer;">Hash File<input type="file" id="file-input" style="display:none;" aria-label="Hash a file"></label>
+            <button class="btn btn-danger btn-sm" id="clear-btn">Clear</button>
           </div>
         </div>
         <div class="panel-body">
           <textarea id="text-input" class="form-control" rows="6" placeholder="Enter text to hash… or drop a file below to compute its checksum." spellcheck="false">Hello, DevUtils! This is a cryptographic hash test.</textarea>
           <div style="margin-top:.75rem;">
-            <label class="form-label">⚙️ Options</label>
+            <label class="form-label">Options</label>
             <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:.4rem;">
               <label style="display:flex;align-items:center;gap:.35rem;font-size:.82rem;cursor:pointer;"><input type="checkbox" id="uppercase-cb"> Uppercase output</label>
               <label style="display:flex;align-items:center;gap:.35rem;font-size:.82rem;cursor:pointer;"><input type="checkbox" id="hmac-cb"> HMAC mode</label>
@@ -83,7 +84,7 @@
 
       <!-- Hash results -->
       <div class="glass-panel" style="margin-bottom:1rem;">
-        <div class="panel-header"><span class="panel-title">🔐 Hash Results</span><span id="input-info" style="font-size:.78rem;color:var(--text-muted);"></span></div>
+        <div class="panel-header"><span class="panel-title">Hash Results</span><span id="input-info" style="font-size:.78rem;color:var(--text-muted);"></span></div>
         <div class="panel-body">
           <div id="hash-results">
             <div id="loading-hashes" style="color:var(--text-muted);font-size:.85rem;text-align:center;padding:1rem;">Computing hashes…</div>
@@ -93,7 +94,7 @@
 
       <!-- Checksum verifier -->
       <div class="glass-panel">
-        <div class="panel-header"><span class="panel-title">✅ Checksum Verifier</span></div>
+        <div class="panel-header"><span class="panel-title">Checksum Verifier</span></div>
         <div class="panel-body">
           <div style="display:grid;grid-template-columns:1fr auto;gap:.75rem;align-items:end;">
             <div class="form-group" style="margin:0;">
@@ -120,41 +121,9 @@
   <div class="info-divider"></div>
   <div class="info-grid">
     <div class="info-card">
-      <h3><span class="icon">📖</span> User Manual &amp; Operational Guide</h3>
+      <h3><span class="icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="1" width="14" height="16" rx="2"/><path d="M5 5h8M5 8h8M5 11h5"/></svg></span> User Manual &amp; Operational Guide</h3>
       <ol>
-        <li><strong>Type or paste text:</strong> Enter any text in the input field. Hashes update automatically as you type.</li>
-        <li><strong>Hash a file:</strong> Click "Hash File" and select a file from your device. The tool reads the file contents and computes checksums without uploading anything. Use this to verify file integrity.</li>
-        <li><strong>HMAC mode:</strong> Check "HMAC mode" and enter a secret key to compute keyed HMAC-SHA hashes. HMAC is used for message authentication — verifying both data integrity and authenticity.</li>
-        <li><strong>Verify a checksum:</strong> Paste an expected hash value (e.g., from a download page) into the Checksum Verifier field and click "Verify." The tool checks whether it matches any of the computed hashes.</li>
-        <li><strong>Copy:</strong> Click the copy button next to any algorithm row to copy just that hash value.</li>
-      </ol>
-    </div>
-    <div class="info-card">
-      <h3><span class="icon">🏗️</span> Architecture Insight: Why This Tool Runs Locally</h3>
-      <p>This tool uses the browser's built-in <strong>Web Crypto API</strong> — specifically <code>window.crypto.subtle.digest()</code> for SHA family hashes and <code>window.crypto.subtle.sign()</code> for HMAC. The Web Crypto API is implemented at the native C++ level using the browser's bundled OpenSSL or BoringSSL cryptographic library, giving it the same security guarantees and performance as native crypto tools. Text is encoded to bytes using <code>TextEncoder</code>. Files are read via <code>FileReader.readAsArrayBuffer()</code>. No data leaves your browser.</p>
-    </div>
-    <div class="info-card" style="grid-column:1/-1;">
-      <h3><span class="icon">❓</span> Frequently Asked Questions</h3>
-      <div class="faq-list">
-        <details class="faq-item"><summary>How does this browser crypto hash generator compare to command-line tools like sha256sum?</summary><div class="faq-answer">This tool uses the same cryptographic algorithms as <code>sha256sum</code>, <code>sha512sum</code>, and <code>openssl dgst</code>. The Web Crypto API implements the FIPS 180-4 standard SHA family identically to native tools. You can verify: run <code>echo -n "test" | sha256sum</code> in your terminal and compare with this tool's SHA-256 output for the text "test" — they will match exactly.</div></details>
-        <details class="faq-item"><summary>Can I use this to verify the SHA-256 checksum of a downloaded file?</summary><div class="faq-answer">Yes — this is one of the primary use cases. Click "Hash File" and select the downloaded file. Compare the SHA-256 result with the checksum published on the software download page. If they match, the file is authentic and was not corrupted or tampered with during download. This works for any file size that fits in browser memory (typically up to several GB).</div></details>
-        <details class="faq-item"><summary>Is SHA-1 still secure for use as a cryptographic hash?</summary><div class="faq-answer">SHA-1 has known collision vulnerabilities (the SHAttered attack demonstrated a practical SHA-1 collision in 2017) and is no longer recommended for security-critical applications such as digital signatures or certificate fingerprints. However, SHA-1 is still commonly used for non-security purposes like Git commit hashes and file checksums where collision resistance is not critical. For security-sensitive use cases, use SHA-256 or SHA-512.</div></details>
-        <details class="faq-item"><summary>What is the difference between SHA-256 and SHA-512?</summary><div class="faq-answer">SHA-256 produces a 256-bit (32-byte, 64 hex character) hash. SHA-512 produces a 512-bit (64-byte, 128 hex character) hash — twice as long and theoretically more collision-resistant. In practice, both are considered cryptographically secure. SHA-512 can be faster than SHA-256 on 64-bit processors because it processes 1024-bit blocks internally, but SHA-256 is the more widely supported standard for software checksums, blockchain applications, and HTTPS certificates.</div></details>
-      </div>
-    </div>
-  </div>
-</section>
-</div>
-
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand"><a href="../../" class="nav-logo"><div class="logo-icon">D</div><span class="logo-text">Dev<span>Utils</span></span></a><p>Premium client-side developer tools.</p></div>
-    <nav class="footer-links"><a href="../../privacy-policy.html">Privacy</a><a href="../../terms.html">Terms</a><a href="../../contact.html">Contact</a></nav>
-  </div>
-  <div class="footer-bottom"><p>© 2025 ToolDuck.xyz</p></div>
-</footer>
-<div class="sticky-ad-footer"><span class="ad-slot-label">Advertisement</span><div class="footer-ad-inner"><!-- GOOGLE ADSENSE INLINE TRACKING CODE SLOT --></div></div>
-<div class="cookie-banner" id="cookie-banner"><p><strong>🍪 Cookie Notice</strong> — <a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
+        <li><a href="../../cookie-policy.html">Learn more</a></p><div class="cookie-actions"><button class="btn btn-primary btn-sm" id="cookie-accept">Accept</button><button class="btn btn-secondary btn-sm" id="cookie-decline">Decline</button></div></div>
 <div id="toast-container" class="toast-container" aria-live="polite"></div>
 <script src="../../assets/js/global.js"></script>
 <script>
