@@ -88,22 +88,129 @@
 
   /* ── Navigation ── */
   var Nav = {
+    overlay: null,
+
+    buildDrawer(mobileNav) {
+      // Inject gradient accent stripe (top border handled by CSS ::before)
+      // Build header: logo + close button
+      var header = document.createElement('div');
+      header.className = 'nav-drawer-header';
+      header.innerHTML = [
+        '<a href="/" class="nav-drawer-logo" aria-label="ToolDuck Home">',
+          '<img src="/assets/images/duck-logo.png" alt="ToolDuck" class="nav-drawer-logo-img" width="30" height="30" loading="eager">',
+          '<span class="logo-text">tool<span>duck</span>.xyz</span>',
+        '</a>',
+        '<button class="nav-drawer-close" id="nav-drawer-close" aria-label="Close menu">',
+          '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">',
+            '<path d="M2 2l12 12M14 2L2 14"/>',
+          '</svg>',
+        '</button>'
+      ].join('');
+
+      // Wrap existing links in a scroll container with sections
+      var links = Array.from(mobileNav.children);
+      var scroll = document.createElement('div');
+      scroll.className = 'nav-drawer-scroll';
+
+      // Group links
+      var mainLinks = ['/', '/tools/hash-generator/', '/tools/jwt-inspector/', '/tools/diff-checker/', '/tools/image-compressor/', '/tools/regex-simulator/', '/tools/json-visualizer/'];
+      var legalLinks = ['/privacy-policy.html', '/terms.html', '/contact.html'];
+
+      var section1 = document.createElement('div');
+      section1.className = 'nav-drawer-section';
+      section1.textContent = 'Tools';
+      scroll.appendChild(section1);
+
+      var section2Label = null;
+      links.forEach(function(el) {
+        var href = el.getAttribute('href') || '';
+        if (legalLinks.includes(href) && !section2Label) {
+          section2Label = document.createElement('div');
+          section2Label.className = 'nav-drawer-section';
+          section2Label.textContent = 'Info';
+          scroll.appendChild(section2Label);
+        }
+        scroll.appendChild(el);
+      });
+
+      // Footer badge
+      var footer = document.createElement('div');
+      footer.className = 'nav-drawer-footer';
+      footer.innerHTML = '<span class="nav-drawer-badge"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 1L2 3v3c0 3 1.8 5.5 4 6 2.2-.5 4-3 4-6V3L6 1z"/></svg> 100% Private · No Uploads</span>';
+
+      mobileNav.appendChild(header);
+      mobileNav.appendChild(scroll);
+      mobileNav.appendChild(footer);
+    },
+
+    open(hamburger, mobileNav) {
+      mobileNav.classList.add('open');
+      hamburger.setAttribute('aria-expanded', 'true');
+      mobileNav.setAttribute('aria-hidden', 'false');
+      if (this.overlay) this.overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    },
+
+    close(hamburger, mobileNav) {
+      mobileNav.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      mobileNav.setAttribute('aria-hidden', 'true');
+      if (this.overlay) this.overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    },
+
     init() {
       var hamburger = document.getElementById('nav-hamburger');
       var mobileNav = document.getElementById('nav-mobile');
+
       if (hamburger && mobileNav) {
+        // Build the drawer structure
+        this.buildDrawer(mobileNav);
+
+        // Create overlay
+        this.overlay = document.createElement('div');
+        this.overlay.className = 'nav-overlay';
+        this.overlay.id = 'nav-overlay';
+        document.body.appendChild(this.overlay);
+
+        var self = this;
+
         hamburger.addEventListener('click', function () {
-          var isOpen = mobileNav.classList.toggle('open');
-          hamburger.setAttribute('aria-expanded', String(isOpen));
+          if (mobileNav.classList.contains('open')) {
+            self.close(hamburger, mobileNav);
+          } else {
+            self.open(hamburger, mobileNav);
+          }
         });
-        document.addEventListener('click', function (e) {
-          if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) {
-            mobileNav.classList.remove('open');
-            hamburger.setAttribute('aria-expanded', 'false');
+
+        // Close button inside drawer
+        mobileNav.addEventListener('click', function(e) {
+          if (e.target.closest('#nav-drawer-close')) {
+            self.close(hamburger, mobileNav);
+          }
+        });
+
+        // Overlay click closes drawer
+        this.overlay.addEventListener('click', function () {
+          self.close(hamburger, mobileNav);
+        });
+
+        // ESC key closes drawer
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && mobileNav.classList.contains('open')) {
+            self.close(hamburger, mobileNav);
+          }
+        });
+
+        // Close on nav link click
+        mobileNav.addEventListener('click', function(e) {
+          if (e.target.tagName === 'A') {
+            self.close(hamburger, mobileNav);
           }
         });
       }
 
+      // Active link highlighting
       var links = document.querySelectorAll('.nav-links a, .nav-mobile a');
       var path = window.location.pathname.replace(/\/$/, '') || '/';
       links.forEach(function (link) {
