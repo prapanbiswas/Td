@@ -23,7 +23,7 @@ html { color-scheme: dark light; }
 
   --text-primary: #E8EDF5;
   --text-secondary: #8B96A8;
-  --text-muted: #5A6478;
+  --text-muted: #7E8EA6; /* lifted from #5A6478 — WCAG AA 5.9:1 on #0B0F19 */
   --text-inverse: #0B0F19;
 
   --border-color: rgba(255, 255, 255, 0.07);
@@ -72,7 +72,7 @@ html { color-scheme: dark light; }
 
   --text-primary: #1A1F2E;
   --text-secondary: #4B5568;
-  --text-muted: #9CA3AF;
+  --text-muted: #60697A; /* darkened from #9CA3AF — WCAG AA 4.99:1 on #F0F4FF */
   --text-inverse: #FFFFFF;
 
   --border-color: rgba(0, 0, 0, 0.07);
@@ -645,6 +645,18 @@ body::before {
   max-width: var(--content-max);
   margin: 0 auto;
   padding: 0 1.5rem;
+}
+
+/* Visually hidden h2 — maintains heading hierarchy for a11y / SEO
+   without affecting the visual layout */
+.tools-section-heading {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .tools-grid {
